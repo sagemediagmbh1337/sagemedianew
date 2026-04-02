@@ -1,0 +1,162 @@
+---
+const navItems = [
+  { label: 'Home', href: '/' },
+  { label: 'Team', href: '/team' },
+  {
+    label: 'Leistungen',
+    href: '/leistungen',
+    children: [
+      { label: 'SEO', href: '/leistungen/seo' },
+      { label: 'GEO/AIO/LLMO', href: '/leistungen/geo-aio-llmo' },
+      { label: 'Google Stellenanzeigen', href: '/leistungen/google-stellenanzeigen' },
+    ]
+  },
+  { label: 'Ergebnisse', href: '/ergebnisse' },
+  { label: 'Magazin', href: '/magazin' },
+  { label: 'Lexikon', href: '/lexikon' },
+]
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 transition-all duration-500" id="site-header">
+  <div class="mx-auto max-w-7xl px-6">
+    <div class="flex items-center justify-between h-20 border-b border-transparent transition-all duration-500" id="header-inner">
+
+      <!-- Logo -->
+      <a href="/" class="inline-flex items-center gap-0 group" aria-label="sagemedia Startseite">
+        <svg viewBox="0 0 280 40" height="36" xmlns="http://www.w3.org/2000/svg" class="shrink-0">
+          <text x="0" y="30" font-family="'Inter', sans-serif" font-weight="400" font-size="28" fill="#111827">sage</text>
+          <text x="68" y="30" font-family="'Inter', sans-serif" font-weight="700" font-size="28" fill="#111827">media</text>
+          <g transform="translate(74, 8)">
+            <polyline points="0,18 5,12 10,15 16,4" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+            <circle cx="16" cy="4" r="2" fill="#10b981" />
+          </g>
+        </svg>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-7" aria-label="Hauptnavigation">
+        {navItems.map((item) => (
+          <div class="relative group">
+            <a
+              href={item.href}
+              class="text-[13px] font-medium text-gray-600 hover:text-gray-950 transition-colors tracking-wide uppercase"
+            >
+              {item.label}
+              {item.children && (
+                <svg class="inline-block ml-0.5 w-3 h-3 opacity-50" viewBox="0 0 12 12" fill="none">
+                  <path d="M3 5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              )}
+            </a>
+            {item.children && (
+              <div class="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 translate-y-1 group-hover:translate-y-0">
+                <div class="bg-white/90 backdrop-blur-2xl rounded-2xl shadow-[0_24px_48px_-12px_rgba(0,0,0,0.12)] border border-gray-200/60 p-3 min-w-[240px]">
+                  {item.children.map((child) => (
+                    <a
+                      href={child.href}
+                      class="flex items-center gap-3 px-4 py-3 text-sm text-gray-600 hover:text-emerald-600 hover:bg-emerald-50/60 rounded-xl transition-all"
+                    >
+                      <span class="w-1.5 h-1.5 rounded-full bg-gray-200 shrink-0" />
+                      {child.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
+      </nav>
+
+      <!-- CTA -->
+      <div class="hidden lg:block">
+        <a href="/kontakt" class="group inline-flex items-center gap-2 bg-gray-950 text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-emerald-600 transition-colors duration-300">
+          Kontakt
+          <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 8h10m-4-4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button class="lg:hidden flex flex-col gap-[5px] p-2 cursor-pointer" id="mobile-menu-btn" aria-label="Menu" aria-expanded="false">
+        <span class="block w-5 h-[1.5px] bg-gray-900 transition-all duration-300 origin-center" id="bar1"></span>
+        <span class="block w-5 h-[1.5px] bg-gray-900 transition-all duration-300" id="bar2"></span>
+        <span class="block w-3.5 h-[1.5px] bg-gray-900 transition-all duration-300 origin-center" id="bar3"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="fixed inset-0 z-40 bg-white opacity-0 invisible transition-all duration-500" id="mobile-menu">
+  <div class="flex flex-col items-start justify-center h-full px-10 gap-5">
+    <div class="mb-6">
+      <span class="text-xs font-mono uppercase tracking-[0.2em] text-gray-400">Navigation</span>
+    </div>
+    {navItems.map((item, i) => (
+      <a
+        href={item.href}
+        class="text-3xl font-extrabold text-gray-900 hover:text-emerald-600 transition-colors"
+        style={`transition-delay: ${i * 50}ms`}
+      >
+        {item.label}
+      </a>
+    ))}
+    <div class="mt-8 pt-8 border-t border-gray-100 w-full">
+      <a href="/kontakt" class="inline-flex items-center gap-3 bg-gray-950 text-white px-8 py-4 rounded-full text-base font-medium">
+        Kontakt aufnehmen
+        <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 8h10m-4-4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn')
+  const menu = document.getElementById('mobile-menu')
+  const header = document.getElementById('site-header')
+  const inner = document.getElementById('header-inner')
+  const bar1 = document.getElementById('bar1')
+  const bar2 = document.getElementById('bar2')
+  const bar3 = document.getElementById('bar3')
+  let open = false
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      header?.classList.add('bg-white/90', 'backdrop-blur-2xl', 'shadow-[0_1px_0_rgba(0,0,0,0.04)]')
+      inner?.classList.add('border-gray-100')
+    } else {
+      header?.classList.remove('bg-white/90', 'backdrop-blur-2xl', 'shadow-[0_1px_0_rgba(0,0,0,0.04)]')
+      inner?.classList.remove('border-gray-100')
+    }
+  }, { passive: true })
+
+  btn?.addEventListener('click', () => {
+    open = !open
+    if (open) {
+      menu?.classList.remove('opacity-0', 'invisible')
+      menu?.classList.add('opacity-100', 'visible')
+      bar1?.classList.add('rotate-45', 'translate-y-[3px]')
+      bar2?.classList.add('opacity-0')
+      bar3?.classList.add('-rotate-45', '-translate-y-[5px]', 'w-5')
+      btn.setAttribute('aria-expanded', 'true')
+    } else {
+      menu?.classList.add('opacity-0', 'invisible')
+      menu?.classList.remove('opacity-100', 'visible')
+      bar1?.classList.remove('rotate-45', 'translate-y-[3px]')
+      bar2?.classList.remove('opacity-0')
+      bar3?.classList.remove('-rotate-45', '-translate-y-[5px]', 'w-5')
+      btn.setAttribute('aria-expanded', 'false')
+    }
+  })
+
+  menu?.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      menu?.classList.add('opacity-0', 'invisible')
+      menu?.classList.remove('opacity-100', 'visible')
+      open = false
+    })
+  })
+</script>

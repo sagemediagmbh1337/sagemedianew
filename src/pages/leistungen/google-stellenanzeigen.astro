@@ -1,0 +1,323 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import Header from '../../components/Header.astro'
+import Footer from '../../components/Footer.astro'
+import HeroPage from '../../components/HeroPage.astro'
+import CtaSection from '../../components/CtaSection.astro'
+import FaqSection from '../../components/FaqSection.astro'
+import StatsStrip from '../../components/StatsStrip.astro'
+import Testimonials from '../../components/Testimonials.astro'
+import ProcessTimeline from '../../components/ProcessTimeline.astro'
+import VideoLightbox from '../../components/VideoLightbox.astro'
+import ServicesGrid from '../../components/ServicesGrid.astro'
+import TrustLogos from '../../components/TrustLogos.astro'
+
+const jobFaqs = [
+  { q: 'Was sind Google Stellenanzeigen?', a: 'Google for Jobs ist ein Feature, das Stellenanzeigen direkt in der Google-Suche anzeigt, prominent über den organischen Ergebnissen. Kandidaten finden deine Jobs genau dort, wo sie aktiv suchen, ohne den Umweg über Jobbörsen. Wir sorgen dafür, dass deine Stellen dort erscheinen.' },
+  { q: 'Brauche ich noch Jobbörsen wie Indeed oder StepStone?', a: 'Google for Jobs ersetzt Jobbörsen nicht komplett, reduziert aber die Abhängigkeit. Viele Kandidaten suchen direkt bei Google und finden deine Stellen dort ohne Umweg. Das spart Kosten für Jobbörsen-Listings und erreicht Kandidaten, die gar nicht auf Jobportalen aktiv sind.' },
+  { q: 'Was kostet die Einrichtung?', a: 'Die Ersteinrichtung (Karriereseite, Schema-Markup, Google-Indexierung) ist ein einmaliges Projekt. Im Erstgespräch besprechen wir den individuellen Invest, analysieren deinen aktuellen Status und geben dir eine konkrete Einschätzung.' },
+  { q: 'Wie schnell erscheinen meine Stellen bei Google?', a: 'Nach Einrichtung des JobPosting Schema-Markups erscheinen neue Stellen typischerweise innerhalb von 24-48 Stunden in Google for Jobs. Die Indexierung läuft automatisch über die Google Search Console.' },
+  { q: 'Funktioniert das auch für kleine Unternehmen?', a: 'Gerade für kleine und mittelständische Unternehmen ist Google for Jobs ein Game Changer. Du konkurierst auf Augenhöhe mit großen Arbeitgebern, ohne deren Budget für Jobbörsen. Eine optimierte Karriereseite mit Schema-Markup ist alles, was du brauchst.' },
+  { q: 'Können wir das mit SEO kombinieren?', a: 'Absolut, und genau das empfehlen wir. Eine SEO-optimierte Karriereseite rankt nicht nur in Google for Jobs, sondern auch organisch für Suchbegriffe wie "Jobs [Branche] [Stadt]". In Kombination mit unserem SEO-Angebot entsteht ein vollständiger Recruiting-Kanal.' },
+]
+
+const videoTestimonials = [
+  { title: 'Von 200 auf 3.400 Besucher/Monat', initials: 'MB', name: 'Markus B.', role: 'CEO, E-Commerce', vimeoId: '1136116624' },
+  { title: 'Wie wir 80% unserer Neupatienten über Google gewinnen', initials: 'JH', name: 'Julia H.', role: 'Praxisinhaberin, Zahnmedizin', vimeoId: '1115108100' },
+  { title: 'SEO als wichtigster Vertriebskanal im B2B', initials: 'SL', name: 'Stefan L.', role: 'Geschäftsführer, Maschinenbau', vimeoId: '1115110019', vimeoHash: 'd330a8b9b1' },
+]
+
+const textReviews = [
+  { quote: '„Die Beratungsleistung ist wirklich top. Man hat das Gefühl, dass hier der Kunde König ist. Ich bin begeistert von der Expertise der Mitarbeiter – man bekommt auf jede Frage eine Antwort."', initials: 'SB', name: 'Stefan Beck', role: 'Inhaber, Pressebeck' },
+  { quote: '„Top Agentur für SEO & SEA! Durch gezielte SEO Optimierungen konnten wichtige Keywords deutlich bessere Rankings erzielen und unsere Sichtbarkeit ist spürbar gestiegen."', initials: 'DK', name: 'Dennis Koch', role: 'GF, Kaweha Absaugtechnik' },
+  { quote: '„Unsere Leads aus Deutschland werden immer mehr. Es gibt eine echte Strategie – wir besprechen gemeinsam unsere Ziele und KPIs. Die Zusammenarbeit ist hervorragend."', initials: 'BH', name: 'Björn Hoekstra', role: 'Marketingleiter, Kiekens' },
+  { quote: '„Sagemedia ist ein Dienstleister mit großer Kompetenz, insbesondere zur Schaffung von Sichtbarkeit. Stets erreichbar, nachhaltige Ergebnisse."', initials: 'CM', name: 'Christian Mitter', role: 'Rechtsanwaltskanzlei Mitter' },
+]
+
+const processSteps = [
+  { step: '01', title: 'Analyse & Beratung', desc: 'Wir analysieren deinen aktuellen Karrierebereich, prüfen ob bereits Stellenanzeigen in Google for Jobs erscheinen und identifizieren das Optimierungspotenzial.', detail: 'Kostenlos & unverbindlich' },
+  { step: '02', title: 'Karriereseite & Schema', desc: 'Aufbau oder Optimierung deiner Karriereseite mit JobPosting Schema-Markup, strukturierten Daten und SEO-optimierten Stellenbeschreibungen.', detail: 'Innerhalb von 2 Wochen' },
+  { step: '03', title: 'Indexierung & Go-Live', desc: 'Einreichung bei Google Search Console, Validierung des Schema-Markups und Monitoring der Indexierung. Deine Stellen erscheinen in Google for Jobs.', detail: '24-48 Stunden' },
+  { step: '04', title: 'Laufende Betreuung', desc: 'Neue Stellen werden automatisch indexiert, Performance wird getrackt und die Karriereseite laufend optimiert, für mehr qualifizierte Bewerbungen.', detail: 'Fortlaufend' },
+]
+---
+
+<Layout title="Google Stellenanzeigen, Google for Jobs | sagemedia" description="Stellenanzeigen direkt in der Google-Suche. Google for Jobs Integration, optimierte Karriereseiten und JobPosting Schema, von sagemedia.">
+  <Header />
+
+  <main class="pt-18">
+
+    <!-- HERO -->
+    <HeroPage
+      eyebrow="Google Stellenanzeigen"
+      titleLine1="Deine Jobs."
+      titleLine2="Direkt bei Google."
+      subtitle="Stellenanzeigen direkt in der Google-Suche, dort, wo Kandidaten aktiv suchen. Mit Google for Jobs, optimierten Karriereseiten und strukturierten Daten erreichst du Bewerber ohne teure Jobbörsen."
+      ctaText="Kostenlose Analyse"
+      secondaryText="So funktioniert's"
+      secondaryHref="#vorteile"
+      breadcrumbs={[
+        { label: 'Home', href: '/' },
+        { label: 'Leistungen', href: '/leistungen' },
+        { label: 'Google Stellenanzeigen' }
+      ]}
+    >
+      <!-- Visual -->
+      <div class="relative" slot="visual">
+        <div class="absolute -inset-12 rounded-[3rem]" style="background: radial-gradient(ellipse at center, rgba(16,185,129,0.15) 0%, rgba(16,185,129,0.05) 50%, transparent 70%);"></div>
+
+        <div class="relative bg-white/70 backdrop-blur-2xl rounded-[1.25rem] border border-white/80 shadow-[0_32px_80px_-16px_rgba(16,185,129,0.15),0_0_0_1px_rgba(0,0,0,0.04)] p-7">
+          <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-3">
+              <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)] animate-pulse"></div>
+              <span class="text-xs font-mono font-medium text-gray-400 uppercase tracking-wider">Google for Jobs</span>
+            </div>
+            <span class="text-[10px] font-mono text-emerald-600 font-semibold bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-100">Live</span>
+          </div>
+
+          <!-- Job Listings Preview -->
+          <div class="space-y-3 mb-6">
+            {[
+              { title: 'Senior Entwickler (m/w/d)', location: 'Bad Staffelstein', type: 'Vollzeit' },
+              { title: 'Marketing Manager (m/w/d)', location: 'Remote', type: 'Vollzeit' },
+              { title: 'SEO-Spezialist (m/w/d)', location: 'Hybrid', type: 'Teilzeit' },
+            ].map((job) => (
+              <div class="p-3 bg-gray-50/80 rounded-xl border border-gray-100">
+                <p class="text-sm font-semibold text-gray-900">{job.title}</p>
+                <div class="mt-1 flex items-center gap-3 text-[10px] text-gray-400 font-mono">
+                  <span>{job.location}</span>
+                  <span class="w-1 h-1 rounded-full bg-gray-300"></span>
+                  <span>{job.type}</span>
+                  <span class="ml-auto text-emerald-600">● Indexiert</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div class="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-6"></div>
+
+          <div class="grid grid-cols-2 gap-6">
+            <div>
+              <p class="text-[10px] font-mono uppercase tracking-wider text-gray-400 mb-1">Impressionen</p>
+              <p class="text-2xl font-extrabold text-gray-900 tracking-tight">12.4k</p>
+            </div>
+            <div>
+              <p class="text-[10px] font-mono uppercase tracking-wider text-gray-400 mb-1">Bewerbungen</p>
+              <p class="text-2xl font-extrabold text-emerald-600 tracking-tight">+340%</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="absolute -bottom-5 -left-5 bg-white/90 backdrop-blur-xl rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.08)] border border-gray-100 px-4 py-3 flex items-center gap-3 hero-badge">
+          <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-[0_0_16px_rgba(16,185,129,0.4)]">
+            <svg class="w-4 h-4 text-white" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8l4 4 8-8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </div>
+          <div>
+            <p class="text-xs font-bold text-gray-900">Schema validiert</p>
+            <p class="text-[10px] text-gray-400">JobPosting Markup</p>
+          </div>
+        </div>
+      </div>
+
+      <TrustLogos class="mt-16 hero-trust" slot="trust" />
+
+    </HeroPage>
+
+    <!-- PROBLEM -->
+    <section class="relative py-24 md:py-32 bg-gray-950 text-white overflow-hidden noise-bg">
+      <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/40 to-transparent divider-glow"></div>
+      <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent"></div>
+      <div class="absolute top-[20%] left-[10%] w-[400px] h-[400px] rounded-full" style="background: radial-gradient(circle, rgba(16,185,129,0.1) 0%, transparent 60%);"></div>
+
+      <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="max-w-3xl mx-auto text-center mb-16 fade-up">
+          <div class="inline-flex items-center gap-2.5 mb-6">
+            <span class="inline-block w-8 h-px bg-emerald-400"></span>
+            <span class="text-xs font-mono font-medium text-emerald-400 uppercase tracking-[0.2em]">Das Problem</span>
+            <span class="inline-block w-8 h-px bg-emerald-400"></span>
+          </div>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-[1.1] tracking-[-0.04em]">
+            Warum klassisches Recruiting
+            <span class="bg-gradient-to-r from-emerald-300 to-emerald-500 bg-clip-text text-transparent"> nicht mehr reicht</span>
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6 fade-up-stagger">
+          {[
+            { icon: 'conflict', title: 'Teure Jobbörsen, wenig Ergebnis', desc: 'Indeed, StepStone, LinkedIn, die Kosten pro Stellenanzeige steigen, die Qualität der Bewerbungen sinkt. Du zahlst für Sichtbarkeit auf Plattformen, die immer überfüllter werden.' },
+            { icon: 'template', title: 'Kandidaten suchen bei Google', desc: '70% der Jobsuchenden starten ihre Suche bei Google, nicht auf Jobbörsen. Wenn deine Stellen dort nicht erscheinen, verpasst du den größten Recruiting-Kanal.' },
+            { icon: 'blackbox', title: 'Karriereseiten ohne Technik', desc: 'Die meisten Karriereseiten haben kein Schema-Markup, keine strukturierten Daten und sind nicht für Google for Jobs optimiert. Die Stellen existieren, aber Google sieht sie nicht.' },
+          ].map((item) => (
+            <div class="relative bg-white/[0.03] border border-white/[0.06] rounded-2xl p-8 hover:bg-white/[0.06] hover:border-red-500/20 transition-all duration-500 fade-up overflow-hidden">
+              <div class="w-10 h-10 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center mb-5">
+                <svg class="w-5 h-5 text-red-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  {item.icon === 'conflict' && <path d="M18 6L6 18M6 6l12 12" />}
+                  {item.icon === 'template' && <><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2" /><path d="M9 5a2 2 0 012-2h2a2 2 0 012 2v0a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /><path d="M9 12h6M9 16h6" /></>}
+                  {item.icon === 'blackbox' && <><path d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M3 3l18 18" /></>}
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-white">{item.title}</h3>
+              <p class="mt-3 text-sm text-gray-400 leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- DIFFERENTIATORS -->
+    <section class="relative py-32 md:py-44 bg-gray-50/80" id="vorteile">
+      <div class="absolute top-[20%] -left-[10%] w-[500px] h-[500px] rounded-full" style="background: radial-gradient(circle, rgba(16,185,129,0.07) 0%, transparent 60%);"></div>
+      <div class="absolute bottom-[10%] right-[5%] w-[400px] h-[400px] rounded-full" style="background: radial-gradient(circle, rgba(52,211,153,0.05) 0%, transparent 60%);"></div>
+      <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200/60 to-transparent"></div>
+      <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200/60 to-transparent"></div>
+
+      <div class="max-w-7xl mx-auto px-6 relative">
+        <div class="grid lg:grid-cols-12 gap-16 lg:gap-8 items-start">
+          <div class="lg:col-span-6 lg:pr-8">
+            <div class="flex items-center gap-3 mb-6 fade-up">
+              <span class="inline-block w-8 h-px bg-emerald-500"></span>
+              <span class="text-xs font-mono font-medium text-emerald-600 uppercase tracking-[0.2em]">Dein Vorteil</span>
+            </div>
+            <h2 class="text-4xl md:text-5xl lg:text-[3.5rem] font-extrabold leading-[1.05] tracking-[-0.04em] text-gray-950 fade-up">
+              Google als dein
+              <span class="bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent"> Recruiting-Kanal</span>
+            </h2>
+            <div class="mt-14 space-y-10">
+              {[
+                { num: '01', title: 'Sichtbar, wo Kandidaten suchen.', text: 'Deine Stellenanzeigen erscheinen direkt in der Google-Suche, prominent, mit Logo, Gehalt und Standort. Kandidaten finden dich ohne Umweg über Jobbörsen, genau im Moment der aktiven Suche.' },
+                { num: '02', title: 'Keine laufenden Kosten pro Klick.', text: 'Im Gegensatz zu Indeed oder StepStone zahlst du bei Google for Jobs keinen Klickpreis. Einmal eingerichtet, erscheinen deine Stellen kostenlos, so lange sie online sind.' },
+                { num: '03', title: 'SEO-Power für deine Karriereseite.', text: 'Wir optimieren deine Karriereseite nicht nur technisch, sondern auch inhaltlich. Das Ergebnis: Rankings für "Jobs [Branche] [Stadt]" und organischer Traffic von qualifizierten Kandidaten.' },
+                { num: '04', title: 'Technisch sauber, sofort indexiert.', text: 'JobPosting Schema-Markup, strukturierte Daten, Google Search Console Integration, alles technisch validiert. Neue Stellen erscheinen innerhalb von 24-48 Stunden bei Google.' },
+              ].map((item) => (
+                <div class="group fade-up">
+                  <div class="flex items-start gap-5">
+                    <span class="shrink-0 text-xs font-mono font-medium text-emerald-400 mt-1.5 tracking-wider">{item.num}</span>
+                    <div>
+                      <h3 class="text-xl font-bold text-gray-900 tracking-tight">{item.title}</h3>
+                      <p class="mt-2.5 text-gray-500 leading-relaxed">{item.text}</p>
+                    </div>
+                  </div>
+                  <div class="mt-5 ml-10 h-px bg-gradient-to-r from-gray-200 via-emerald-200/30 to-transparent"></div>
+                </div>
+              ))}
+            </div>
+            <div class="mt-12 fade-up">
+              <a href="/kontakt" class="group inline-flex items-center gap-3 text-gray-900 font-semibold hover:text-emerald-600 transition-colors">
+                <span class="w-12 h-12 rounded-full border-2 border-gray-900 group-hover:border-emerald-500 group-hover:bg-emerald-500 group-hover:shadow-[0_0_24px_rgba(16,185,129,0.4)] flex items-center justify-center transition-all duration-300">
+                  <svg class="w-4 h-4 group-hover:text-white transition-colors" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10m-4-4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                </span>
+                Karriereseite analysieren lassen
+              </a>
+            </div>
+          </div>
+
+          <div class="lg:col-span-6 fade-up">
+            <div class="relative lg:pl-8">
+              <div class="absolute -inset-8 rounded-[2rem]" style="background: radial-gradient(ellipse at 60% 40%, rgba(16,185,129,0.12) 0%, rgba(16,185,129,0.04) 50%, transparent 70%);"></div>
+              <div class="relative aspect-[4/3] bg-gray-100 rounded-[1.5rem] overflow-hidden shadow-[0_32px_64px_-16px_rgba(0,0,0,0.15)]">
+                <img src="/images/sagemedia-buero.jpg" alt="sagemedia Agentur" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+                <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-gray-950/30 to-transparent"></div>
+              </div>
+              <div class="mt-8 grid grid-cols-2 gap-4">
+                {[
+                  { title: 'Google for Jobs', sub: 'Zertifizierte Integration', icon: 'badge' },
+                  { title: 'Schema-Markup', sub: 'JobPosting validiert', icon: 'badge' },
+                  { title: 'SEO-Expertise', sub: '15+ Jahre Erfahrung', icon: 'trophy' },
+                  { title: '5.0 Google Rating', sub: 'Durchschnitt aller Reviews', icon: 'star' },
+                ].map((a) => (
+                  <div class="flex items-start gap-3 p-4 bg-white rounded-xl border border-gray-100 hover:border-emerald-200 transition-colors shadow-[0_4px_16px_rgba(0,0,0,0.04)]">
+                    <div class="shrink-0 w-9 h-9 rounded-lg bg-emerald-100 flex items-center justify-center">
+                      <svg class="w-4 h-4 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        {a.icon === 'trophy' && <><path d="M6 9H4.5a2.5 2.5 0 010-5H6" /><path d="M18 9h1.5a2.5 2.5 0 000-5H18" /><path d="M4 22h16" /><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20 7 22" /><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20 17 22" /><path d="M18 2H6v7a6 6 0 0012 0V2z" /></>}
+                        {a.icon === 'badge' && <path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138c.2.686.81 1.237 1.502 1.437a3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0" />}
+                        {a.icon === 'star' && <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />}
+                      </svg>
+                    </div>
+                    <div>
+                      <p class="text-sm font-bold text-gray-900">{a.title}</p>
+                      <p class="text-xs text-gray-400 mt-0.5">{a.sub}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEISTUNGEN -->
+    <ServicesGrid
+      eyebrow="Was du bekommst"
+      title="Stellenanzeigen-Leistungen"
+      titleAccent=" im Überblick"
+      subtitle="Von der Karriereseite bis zur laufenden Betreuung, alles für deinen Google-Recruiting-Kanal."
+      services={[
+        { href: '#', icon: 'search', title: 'Google for Jobs Setup', desc: 'Technische Einrichtung von JobPosting Schema-Markup, strukturierten Daten und Google Search Console Integration für automatische Indexierung.' },
+        { href: '#', icon: 'layout', title: 'Karriereseite Optimierung', desc: 'SEO-optimierte Karriereseite mit modernem Design, Employer Branding und optimierten Stellenbeschreibungen die konvertieren.' },
+        { href: '#', icon: 'bulb', title: 'KI-optimierte Jobtexte', desc: 'Stellenbeschreibungen, die nicht nur in Google for Jobs performen, sondern auch in ChatGPT und KI-Suchsystemen als Empfehlung erscheinen.' },
+        { href: '#', icon: 'monitor', title: 'Performance Tracking', desc: 'Monitoring von Impressionen, Klicks und Bewerbungen über Google Search Console und eigene Tracking-Tools.' },
+        { href: '#', icon: 'cursor', title: 'Lokales Recruiting-SEO', desc: 'Rankings für "Jobs [Branche] [Stadt]", organischer Traffic von Kandidaten, die aktiv in deiner Region suchen.' },
+        { href: '#', icon: 'people', title: 'Laufende Betreuung', desc: 'Neue Stellen werden indexiert, bestehende optimiert und die Karriereseite laufend an Google-Updates angepasst.' },
+      ]}
+    />
+
+    <ProcessTimeline
+      title="In 4 Schritten zu"
+      titleAccent=" Google Stellenanzeigen"
+      subtitle="Von der Analyse bis zur ersten indexierten Stelle, schnell, technisch sauber und nachhaltig."
+      steps={processSteps}
+    />
+
+    <StatsStrip stats={[
+      { val: '24-48h', label: 'Bis zur Indexierung' },
+      { val: '0€', label: 'Kosten pro Klick' },
+      { val: '70%', label: 'Suchen bei Google' },
+      { val: '5.0', label: 'Google Bewertung' },
+    ]} />
+
+    <Testimonials videos={videoTestimonials} reviews={textReviews} />
+
+    <FaqSection
+      title="Häufige Fragen"
+      titleAccent="zu Google Stellenanzeigen"
+      subtitle="Die wichtigsten Antworten zu Google for Jobs und Karriereseiten."
+      faqs={jobFaqs}
+    />
+
+    <CtaSection
+      title="Deine Stellen."
+      titleAccent="Direkt bei Google."
+      subtitle="Wir analysieren deine aktuelle Karriereseite und zeigen dir, wie deine Stellenanzeigen in Google for Jobs erscheinen, kostenlos und unverbindlich."
+      ctaText="Kostenlose Analyse starten"
+    />
+
+  </main>
+
+  <Footer />
+  <VideoLightbox />
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": jobFaqs.slice(0, 4).map(f => ({
+      "@type": "Question", "name": f.q, "acceptedAnswer": { "@type": "Answer", "text": f.a }
+    }))
+  })} />
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Google Stellenanzeigen, Google for Jobs",
+    "provider": {
+      "@type": "ProfessionalService",
+      "name": "sagemedia GmbH",
+      "url": "https://sagemedia.de",
+      "telephone": "+4995733313759",
+      "address": { "@type": "PostalAddress", "streetAddress": "Goethestraße 12", "addressLocality": "Bad Staffelstein", "postalCode": "96231", "addressCountry": "DE" }
+    },
+    "description": "Google for Jobs Integration, optimierte Karriereseiten und JobPosting Schema-Markup für mehr qualifizierte Bewerbungen.",
+    "areaServed": { "@type": "Country", "name": "Deutschland" },
+    "serviceType": "Google Stellenanzeigen"
+  })} />
+</Layout>

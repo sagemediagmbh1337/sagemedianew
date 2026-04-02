@@ -1,0 +1,98 @@
+---
+/**
+ * Shared Video Lightbox — YouTube & Vimeo
+ * Include once per page. Handles:
+ * - .case-thumbnail inside [data-yt-id] → YouTube embed
+ * - .video-thumbnail inside [data-vimeo-id] → Vimeo embed
+ * - .case-prev / .case-next → slider nav (via data-slider)
+ * - .video-prev / .video-next → slider nav (via data-slider)
+ * - Fade-up IntersectionObserver
+ */
+---
+
+<!-- Lightbox -->
+<div class="video-lightbox" id="video-lightbox">
+  <button class="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-white/20 transition-colors cursor-pointer z-10" id="lightbox-close" aria-label="Schließen">
+    <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12" /></svg>
+  </button>
+  <div class="w-full max-w-5xl mx-6 aspect-video" id="lightbox-content"></div>
+</div>
+
+<script>
+  const lightbox = document.getElementById('video-lightbox')
+  const lightboxContent = document.getElementById('lightbox-content')
+  const lightboxClose = document.getElementById('lightbox-close')
+
+  function openLightbox(src: string) {
+    if (!lightbox || !lightboxContent) return
+    lightboxContent.innerHTML = `<iframe src="${src}" class="w-full h-full rounded-2xl" frameborder="0" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>`
+    lightbox.classList.add('active')
+    document.body.style.overflow = 'hidden'
+  }
+
+  function closeLightbox() {
+    if (!lightbox || !lightboxContent) return
+    lightbox.classList.remove('active')
+    document.body.style.overflow = ''
+    setTimeout(() => { lightboxContent.innerHTML = '' }, 300)
+  }
+
+  // YouTube — .case-thumbnail inside [data-yt-id]
+  document.querySelectorAll('[data-yt-id]').forEach(card => {
+    const thumb = card.querySelector('.case-thumbnail')
+    const ytId = card.getAttribute('data-yt-id')
+    thumb?.addEventListener('click', () => {
+      if (ytId) openLightbox(`https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0`)
+    })
+  })
+
+  // Vimeo — .video-thumbnail inside [data-vimeo-id]
+  document.querySelectorAll('[data-vimeo-id]').forEach(card => {
+    const thumb = card.querySelector('.video-thumbnail')
+    const vimeoId = card.getAttribute('data-vimeo-id')
+    const vimeoHash = card.getAttribute('data-vimeo-hash')
+    thumb?.addEventListener('click', () => {
+      if (vimeoId) {
+        const hashParam = vimeoHash ? `?h=${vimeoHash}&` : '?'
+        openLightbox(`https://player.vimeo.com/video/${vimeoId}${hashParam}autoplay=1&title=0&byline=0&portrait=0`)
+      }
+    })
+  })
+
+  // Close handlers
+  lightboxClose?.addEventListener('click', closeLightbox)
+  lightbox?.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox() })
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox() })
+
+  // Slider nav — case-prev/case-next and video-prev/video-next
+  document.querySelectorAll('.case-prev, .video-prev').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const sliderId = btn.getAttribute('data-slider')
+      const slider = sliderId ? document.getElementById(sliderId) : null
+      slider?.scrollBy({ left: -(slider.offsetWidth * 0.55), behavior: 'smooth' })
+    })
+  })
+  document.querySelectorAll('.case-next, .video-next').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const sliderId = btn.getAttribute('data-slider')
+      const slider = sliderId ? document.getElementById(sliderId) : null
+      slider?.scrollBy({ left: slider.offsetWidth * 0.55, behavior: 'smooth' })
+    })
+  })
+
+  // Hero entrance animations
+  document.querySelectorAll('.hero-eyebrow, .hero-title, .hero-sub, .hero-cta, .hero-visual, .hero-trust, .hero-badge, .hero-badge-2').forEach(el => {
+    setTimeout(() => el.classList.add('animate'), 100)
+  })
+
+  // Fade-up observer
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible')
+        observer.unobserve(entry.target)
+      }
+    })
+  }, { threshold: 0.1 })
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el))
+</script>

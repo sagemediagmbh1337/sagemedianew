@@ -1,0 +1,60 @@
+---
+interface Props {
+  eyebrow?: string
+  title: string
+  titleAccent: string
+  subtitle: string
+  ctaText: string
+  ctaHref?: string
+  showContact?: boolean
+}
+
+const {
+  eyebrow = 'Nächster Schritt',
+  title,
+  titleAccent,
+  subtitle,
+  ctaText,
+  ctaHref = '/kontakt',
+  showContact = true
+} = Astro.props
+---
+
+<section class="relative py-32 md:py-44 bg-gray-950 overflow-hidden noise-bg">
+  <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent divider-glow"></div>
+  <div class="absolute top-[10%] left-[30%] w-[600px] h-[600px] rounded-full" style="background: radial-gradient(circle, rgba(16,185,129,0.12) 0%, rgba(16,185,129,0.03) 50%, transparent 70%);"></div>
+  <div class="absolute bottom-[5%] right-[20%] w-[400px] h-[400px] rounded-full" style="background: radial-gradient(circle, rgba(52,211,153,0.08) 0%, transparent 60%);"></div>
+
+  <div class="max-w-3xl mx-auto px-6 text-center relative z-10">
+    <div class="flex items-center justify-center gap-3 mb-8 fade-up">
+      <span class="inline-block w-8 h-px bg-emerald-400"></span>
+      <span class="text-xs font-mono font-medium text-emerald-400 uppercase tracking-[0.2em]">{eyebrow}</span>
+      <span class="inline-block w-8 h-px bg-emerald-400"></span>
+    </div>
+    <h2 class="text-4xl md:text-5xl lg:text-[4rem] font-extrabold leading-[1.05] tracking-[-0.04em] text-white fade-up">
+      {title}
+      <span class="bg-gradient-to-r from-emerald-300 via-emerald-400 to-emerald-500 bg-clip-text text-transparent"> {titleAccent}</span>
+    </h2>
+    <p class="mt-6 text-lg text-gray-400 max-w-xl mx-auto fade-up">{subtitle}</p>
+    <div class="mt-10 fade-up">
+      <a href={ctaHref} class="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full text-base font-semibold overflow-hidden transition-all duration-500 hover:shadow-[0_0_40px_rgba(16,185,129,0.4)]">
+        <div class="absolute inset-0 bg-gradient-to-r from-emerald-500 to-emerald-400 transition-all duration-500 group-hover:from-emerald-400 group-hover:to-emerald-300"></div>
+        <div class="absolute inset-0 rounded-full shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]"></div>
+        <span class="relative z-10 text-white font-semibold">{ctaText}</span>
+        <svg class="relative z-10 w-4 h-4 text-white group-hover:translate-x-1 transition-transform" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10m-4-4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" /></svg>
+      </a>
+    </div>
+    {showContact && (
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-6 fade-up">
+        <a href="tel:+4995733313759" class="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-emerald-400 transition-colors">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" /></svg>
+          09573 / 33 13 759
+        </a>
+        <a href="mailto:info@sagemedia.de" class="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-emerald-400 transition-colors">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
+          info@sagemedia.de
+        </a>
+      </div>
+    )}
+  </div>
+</section>

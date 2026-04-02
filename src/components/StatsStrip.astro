@@ -1,0 +1,28 @@
+---
+interface Stat {
+  val: string
+  label: string
+}
+
+interface Props {
+  stats: Stat[]
+}
+
+const { stats } = Astro.props
+---
+
+<section class="relative py-16 md:py-20 bg-gray-950 text-white overflow-hidden">
+  <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent"></div>
+  <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent"></div>
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-16">
+      {stats.map((s, i) => (
+        <div class="relative text-center fade-up">
+          {i > 0 && <div class="hidden md:block absolute -left-8 top-1/2 -translate-y-1/2 h-12 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent"></div>}
+          <p class="text-4xl md:text-5xl font-extrabold tracking-tight text-white">{s.val}</p>
+          <p class="mt-2 text-xs text-gray-500 font-mono uppercase tracking-wider">{s.label}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

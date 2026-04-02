@@ -1,0 +1,194 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import Header from '../../components/Header.astro'
+import Footer from '../../components/Footer.astro'
+import HeroPage from '../../components/HeroPage.astro'
+import CtaSection from '../../components/CtaSection.astro'
+import StatsStrip from '../../components/StatsStrip.astro'
+import Testimonials from '../../components/Testimonials.astro'
+import ProcessTimeline from '../../components/ProcessTimeline.astro'
+import VideoLightbox from '../../components/VideoLightbox.astro'
+import ServicesGrid from '../../components/ServicesGrid.astro'
+import TrustLogos from '../../components/TrustLogos.astro'
+
+const videoTestimonials = [
+  { title: 'Von 200 auf 3.400 Besucher/Monat', initials: 'MB', name: 'Markus B.', role: 'CEO, E-Commerce', vimeoId: '1136116624' },
+  { title: 'Wie wir 80% unserer Neupatienten über Google gewinnen', initials: 'JH', name: 'Julia H.', role: 'Praxisinhaberin, Zahnmedizin', vimeoId: '1115108100' },
+  { title: 'SEO als wichtigster Vertriebskanal im B2B', initials: 'SL', name: 'Stefan L.', role: 'Geschäftsführer, Maschinenbau', vimeoId: '1115110019', vimeoHash: 'd330a8b9b1' },
+]
+
+const textReviews = [
+  { quote: '„Die Beratungsleistung ist wirklich top. Man hat das Gefühl, dass hier der Kunde König ist. Ich bin begeistert von der Expertise der Mitarbeiter – man bekommt auf jede Frage eine Antwort."', initials: 'SB', name: 'Stefan Beck', role: 'Inhaber, Pressebeck' },
+  { quote: '„Top Agentur für SEO & SEA! Durch gezielte SEO Optimierungen konnten wichtige Keywords deutlich bessere Rankings erzielen und unsere Sichtbarkeit ist spürbar gestiegen."', initials: 'DK', name: 'Dennis Koch', role: 'GF, Kaweha Absaugtechnik' },
+  { quote: '„Unsere Leads aus Deutschland werden immer mehr. Es gibt eine echte Strategie – wir besprechen gemeinsam unsere Ziele und KPIs. Die Zusammenarbeit ist hervorragend."', initials: 'BH', name: 'Björn Hoekstra', role: 'Marketingleiter, Kiekens' },
+  { quote: '„Die Arbeit von sagemedia war sofort bemerk- und sichtbar. Das Ranking hat sich binnen kürzester Zeit stark verbessert – viel besser, als wir es erwartet hatten."', initials: 'StW', name: 'Stefanie Wagenblast', role: 'Rechtsanwaltskanzlei Wagenblast' },
+  { quote: '„Sagemedia ist ein sehr wertvoller Partner für uns! Dank Sagemedia konnten unsere neuen Produkte schnell und einfach online gefunden werden."', initials: 'MZ', name: 'Matthias Zech', role: 'GF, Cherry-Bikes Nürnberg' },
+  { quote: '„Sagemedia ist ein Dienstleister mit großer Kompetenz, insbesondere zur Schaffung von Sichtbarkeit. Stets erreichbar, nachhaltige Ergebnisse."', initials: 'CM', name: 'Christian Mitter', role: 'Rechtsanwaltskanzlei Mitter' },
+]
+
+const processSteps = [
+  { step: '01', title: 'Erstgespräch & Branchencheck', desc: 'Wir prüfen ob deine Branche und Region noch verfügbar ist. In einem 30-minütigen Call besprechen wir deine Ziele, deinen Wettbewerb und ob wir der richtige Partner sind.', detail: 'Kostenlos & unverbindlich' },
+  { step: '02', title: 'Audit & Strategie', desc: 'Umfassende Analyse deiner digitalen Sichtbarkeit: Technisches SEO, Content, Backlinks, KI-Suchsysteme und Wettbewerb. Daraus entsteht deine individuelle Roadmap.', detail: 'Innerhalb von 2 Wochen' },
+  { step: '03', title: 'Umsetzung & Optimierung', desc: 'Technische Optimierung, Content-Erstellung, Linkaufbau, Schema-Markup und KI-Optimierung. Alles dokumentiert, nachvollziehbar und in monatlichen Sprints.', detail: 'Monatliche Sprints' },
+  { step: '04', title: 'Reporting & Skalierung', desc: 'Echtzeit-Dashboard mit allen KPIs, monatliches Reporting und iterative Optimierung. Wir skalieren was funktioniert und passen an, was nicht performt.', detail: 'Dashboard mit Echtzeitdaten' },
+]
+---
+
+<Layout title="Leistungen, SEO, GEO & Google Stellenanzeigen | sagemedia" description="Digitale Sichtbarkeit aus einer Hand: SEO, KI-Suchoptimierung (GEO/AIO/LLMO) und Google Stellenanzeigen. Branchenexklusiv, datengetrieben, messbar.">
+  <Header />
+
+  <main class="pt-18">
+
+    <!-- HERO -->
+    <HeroPage
+      eyebrow="Leistungen"
+      titleLine1="Sichtbarkeit."
+      titleLine2="Kein Zufall."
+      subtitle="Von klassischem SEO über KI-Suchoptimierung bis Google Stellenanzeigen, wir machen dein Unternehmen dort sichtbar, wo deine Kunden und Kandidaten suchen. Branchenexklusiv und datengetrieben."
+      ctaText="Verfügbarkeit prüfen"
+      secondaryText="Leistungen ansehen"
+      secondaryHref="#leistungen"
+      breadcrumbs={[
+        { label: 'Home', href: '/' },
+        { label: 'Leistungen' }
+      ]}
+    >
+      <!-- Visual -->
+      <div class="relative" slot="visual">
+        <div class="absolute -inset-12 rounded-[3rem]" style="background: radial-gradient(ellipse at center, rgba(16,185,129,0.15) 0%, rgba(16,185,129,0.05) 50%, transparent 70%);"></div>
+        <div class="absolute -inset-6 rounded-[2rem] border border-emerald-500/10 animate-pulse"></div>
+
+        <div class="relative bg-white/70 backdrop-blur-2xl rounded-[1.25rem] border border-white/80 shadow-[0_32px_80px_-16px_rgba(16,185,129,0.15),0_0_0_1px_rgba(0,0,0,0.04)] p-7">
+          <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-3">
+              <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)] animate-pulse"></div>
+              <span class="text-xs font-mono font-medium text-gray-400 uppercase tracking-wider">Leistungen</span>
+            </div>
+            <span class="text-[10px] font-mono text-emerald-600 font-semibold bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-100">3 Services</span>
+          </div>
+
+          <div class="space-y-3 mb-6">
+            {[
+              { name: 'SEO', status: 'Aktiv', desc: 'Google & Bing' },
+              { name: 'GEO / AIO / LLMO', status: 'Aktiv', desc: 'ChatGPT & AI Overviews' },
+              { name: 'Google Stellenanzeigen', status: 'Aktiv', desc: 'Google for Jobs' },
+            ].map((s) => (
+              <div class="flex items-center justify-between p-3 bg-gray-50/80 rounded-xl border border-gray-100">
+                <div>
+                  <span class="text-sm font-semibold text-gray-900">{s.name}</span>
+                  <p class="text-[10px] text-gray-400 mt-0.5">{s.desc}</p>
+                </div>
+                <div class="flex items-center gap-2">
+                  <div class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.5)]"></div>
+                  <span class="text-xs font-mono text-emerald-600">{s.status}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div class="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-6"></div>
+
+          <div class="grid grid-cols-3 gap-4">
+            <div>
+              <p class="text-[10px] font-mono uppercase tracking-wider text-gray-400 mb-1">Rankings</p>
+              <p class="text-xl font-extrabold text-gray-900 tracking-tight">100k+</p>
+            </div>
+            <div>
+              <p class="text-[10px] font-mono uppercase tracking-wider text-gray-400 mb-1">Wachstum</p>
+              <p class="text-xl font-extrabold text-emerald-600 tracking-tight">648%</p>
+            </div>
+            <div>
+              <p class="text-[10px] font-mono uppercase tracking-wider text-gray-400 mb-1">Bewertung</p>
+              <p class="text-xl font-extrabold text-gray-900 tracking-tight">5.0</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="absolute -bottom-5 -left-5 bg-white/90 backdrop-blur-xl rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.08)] border border-gray-100 px-4 py-3 flex items-center gap-3 hero-badge">
+          <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-[0_0_16px_rgba(16,185,129,0.4)]">
+            <svg class="w-4 h-4 text-white" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8l4 4 8-8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </div>
+          <div>
+            <p class="text-xs font-bold text-gray-900">Branchenexklusiv</p>
+            <p class="text-[10px] text-gray-400">1 Kunde pro Branche</p>
+          </div>
+        </div>
+
+        <div class="absolute -top-4 -right-4 bg-white/90 backdrop-blur-xl rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.08)] border border-gray-100 px-4 py-3 hero-badge-2">
+          <p class="text-xs font-bold text-gray-900">15+ Jahre</p>
+          <p class="text-[10px] text-gray-400">SEO-Erfahrung</p>
+        </div>
+      </div>
+
+      <TrustLogos class="mt-16 hero-trust" slot="trust" />
+    </HeroPage>
+
+    <!-- STATS -->
+    <StatsStrip stats={[
+      { val: '100k+', label: 'Rankings erzielt' },
+      { val: '648%', label: 'Ø Traffic-Wachstum' },
+      { val: '24+', label: 'Monate Kundenbindung' },
+      { val: '1', label: 'Kunde pro Branche' },
+    ]} />
+
+    <!-- LEISTUNGEN -->
+    <ServicesGrid
+      eyebrow="Unsere Leistungen"
+      title="Was wir für"
+      titleAccent=" dich tun"
+      subtitle="Jede Leistung wird individuell auf deine Branche, dein Geschäftsmodell und deine Ziele zugeschnitten."
+      services={[
+        { href: '/leistungen/seo', icon: 'search', title: 'Suchmaschinen-optimierung', desc: 'Technisches SEO, Content-Strategie und strategischer Linkaufbau, abgestimmt auf deine Branche und Region. Wir optimieren für Google und zunehmend auch für KI-basierte Suchsysteme. Datengetrieben mit Google Search Console, Ahrefs und eigenen Analyse-Tools.' },
+        { href: '/leistungen/geo-aio-llmo', icon: 'bulb', title: 'GEO / AIO / LLMO', desc: 'Generative Engine Optimization für ChatGPT, Perplexity und Google AI Overviews. Wir sorgen dafür, dass KI-Systeme dein Unternehmen als vertrauenswürdige Quelle erkennen und in ihren Antworten empfehlen. Die nächste Stufe der Suchmaschinenoptimierung.' },
+        { href: '/leistungen/google-stellenanzeigen', icon: 'people', title: 'Google Stellenanzeigen', desc: 'Google for Jobs Integration und KI-optimierte Karriereseiten mit strukturierten Daten (JobPosting Schema). Deine Stellenanzeigen erscheinen direkt in der Google-Suche, dort, wo Kandidaten aktiv suchen, nicht auf überladenen Jobbörsen.' },
+      ]}
+    />
+
+    <!-- PROZESS -->
+    <ProcessTimeline
+      title="So arbeiten wir"
+      titleAccent=" zusammen"
+      subtitle="Kein langwieriges Onboarding, keine versteckten Kosten. Vom ersten Gespräch bis zu messbaren Ergebnissen, transparent und strukturiert."
+      steps={processSteps}
+    />
+
+    <!-- KUNDENSTIMMEN -->
+    <Testimonials videos={videoTestimonials} reviews={textReviews} />
+
+    <!-- CTA -->
+    <CtaSection
+      title="Ist deine Branche"
+      titleAccent="noch verfügbar?"
+      subtitle="Wir betreuen nur einen Kunden pro Branche und Region. Prüfe jetzt, ob dein Exklusivplatz noch frei ist, kostenlos und unverbindlich."
+      ctaText="Verfügbarkeit prüfen"
+    />
+
+  </main>
+
+  <Footer />
+  <VideoLightbox />
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Digitale Sichtbarkeit, SEO, GEO & Recruiting",
+    "provider": {
+      "@type": "ProfessionalService",
+      "name": "sagemedia GmbH",
+      "url": "https://sagemedia.de",
+      "telephone": "+4995733313759",
+      "address": { "@type": "PostalAddress", "streetAddress": "Goethestraße 12", "addressLocality": "Bad Staffelstein", "postalCode": "96231", "addressCountry": "DE" }
+    },
+    "description": "Branchenexklusive Agentur für SEO, KI-Suchoptimierung (GEO/AIO/LLMO) und Google Stellenanzeigen.",
+    "areaServed": { "@type": "Country", "name": "Deutschland" },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Leistungen",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Suchmaschinenoptimierung (SEO)", "url": "https://sagemedia.de/leistungen/seo" }},
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "GEO / AIO / LLMO", "url": "https://sagemedia.de/leistungen/geo-aio-llmo" }},
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Google Stellenanzeigen", "url": "https://sagemedia.de/leistungen/google-stellenanzeigen" }},
+      ]
+    }
+  })} />
+</Layout>

@@ -1,0 +1,74 @@
+---
+interface Service {
+  href: string
+  icon: string
+  title: string
+  desc: string
+}
+
+interface Props {
+  eyebrow?: string
+  title?: string
+  titleAccent?: string
+  subtitle?: string
+  services: Service[]
+}
+
+const {
+  eyebrow = 'Leistungen',
+  title = 'Was wir für',
+  titleAccent = ' dich tun',
+  subtitle = 'Von klassischem SEO bis KI-Suchoptimierung, das gesamte Spektrum digitaler Sichtbarkeit.',
+  services,
+} = Astro.props
+---
+
+<section class="relative py-32 md:py-44 overflow-hidden">
+  <div class="absolute top-[10%] right-[5%] w-[500px] h-[500px] rounded-full" style="background: radial-gradient(circle, rgba(16,185,129,0.06) 0%, transparent 60%);"></div>
+  <div class="absolute bottom-[5%] left-[10%] w-[400px] h-[400px] rounded-full" style="background: radial-gradient(circle, rgba(52,211,153,0.05) 0%, transparent 60%);"></div>
+  <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-300/20 to-transparent"></div>
+
+  <div class="max-w-7xl mx-auto px-6 relative">
+    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-20">
+      <div class="max-w-2xl">
+        <div class="flex items-center gap-3 mb-6 fade-up">
+          <span class="inline-block w-8 h-px bg-emerald-500"></span>
+          <span class="text-xs font-mono font-medium text-emerald-600 uppercase tracking-[0.2em]">{eyebrow}</span>
+        </div>
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[1.05] tracking-[-0.04em] text-gray-950 fade-up">
+          {title}
+          <span class="bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">{titleAccent}</span>
+        </h2>
+      </div>
+      <p class="text-gray-500 leading-relaxed max-w-sm fade-up">{subtitle}</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 fade-up-stagger">
+      {services.map((s) => (
+        <a href={s.href} class="group relative bg-white rounded-2xl p-8 border border-gray-100 hover:border-emerald-200 transition-all duration-500 hover:shadow-[0_24px_64px_-12px_rgba(16,185,129,0.12)] overflow-hidden fade-up card-lift">
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background: radial-gradient(circle at 50% 0%, rgba(16,185,129,0.06) 0%, transparent 60%);"></div>
+          <div class="relative">
+            <div class="w-12 h-12 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-emerald-400 group-hover:to-emerald-600 group-hover:border-emerald-500 group-hover:shadow-[0_8px_24px_rgba(16,185,129,0.3)] transition-all duration-500">
+              <svg class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors duration-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                {s.icon === 'search' && <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />}
+                {s.icon === 'bulb' && <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />}
+                {s.icon === 'people' && <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />}
+                {s.icon === 'cursor' && <path d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5" />}
+                {s.icon === 'layout' && <path d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zm0 8a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6z" />}
+                {s.icon === 'monitor' && <path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />}
+              </svg>
+            </div>
+            <h3 class="mt-6 text-xl font-bold text-gray-900 tracking-tight group-hover:text-emerald-700 transition-colors">{s.title}</h3>
+            <p class="mt-3 text-sm text-gray-500 leading-relaxed">{s.desc}</p>
+            <div class="mt-6 flex items-center gap-2">
+              <span class="text-xs font-mono font-medium text-gray-400 group-hover:text-emerald-600 uppercase tracking-wider transition-colors">Mehr erfahren</span>
+              <svg class="w-4 h-4 text-gray-300 group-hover:text-emerald-500 group-hover:translate-x-1 transition-all" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M3 8h10m-4-4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

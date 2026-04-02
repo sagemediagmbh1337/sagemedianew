@@ -1,0 +1,91 @@
+---
+interface CaseStudy {
+  ytId: string
+  title: string
+  metric: string
+  metricLabel: string
+  industry: string
+}
+
+interface Props {
+  eyebrow?: string
+  title?: string
+  titleAccent?: string
+  subtitle?: string
+  cases: CaseStudy[]
+  showAllLink?: boolean
+}
+
+const {
+  eyebrow = 'Ergebnisse',
+  title = 'Echte Kunden.',
+  titleAccent = ' Echte Ergebnisse.',
+  subtitle = 'Keine erfundenen Zahlen. Unsere Kunden sprechen selbst über ihre Ergebnisse.',
+  cases,
+  showAllLink = true,
+} = Astro.props
+
+const sliderId = `case-slider-${Math.random().toString(36).slice(2, 8)}`
+---
+
+<section class="relative py-32 md:py-44 overflow-hidden" id="ergebnisse">
+  <div class="absolute top-[15%] right-[10%] w-[500px] h-[500px] rounded-full" style="background: radial-gradient(circle, rgba(16,185,129,0.06) 0%, transparent 60%);"></div>
+  <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200/60 to-transparent"></div>
+  <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200/60 to-transparent"></div>
+
+  <div class="max-w-7xl mx-auto px-6 relative">
+    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16">
+      <div>
+        <div class="flex items-center gap-3 mb-6 fade-up">
+          <span class="inline-block w-8 h-px bg-emerald-500"></span>
+          <span class="text-xs font-mono font-medium text-emerald-600 uppercase tracking-[0.2em]">{eyebrow}</span>
+        </div>
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[1.05] tracking-[-0.04em] text-gray-950 fade-up">
+          {title}
+          <span class="bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">{titleAccent}</span>
+        </h2>
+      </div>
+      <p class="text-gray-500 leading-relaxed max-w-sm fade-up">{subtitle}</p>
+    </div>
+
+    <!-- Video Slider -->
+    <div class="relative fade-up">
+      <div id={sliderId} class="case-slider flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4" style="-ms-overflow-style: none; scrollbar-width: none;">
+        {cases.map((c) => (
+          <div class="group shrink-0 w-full md:w-[calc(50%-0.75rem)] snap-start fade-up" data-yt-id={c.ytId}>
+            <div class="case-thumbnail cursor-pointer relative aspect-video rounded-2xl overflow-hidden bg-gray-100 shadow-[0_8px_32px_rgba(0,0,0,0.08)]">
+              <img src={`https://img.youtube.com/vi/${c.ytId}/maxresdefault.jpg`} alt={c.title} class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+              <div class="absolute inset-0 bg-gradient-to-t from-gray-950/70 via-transparent to-transparent"></div>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center group-hover:bg-emerald-500 group-hover:border-emerald-400 group-hover:shadow-[0_0_32px_rgba(16,185,129,0.5)] group-hover:scale-105 transition-all duration-500">
+                  <svg class="w-6 h-6 text-white ml-0.5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="absolute bottom-0 left-0 right-0 p-5">
+                <span class="inline-block text-[10px] font-mono text-emerald-400 uppercase tracking-wider bg-emerald-500/20 backdrop-blur-sm border border-emerald-500/20 px-2.5 py-1 rounded-full mb-2">{c.industry}</span>
+                <p class="text-white text-base font-bold leading-snug">{c.title}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="flex items-center gap-3 mt-6">
+        <button class="case-prev w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:border-emerald-300 hover:shadow-[0_0_16px_rgba(16,185,129,0.15)] transition-all cursor-pointer" data-slider={sliderId} aria-label="Zurück">
+          <svg class="w-4 h-4 text-gray-500" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 4l-4 4 4 4" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </button>
+        <button class="case-next w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:border-emerald-300 hover:shadow-[0_0_16px_rgba(16,185,129,0.15)] transition-all cursor-pointer" data-slider={sliderId} aria-label="Weiter">
+          <svg class="w-4 h-4 text-gray-500" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </button>
+        {showAllLink && (
+          <a href="/ergebnisse" class="hidden sm:inline-flex items-center gap-2 text-sm font-semibold text-gray-500 hover:text-emerald-600 transition-colors ml-3">
+            Alle Ergebnisse
+            <svg class="w-3.5 h-3.5" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10m-4-4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+</section>

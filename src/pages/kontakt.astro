@@ -1,0 +1,210 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import HeroPage from '../components/HeroPage.astro'
+import StatsStrip from '../components/StatsStrip.astro'
+import Testimonials from '../components/Testimonials.astro'
+import VideoLightbox from '../components/VideoLightbox.astro'
+import TrustLogos from '../components/TrustLogos.astro'
+import FaqSection from '../components/FaqSection.astro'
+
+const kontaktFaqs = [
+  { q: 'Ist das Erstgespräch wirklich kostenlos?', a: 'Ja, zu 100%. Im 30-minütigen Call prüfen wir ob deine Branche verfügbar ist, besprechen deine Ziele und schauen ob wir der richtige Partner sind. Kein Verkaufsgespräch, ein ehrliches Kennenlernen.' },
+  { q: 'Wie schnell bekomme ich eine Antwort?', a: 'Wir antworten in der Regel innerhalb von 24 Stunden auf Anfragen. Für dringende Fragen erreichst du uns auch telefonisch unter 09573 / 33 13 759.' },
+  { q: 'Was passiert nach dem Erstgespräch?', a: 'Wenn es passt, erstellen wir einen kostenlosen SEO-Audit deiner Website. Daraus entsteht eine individuelle Roadmap mit konkreten Maßnahmen, KPIs und Zeitplan. Erst danach entscheidest du, ob du starten möchtest.' },
+  { q: 'Betreut ihr auch Unternehmen außerhalb Bayerns?', a: 'Ja. Unsere Kunden sitzen in ganz Deutschland, Österreich und der Schweiz. Die Zusammenarbeit läuft komplett digital, mit regelmäßigen Video-Calls und Echtzeit-Dashboard.' },
+]
+
+const textReviews = [
+  { quote: '„Die Beratungsleistung ist wirklich top. Man hat das Gefühl, dass hier der Kunde König ist. Ich bin begeistert von der Expertise der Mitarbeiter – man bekommt auf jede Frage eine Antwort."', initials: 'SB', name: 'Stefan Beck', role: 'Inhaber, Pressebeck' },
+  { quote: '„Top Agentur für SEO & SEA! Durch gezielte SEO Optimierungen konnten wichtige Keywords deutlich bessere Rankings erzielen und unsere Sichtbarkeit ist spürbar gestiegen."', initials: 'DK', name: 'Dennis Koch', role: 'GF, Kaweha Absaugtechnik' },
+  { quote: '„Die Arbeit von sagemedia war sofort bemerk- und sichtbar. Das Ranking hat sich binnen kürzester Zeit stark verbessert – viel besser, als wir es erwartet hatten."', initials: 'StW', name: 'Stefanie Wagenblast', role: 'Rechtsanwaltskanzlei Wagenblast' },
+  { quote: '„Sagemedia ist ein Dienstleister mit großer Kompetenz, insbesondere zur Schaffung von Sichtbarkeit. Stets erreichbar, nachhaltige Ergebnisse."', initials: 'CM', name: 'Christian Mitter', role: 'Rechtsanwaltskanzlei Mitter' },
+]
+---
+
+<Layout title="Kontakt, Erstgespräch vereinbaren | sagemedia" description="Kostenloses Erstgespräch mit sagemedia. Prüfe ob deine Branche noch verfügbar ist. Ruf an oder buche direkt einen Termin.">
+  <Header />
+
+  <main class="pt-18">
+
+    <!-- HERO -->
+    <HeroPage
+      eyebrow="Kontakt"
+      titleLine1="Lass uns"
+      titleLine2="sprechen."
+      subtitle="Ob du Fragen hast, ein konkretes Projekt besprechen oder einfach prüfen möchtest, ob deine Branche noch verfügbar ist, wir sind für dich da."
+      ctaText="Termin buchen"
+      ctaHref="#termin"
+      secondaryText="Anrufen"
+      secondaryHref="tel:+4995733313759"
+      breadcrumbs={[
+        { label: 'Home', href: '/' },
+        { label: 'Kontakt' }
+      ]}
+    >
+      <!-- Contact Card Visual -->
+      <div class="relative" slot="visual">
+        <div class="absolute -inset-12 rounded-[3rem]" style="background: radial-gradient(ellipse at center, rgba(16,185,129,0.15) 0%, rgba(16,185,129,0.05) 50%, transparent 70%);"></div>
+
+        <div class="relative bg-white/70 backdrop-blur-2xl rounded-[1.25rem] border border-white/80 shadow-[0_32px_80px_-16px_rgba(16,185,129,0.15),0_0_0_1px_rgba(0,0,0,0.04)] p-7">
+          <!-- Contact Details -->
+          <div class="space-y-4">
+            <a href="tel:+4995733313759" class="flex items-center gap-4 p-3 bg-gray-50/80 rounded-xl border border-gray-100 hover:border-emerald-200 transition-colors group">
+              <div class="w-10 h-10 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center justify-center group-hover:bg-emerald-500 group-hover:border-emerald-500 transition-all">
+                <svg class="w-4 h-4 text-emerald-600 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" /></svg>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-gray-900">09573 / 33 13 759</p>
+                <p class="text-[10px] text-gray-400">Mo–Fr, 9–18 Uhr</p>
+              </div>
+            </a>
+
+            <a href="mailto:info@sagemedia.de" class="flex items-center gap-4 p-3 bg-gray-50/80 rounded-xl border border-gray-100 hover:border-emerald-200 transition-colors group">
+              <div class="w-10 h-10 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center justify-center group-hover:bg-emerald-500 group-hover:border-emerald-500 transition-all">
+                <svg class="w-4 h-4 text-emerald-600 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><path d="M22 6l-10 7L2 6" /></svg>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-gray-900">info@sagemedia.de</p>
+                <p class="text-[10px] text-gray-400">Antwort innerhalb 24h</p>
+              </div>
+            </a>
+
+            <div class="flex items-center gap-4 p-3 bg-gray-50/80 rounded-xl border border-gray-100">
+              <div class="w-10 h-10 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center justify-center">
+                <svg class="w-4 h-4 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><circle cx="12" cy="11" r="3" /></svg>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-gray-900">Goethestraße 12</p>
+                <p class="text-[10px] text-gray-400">96231 Bad Staffelstein, Bayern</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="absolute -bottom-5 -left-5 bg-white/90 backdrop-blur-xl rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.08)] border border-gray-100 px-4 py-3 flex items-center gap-3 hero-badge">
+          <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-[0_0_16px_rgba(16,185,129,0.4)]">
+            <svg class="w-4 h-4 text-white" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8l4 4 8-8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </div>
+          <div>
+            <p class="text-xs font-bold text-gray-900">Kostenlos</p>
+            <p class="text-[10px] text-gray-400">30 Min. Erstgespräch</p>
+          </div>
+        </div>
+      </div>
+
+      <TrustLogos class="mt-16 hero-trust" slot="trust" />
+    </HeroPage>
+
+    <!-- CALENDLY EMBED -->
+    <section class="relative py-32 md:py-44 bg-gray-50/80 overflow-hidden" id="termin">
+      <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200/60 to-transparent"></div>
+      <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200/60 to-transparent"></div>
+      <div class="absolute top-[20%] right-[5%] w-[500px] h-[500px] rounded-full" style="background: radial-gradient(circle, rgba(16,185,129,0.07) 0%, transparent 60%);"></div>
+
+      <div class="max-w-7xl mx-auto px-6 relative">
+        <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          <!-- Text -->
+          <div class="lg:col-span-5">
+            <div class="flex items-center gap-3 mb-6 fade-up">
+              <span class="inline-block w-8 h-px bg-emerald-500"></span>
+              <span class="text-xs font-mono font-medium text-emerald-600 uppercase tracking-[0.2em]">Termin buchen</span>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-extrabold leading-[1.05] tracking-[-0.04em] text-gray-950 fade-up">
+              Erstgespräch
+              <span class="bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent"> vereinbaren</span>
+            </h2>
+            <p class="mt-6 text-gray-500 leading-relaxed fade-up">
+              Buche direkt einen 30-minütigen Call mit André. Wir besprechen deine Ziele, prüfen die Verfügbarkeit deiner Branche und zeigen dir, wie wir konkret helfen können.
+            </p>
+
+            <div class="mt-10 space-y-5 fade-up">
+              {[
+                { title: 'Branchencheck', desc: 'Wir prüfen ob deine Branche und Region noch verfügbar ist.' },
+                { title: 'Potenzial-Analyse', desc: 'Erste Einschätzung zu Rankings, Traffic und Wettbewerb in deiner Branche.' },
+                { title: 'Nächste Schritte', desc: 'Klarer Plan, was als nächstes passiert, ohne Verpflichtung.' },
+              ].map((item, i) => (
+                <div class="flex items-start gap-4">
+                  <div class="w-9 h-9 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center justify-center shrink-0">
+                    <span class="text-xs font-mono font-bold text-emerald-600">{String(i + 1).padStart(2, '0')}</span>
+                  </div>
+                  <div>
+                    <p class="text-sm font-bold text-gray-900">{item.title}</p>
+                    <p class="text-xs text-gray-400 mt-0.5">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Calendly Placeholder -->
+          <div class="lg:col-span-7 fade-up">
+            <div class="relative bg-white rounded-2xl border border-gray-100 shadow-[0_8px_32px_rgba(0,0,0,0.04)] overflow-hidden" id="calendly-container">
+              <!-- Placeholder until Calendly is integrated -->
+              <div class="aspect-[4/3] lg:aspect-auto lg:min-h-[600px] flex items-center justify-center p-8">
+                <div class="text-center max-w-sm">
+                  <div class="w-16 h-16 rounded-2xl bg-emerald-50 border border-emerald-100 flex items-center justify-center mx-auto mb-6">
+                    <svg class="w-7 h-7 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>
+                  </div>
+                  <p class="text-lg font-bold text-gray-900">Calendly wird hier eingebettet</p>
+                  <p class="mt-2 text-sm text-gray-400">30-minütiger Call mit André Schäfer</p>
+                  <div class="mt-8">
+                    <a href="tel:+4995733313759" class="group relative inline-flex items-center gap-3 px-6 py-3 rounded-full text-sm font-semibold overflow-hidden transition-all duration-500 hover:shadow-[0_0_32px_rgba(16,185,129,0.3)]">
+                      <div class="absolute inset-0 bg-gradient-to-r from-emerald-600 to-emerald-500"></div>
+                      <span class="relative z-10 text-white">Oder direkt anrufen: 09573 / 33 13 759</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <StatsStrip stats={[
+      { val: '24h', label: 'Antwortzeit' },
+      { val: '30 Min.', label: 'Erstgespräch' },
+      { val: '100%', label: 'Kostenlos' },
+      { val: '5.0', label: 'Google Bewertung' },
+    ]} />
+
+    <!-- KUNDENSTIMMEN -->
+    <Testimonials reviews={textReviews} />
+
+    <!-- FAQ -->
+    <FaqSection
+      title="Häufige Fragen"
+      titleAccent="zum Erstgespräch"
+      subtitle="Was du vor dem ersten Kontakt wissen solltest."
+      faqs={kontaktFaqs}
+    />
+
+  </main>
+
+  <Footer />
+  <VideoLightbox />
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "mainEntity": {
+      "@type": "LocalBusiness",
+      "name": "sagemedia GmbH",
+      "url": "https://sagemedia.de",
+      "telephone": "+4995733313759",
+      "email": "info@sagemedia.de",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Goethestraße 12",
+        "addressLocality": "Bad Staffelstein",
+        "postalCode": "96231",
+        "addressRegion": "Bayern",
+        "addressCountry": "DE"
+      },
+      "openingHours": "Mo-Fr 09:00-18:00"
+    }
+  })} />
+</Layout>

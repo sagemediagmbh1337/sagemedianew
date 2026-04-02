@@ -1,0 +1,60 @@
+---
+import '../styles/global.css'
+
+interface Props {
+  title: string
+  description?: string
+}
+
+const {
+  title,
+  description = 'Ein Unternehmen pro Branche. Keine Kompromisse. sagemedia ist deine exklusive SEO-Agentur für nachhaltige Sichtbarkeit bei Google, ChatGPT und KI-Suchsystemen.'
+} = Astro.props
+---
+
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href="https://sagemedia.de/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="de_DE" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Schema.org -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "sagemedia GmbH",
+      "description": "Premium-SEO-Agentur aus Bad Staffelstein",
+      "url": "https://sagemedia.de",
+      "telephone": "+4995733313759",
+      "email": "info@sagemedia.de",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Goethestraße 12",
+        "addressLocality": "Bad Staffelstein",
+        "postalCode": "96231",
+        "addressRegion": "Bayern",
+        "addressCountry": "DE"
+      },
+      "founder": { "@type": "Person", "name": "André Schäfer" },
+      "vatID": "DE358112804"
+    })} />
+  </head>
+  <body class="min-h-screen font-sans text-gray-950 antialiased">
+    <slot />
+  </body>
+</html>

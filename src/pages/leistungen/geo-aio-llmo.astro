@@ -1,0 +1,332 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import Header from '../../components/Header.astro'
+import Footer from '../../components/Footer.astro'
+import HeroPage from '../../components/HeroPage.astro'
+import CtaSection from '../../components/CtaSection.astro'
+import FaqSection from '../../components/FaqSection.astro'
+import StatsStrip from '../../components/StatsStrip.astro'
+import CaseStudies from '../../components/CaseStudies.astro'
+import Testimonials from '../../components/Testimonials.astro'
+import ProcessTimeline from '../../components/ProcessTimeline.astro'
+import VideoLightbox from '../../components/VideoLightbox.astro'
+import ServicesGrid from '../../components/ServicesGrid.astro'
+import TrustLogos from '../../components/TrustLogos.astro'
+
+const geoFaqs = [
+  { q: 'Was ist GEO / AIO / LLMO?', a: 'GEO (Generative Engine Optimization), AIO (AI Overview Optimization) und LLMO (Large Language Model Optimization) sind Strategien, um dein Unternehmen in KI-gestützten Suchsystemen wie ChatGPT, Perplexity und Google AI Overviews sichtbar zu machen. Während klassisches SEO auf Google-Rankings abzielt, sorgt GEO/AIO/LLMO dafür, dass KI-Systeme dich als vertrauenswürdige Quelle erkennen und aktiv empfehlen.' },
+  { q: 'Brauche ich GEO, wenn ich bereits SEO mache?', a: 'Ja, es ergänzt sich perfekt. Gutes SEO ist die Grundlage für GEO. Wer bei Google stark rankt und als E-E-A-T-Quelle etabliert ist, hat bessere Chancen, von KI-Systemen zitiert zu werden. Wir optimieren beide Kanäle gleichzeitig, da die Maßnahmen sich gegenseitig verstärken.' },
+  { q: 'Wie messe ich Erfolg bei KI-Suchsystemen?', a: 'Wir tracken, wie oft dein Unternehmen in AI Overviews, ChatGPT-Antworten und Perplexity-Ergebnissen erscheint. Dazu nutzen wir eigene Monitoring-Tools, Google Search Console (AI Overview Impressions) und manuelle Audits mit definierten Suchanfragen.' },
+  { q: 'Wie schnell sehe ich Ergebnisse?', a: 'KI-Suchsysteme aktualisieren ihre Quellen schneller als Google Rankings, erste Erwähnungen können bereits nach 4-8 Wochen auftauchen. Für eine konsistente Sichtbarkeit als bevorzugte Quelle rechnen wir mit 3-6 Monaten.' },
+  { q: 'Was kostet GEO/AIO/LLMO bei sagemedia?', a: 'GEO/AIO/LLMO wird in der Regel als Erweiterung unserer SEO-Betreuung angeboten. Im Erstgespräch besprechen wir den individuellen Invest und analysieren, wie relevant KI-Suchsysteme für deine Branche bereits sind.' },
+  { q: 'Ist GEO/AIO/LLMO für jede Branche relevant?', a: 'Die Relevanz wächst rasant. Besonders für B2B, SaaS, Gesundheitswesen, Recht und Beratung ist GEO bereits heute ein entscheidender Kanal. Für lokale Dienstleister wird es in den nächsten 12-24 Monaten relevant. Wir beraten dich ehrlich, ob es jetzt schon Sinn macht.' },
+]
+
+const caseStudies = [
+  { ytId: '2wpHWuAU8Zc', title: 'Energieversum: 100+ Leads/Monat', metric: '44.362', metricLabel: 'Org. Traffic', industry: 'Photovoltaik' },
+  { ytId: '4nF2yb1rAzU', title: 'Beamtenberater: 88.586 Klicks/Monat', metric: '15.238', metricLabel: 'Keywords', industry: 'Versicherung' },
+  { ytId: 'mTW5nOlHcpo', title: 'Cherry-Bikes: 470 Conversions/Monat', metric: '9.303', metricLabel: 'Keywords', industry: 'E-Commerce' },
+  { ytId: 'S8fPqe5PWbQ', title: 'Iris Haag: +5.000% Traffic-Wachstum', metric: '+5.000%', metricLabel: 'Traffic', industry: 'Coaching' },
+]
+
+const videoTestimonials = [
+  { title: 'Von 200 auf 3.400 Besucher/Monat', initials: 'MB', name: 'Markus B.', role: 'CEO, E-Commerce', vimeoId: '1136116624' },
+  { title: 'Wie wir 80% unserer Neupatienten über Google gewinnen', initials: 'JH', name: 'Julia H.', role: 'Praxisinhaberin, Zahnmedizin', vimeoId: '1115108100' },
+  { title: 'SEO als wichtigster Vertriebskanal im B2B', initials: 'SL', name: 'Stefan L.', role: 'Geschäftsführer, Maschinenbau', vimeoId: '1115110019', vimeoHash: 'd330a8b9b1' },
+]
+
+const textReviews = [
+  { quote: '„Die Beratungsleistung ist wirklich top. Man hat das Gefühl, dass hier der Kunde König ist. Ich bin begeistert von der Expertise der Mitarbeiter – man bekommt auf jede Frage eine Antwort."', initials: 'SB', name: 'Stefan Beck', role: 'Inhaber, Pressebeck' },
+  { quote: '„Top Agentur für SEO & SEA! Durch gezielte SEO Optimierungen konnten wichtige Keywords deutlich bessere Rankings erzielen und unsere Sichtbarkeit ist spürbar gestiegen."', initials: 'DK', name: 'Dennis Koch', role: 'GF, Kaweha Absaugtechnik' },
+  { quote: '„Unsere Leads aus Deutschland werden immer mehr. Es gibt eine echte Strategie – wir besprechen gemeinsam unsere Ziele und KPIs. Die Zusammenarbeit ist hervorragend."', initials: 'BH', name: 'Björn Hoekstra', role: 'Marketingleiter, Kiekens' },
+  { quote: '„Ich bin Kunde und Geschäftspartner gleichermaßen. Die extrem hohe fachliche Kompetenz in puncto SEO und das überdurchschnittliche Engagement machen die Zusammenarbeit besonders."', initials: 'JK', name: 'Jochen Koch', role: 'Inhaber, Jochen Koch Onlinemarketing' },
+  { quote: '„Die Arbeit von sagemedia war sofort bemerk- und sichtbar. Das Ranking hat sich binnen kürzester Zeit stark verbessert – viel besser, als wir es erwartet hatten."', initials: 'StW', name: 'Stefanie Wagenblast', role: 'Rechtsanwaltskanzlei Wagenblast' },
+  { quote: '„Sagemedia ist ein Dienstleister mit großer Kompetenz, insbesondere zur Schaffung von Sichtbarkeit. Stets erreichbar, nachhaltige Ergebnisse."', initials: 'CM', name: 'Christian Mitter', role: 'Rechtsanwaltskanzlei Mitter' },
+]
+
+const processSteps = [
+  { step: '01', title: 'KI-Sichtbarkeits-Audit', desc: 'Wir analysieren, wie dein Unternehmen aktuell in ChatGPT, Perplexity und Google AI Overviews erscheint, und wo deine Wettbewerber stehen.', detail: 'Kostenlos & unverbindlich' },
+  { step: '02', title: 'GEO-Strategie & Roadmap', desc: 'Individuelle Strategie für KI-Sichtbarkeit: Welche Quellen zitiert werden, welcher Content nötig ist und wie wir dein E-E-A-T-Profil stärken.', detail: 'Innerhalb von 2 Wochen' },
+  { step: '03', title: 'Content & Autorität aufbauen', desc: 'Erstellung von zitierfähigem Content, Schema-Markup, Digital PR und Aufbau von Signalen, die KI-Systeme als vertrauenswürdig einstufen.', detail: 'Monatliche Sprints' },
+  { step: '04', title: 'Monitoring & Optimierung', desc: 'Laufendes Tracking deiner KI-Sichtbarkeit, Anpassung an Algorithmus-Updates und iterative Optimierung der Content-Strategie.', detail: 'Fortlaufend' },
+]
+---
+
+<Layout title="GEO / AIO / LLMO, KI-Suchoptimierung | sagemedia" description="Sichtbar in ChatGPT, Perplexity & Google AI Overviews. GEO, AIO und LLMO von sagemedia, damit KI-Suchsysteme dein Unternehmen empfehlen.">
+  <Header />
+
+  <main class="pt-18">
+
+    <!-- HERO -->
+    <HeroPage
+      eyebrow="GEO / AIO / LLMO"
+      titleLine1="Sichtbar in der"
+      titleLine2="KI-Suche."
+      subtitle="ChatGPT, Perplexity und Google AI Overviews verändern, wie Menschen suchen. Wir sorgen dafür, dass KI-Systeme dein Unternehmen als vertrauenswürdige Quelle erkennen und aktiv empfehlen."
+      ctaText="KI-Sichtbarkeit prüfen"
+      secondaryText="So funktioniert's"
+      secondaryHref="#vorteile"
+      breadcrumbs={[
+        { label: 'Home', href: '/' },
+        { label: 'Leistungen', href: '/leistungen' },
+        { label: 'GEO / AIO / LLMO' }
+      ]}
+    >
+      <!-- Visual -->
+      <div class="relative" slot="visual">
+        <div class="absolute -inset-12 rounded-[3rem]" style="background: radial-gradient(ellipse at center, rgba(16,185,129,0.15) 0%, rgba(16,185,129,0.05) 50%, transparent 70%);"></div>
+
+        <div class="relative bg-white/70 backdrop-blur-2xl rounded-[1.25rem] border border-white/80 shadow-[0_32px_80px_-16px_rgba(16,185,129,0.15),0_0_0_1px_rgba(0,0,0,0.04)] p-7">
+          <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-3">
+              <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)] animate-pulse"></div>
+              <span class="text-xs font-mono font-medium text-gray-400 uppercase tracking-wider">KI-Sichtbarkeit</span>
+            </div>
+            <span class="text-[10px] font-mono text-emerald-600 font-semibold bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-100">Aktiv</span>
+          </div>
+
+          <!-- AI Sources -->
+          <div class="space-y-4 mb-6">
+            {[
+              { name: 'ChatGPT', status: 'Empfohlen', active: true },
+              { name: 'Google AI Overview', status: 'Zitiert', active: true },
+              { name: 'Perplexity', status: 'Top-Quelle', active: true },
+            ].map((s) => (
+              <div class="flex items-center justify-between p-3 bg-gray-50/80 rounded-xl border border-gray-100">
+                <span class="text-sm font-semibold text-gray-900">{s.name}</span>
+                <div class="flex items-center gap-2">
+                  <div class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.5)]"></div>
+                  <span class="text-xs font-mono text-emerald-600">{s.status}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div class="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-6"></div>
+
+          <div class="grid grid-cols-2 gap-6">
+            <div>
+              <p class="text-[10px] font-mono uppercase tracking-wider text-gray-400 mb-1">KI-Erwähnungen</p>
+              <p class="text-2xl font-extrabold text-gray-900 tracking-tight">347</p>
+            </div>
+            <div>
+              <p class="text-[10px] font-mono uppercase tracking-wider text-gray-400 mb-1">Empfehlungsrate</p>
+              <p class="text-2xl font-extrabold text-emerald-600 tracking-tight">89%</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="absolute -bottom-5 -left-5 bg-white/90 backdrop-blur-xl rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.08)] border border-gray-100 px-4 py-3 flex items-center gap-3 hero-badge">
+          <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-[0_0_16px_rgba(16,185,129,0.4)]">
+            <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+          </div>
+          <div>
+            <p class="text-xs font-bold text-gray-900">First Mover</p>
+            <p class="text-[10px] text-gray-400">KI-Optimierung seit 2024</p>
+          </div>
+        </div>
+      </div>
+
+      <TrustLogos class="mt-16 hero-trust" slot="trust" />
+
+    </HeroPage>
+
+    <!-- PROBLEM -->
+    <section class="relative py-24 md:py-32 bg-gray-950 text-white overflow-hidden noise-bg">
+      <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/40 to-transparent divider-glow"></div>
+      <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent"></div>
+      <div class="absolute top-[20%] left-[10%] w-[400px] h-[400px] rounded-full" style="background: radial-gradient(circle, rgba(16,185,129,0.1) 0%, transparent 60%);"></div>
+
+      <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="max-w-3xl mx-auto text-center mb-16 fade-up">
+          <div class="inline-flex items-center gap-2.5 mb-6">
+            <span class="inline-block w-8 h-px bg-emerald-400"></span>
+            <span class="text-xs font-mono font-medium text-emerald-400 uppercase tracking-[0.2em]">Die Veränderung</span>
+            <span class="inline-block w-8 h-px bg-emerald-400"></span>
+          </div>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-[1.1] tracking-[-0.04em]">
+            Warum Google allein
+            <span class="bg-gradient-to-r from-emerald-300 to-emerald-500 bg-clip-text text-transparent"> nicht mehr reicht</span>
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6 fade-up-stagger">
+          {[
+            { icon: 'conflict', title: 'Suchverhalten verändert sich', desc: 'Immer mehr Menschen stellen ihre Fragen direkt an ChatGPT oder Perplexity statt Google. Wer dort nicht erscheint, verliert Sichtbarkeit, ohne es zu merken.' },
+            { icon: 'template', title: 'AI Overviews verdrängen Klicks', desc: 'Google AI Overviews beantworten Fragen direkt in der Suche. Klassische Ergebnisse rutschen nach unten. Nur wer als Quelle zitiert wird, bleibt sichtbar.' },
+            { icon: 'blackbox', title: 'Keine Strategie für KI-Suche', desc: 'Die meisten Unternehmen und Agenturen optimieren ausschließlich für klassische Google-Rankings. KI-Suchsysteme werden komplett ignoriert, ein wachsender blinder Fleck.' },
+          ].map((item) => (
+            <div class="relative bg-white/[0.03] border border-white/[0.06] rounded-2xl p-8 hover:bg-white/[0.06] hover:border-red-500/20 transition-all duration-500 fade-up overflow-hidden">
+              <div class="w-10 h-10 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center mb-5">
+                <svg class="w-5 h-5 text-red-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  {item.icon === 'conflict' && <path d="M18 6L6 18M6 6l12 12" />}
+                  {item.icon === 'template' && <><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2" /><path d="M9 5a2 2 0 012-2h2a2 2 0 012 2v0a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /><path d="M9 12h6M9 16h6" /></>}
+                  {item.icon === 'blackbox' && <><path d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M3 3l18 18" /></>}
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-white">{item.title}</h3>
+              <p class="mt-3 text-sm text-gray-400 leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- DIFFERENTIATORS -->
+    <section class="relative py-32 md:py-44 bg-gray-50/80" id="vorteile">
+      <div class="absolute top-[20%] -left-[10%] w-[500px] h-[500px] rounded-full" style="background: radial-gradient(circle, rgba(16,185,129,0.07) 0%, transparent 60%);"></div>
+      <div class="absolute bottom-[10%] right-[5%] w-[400px] h-[400px] rounded-full" style="background: radial-gradient(circle, rgba(52,211,153,0.05) 0%, transparent 60%);"></div>
+      <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200/60 to-transparent"></div>
+      <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200/60 to-transparent"></div>
+
+      <div class="max-w-7xl mx-auto px-6 relative">
+        <div class="grid lg:grid-cols-12 gap-16 lg:gap-8 items-start">
+          <div class="lg:col-span-6 lg:pr-8">
+            <div class="flex items-center gap-3 mb-6 fade-up">
+              <span class="inline-block w-8 h-px bg-emerald-500"></span>
+              <span class="text-xs font-mono font-medium text-emerald-600 uppercase tracking-[0.2em]">Dein Vorteil</span>
+            </div>
+            <h2 class="text-4xl md:text-5xl lg:text-[3.5rem] font-extrabold leading-[1.05] tracking-[-0.04em] text-gray-950 fade-up">
+              Warum GEO mit sagemedia
+              <span class="bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent"> funktioniert</span>
+            </h2>
+            <div class="mt-14 space-y-10">
+              {[
+                { num: '01', title: 'SEO + GEO aus einer Hand.', text: 'Klassisches SEO und KI-Optimierung greifen ineinander. Wir optimieren nicht zwei getrennte Kanäle, sondern ein ganzheitliches System. Deine Google-Rankings stärken deine KI-Sichtbarkeit und umgekehrt.' },
+                { num: '02', title: 'Wir verstehen, wie KI-Systeme Quellen wählen.', text: 'ChatGPT, Perplexity und Google AI Overviews nutzen E-E-A-T-Signale, strukturierte Daten und Autorität, um Quellen zu bewerten. Wir kennen diese Mechanismen und optimieren gezielt dafür.' },
+                { num: '03', title: 'First Mover Advantage für deine Branche.', text: 'Die meisten Unternehmen ignorieren KI-Suchsysteme noch komplett. Wer jetzt handelt, baut einen Vorsprung auf, der schwer einzuholen ist, besonders mit unserer Branchenexklusivität.' },
+                { num: '04', title: 'Messbarer Impact, keine Buzzwords.', text: 'Wir tracken deine KI-Sichtbarkeit mit konkreten Metriken: Erwähnungen, Empfehlungsrate, Quell-Rankings. Kein Marketing-Gerede, sondern nachweisbare Ergebnisse in deinem Dashboard.' },
+              ].map((item) => (
+                <div class="group fade-up">
+                  <div class="flex items-start gap-5">
+                    <span class="shrink-0 text-xs font-mono font-medium text-emerald-400 mt-1.5 tracking-wider">{item.num}</span>
+                    <div>
+                      <h3 class="text-xl font-bold text-gray-900 tracking-tight">{item.title}</h3>
+                      <p class="mt-2.5 text-gray-500 leading-relaxed">{item.text}</p>
+                    </div>
+                  </div>
+                  <div class="mt-5 ml-10 h-px bg-gradient-to-r from-gray-200 via-emerald-200/30 to-transparent"></div>
+                </div>
+              ))}
+            </div>
+            <div class="mt-12 fade-up">
+              <a href="/kontakt" class="group inline-flex items-center gap-3 text-gray-900 font-semibold hover:text-emerald-600 transition-colors">
+                <span class="w-12 h-12 rounded-full border-2 border-gray-900 group-hover:border-emerald-500 group-hover:bg-emerald-500 group-hover:shadow-[0_0_24px_rgba(16,185,129,0.4)] flex items-center justify-center transition-all duration-300">
+                  <svg class="w-4 h-4 group-hover:text-white transition-colors" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10m-4-4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                </span>
+                KI-Sichtbarkeit prüfen
+              </a>
+            </div>
+          </div>
+
+          <div class="lg:col-span-6 fade-up">
+            <div class="relative lg:pl-8">
+              <div class="absolute -inset-8 rounded-[2rem]" style="background: radial-gradient(ellipse at 60% 40%, rgba(16,185,129,0.12) 0%, rgba(16,185,129,0.04) 50%, transparent 70%);"></div>
+              <div class="relative flex justify-center">
+                <img src="/images/awards/sagemedia-pokal-contest.jpg" alt="SEO-Contest 2021, 1. Platz Pokal" class="relative w-64 md:w-72 rounded-2xl shadow-[0_32px_80px_-16px_rgba(0,0,0,0.15)]" loading="lazy" />
+              </div>
+              <div class="mt-8 grid grid-cols-2 gap-4">
+                {[
+                  { title: 'SEO-Contest 2021', sub: '1. Platz, deutschlandweit', icon: 'trophy' },
+                  { title: 'GEO seit 2024', sub: 'Early Adopter', icon: 'badge' },
+                  { title: 'Top SEO-Agentur', sub: 'Agenturtipp.de', icon: 'badge' },
+                  { title: '5.0 Google Rating', sub: 'Durchschnitt aller Reviews', icon: 'star' },
+                ].map((a) => (
+                  <div class="flex items-start gap-3 p-4 bg-white rounded-xl border border-gray-100 hover:border-emerald-200 transition-colors shadow-[0_4px_16px_rgba(0,0,0,0.04)]">
+                    <div class="shrink-0 w-9 h-9 rounded-lg bg-emerald-100 flex items-center justify-center">
+                      <svg class="w-4 h-4 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        {a.icon === 'trophy' && <><path d="M6 9H4.5a2.5 2.5 0 010-5H6" /><path d="M18 9h1.5a2.5 2.5 0 000-5H18" /><path d="M4 22h16" /><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20 7 22" /><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20 17 22" /><path d="M18 2H6v7a6 6 0 0012 0V2z" /></>}
+                        {a.icon === 'badge' && <path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138c.2.686.81 1.237 1.502 1.437a3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0" />}
+                        {a.icon === 'star' && <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />}
+                      </svg>
+                    </div>
+                    <div>
+                      <p class="text-sm font-bold text-gray-900">{a.title}</p>
+                      <p class="text-xs text-gray-400 mt-0.5">{a.sub}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEISTUNGEN -->
+    <ServicesGrid
+      eyebrow="Was du bekommst"
+      title="GEO-Leistungen"
+      titleAccent=" im Überblick"
+      subtitle="Alles was du brauchst, um in ChatGPT, Perplexity und Google AI Overviews als Quelle empfohlen zu werden."
+      services={[
+        { href: '#', icon: 'search', title: 'KI-Sichtbarkeits-Audit', desc: 'Analyse deiner aktuellen Präsenz in ChatGPT, Perplexity, Google AI Overviews und weiteren KI-Suchsystemen, inkl. Wettbewerbsvergleich.' },
+        { href: '#', icon: 'bulb', title: 'E-E-A-T Optimierung', desc: 'Aufbau von Experience, Expertise, Authority und Trust, die Signale, die KI-Systeme nutzen, um vertrauenswürdige Quellen zu identifizieren.' },
+        { href: '#', icon: 'cursor', title: 'Zitierfähiger Content', desc: 'Erstellung von Inhalten, die KI-Systeme als Quelle verwenden: strukturiert, faktisch, mit klaren Aussagen und Schema-Markup.' },
+        { href: '#', icon: 'layout', title: 'Structured Data & Schema', desc: 'Erweitertes Schema-Markup (FAQ, HowTo, Article, Organization) das KI-Systemen hilft, deine Inhalte korrekt zu interpretieren und zu zitieren.' },
+        { href: '#', icon: 'monitor', title: 'Digital PR & Autorität', desc: 'Aufbau von Erwähnungen und Backlinks in Quellen, die KI-Systeme als vertrauenswürdig einstufen, Fachmedien, Branchenportale, Wikipedia.' },
+        { href: '#', icon: 'people', title: 'KI-Monitoring & Reporting', desc: 'Laufendes Tracking deiner Sichtbarkeit in KI-Suchsystemen mit eigenen Tools. Monatliches Reporting über Erwähnungen, Empfehlungen und Trends.' },
+      ]}
+    />
+
+    <ProcessTimeline
+      title="In 4 Schritten zur"
+      titleAccent=" KI-Sichtbarkeit"
+      subtitle="Von der Analyse bis zur laufenden Optimierung, so wirst du zur bevorzugten Quelle für KI-Suchsysteme."
+      steps={processSteps}
+    />
+
+    <CaseStudies cases={caseStudies} />
+
+    <StatsStrip stats={[
+      { val: '100k+', label: 'Rankings erzielt' },
+      { val: '648%', label: 'Ø Traffic-Wachstum' },
+      { val: '24+', label: 'Monate Kundenbindung' },
+      { val: '5.0', label: 'Google Bewertung' },
+    ]} />
+
+    <Testimonials videos={videoTestimonials} reviews={textReviews} />
+
+    <FaqSection
+      title="Häufige Fragen"
+      titleAccent="zu GEO / AIO / LLMO"
+      subtitle="Die wichtigsten Antworten zur KI-Suchoptimierung."
+      faqs={geoFaqs}
+    />
+
+    <CtaSection
+      title="Bereit für die"
+      titleAccent="KI-Suche?"
+      subtitle="Prüfe jetzt, wie sichtbar dein Unternehmen in ChatGPT, Perplexity und Google AI Overviews ist, kostenlos und unverbindlich."
+      ctaText="KI-Sichtbarkeit prüfen"
+    />
+
+  </main>
+
+  <Footer />
+  <VideoLightbox />
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": geoFaqs.slice(0, 4).map(f => ({
+      "@type": "Question", "name": f.q, "acceptedAnswer": { "@type": "Answer", "text": f.a }
+    }))
+  })} />
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "GEO / AIO / LLMO, KI-Suchoptimierung",
+    "provider": {
+      "@type": "ProfessionalService",
+      "name": "sagemedia GmbH",
+      "url": "https://sagemedia.de",
+      "telephone": "+4995733313759",
+      "address": { "@type": "PostalAddress", "streetAddress": "Goethestraße 12", "addressLocality": "Bad Staffelstein", "postalCode": "96231", "addressCountry": "DE" }
+    },
+    "description": "Generative Engine Optimization für ChatGPT, Perplexity und Google AI Overviews. Sichtbarkeit in der KI-Suche.",
+    "areaServed": { "@type": "Country", "name": "Deutschland" },
+    "serviceType": "KI-Suchoptimierung"
+  })} />
+</Layout>
