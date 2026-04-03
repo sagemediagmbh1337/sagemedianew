@@ -1,18 +1,18 @@
 ---
 const navItems = [
-  { label: 'Home', href: '/' },
-  { label: 'Team', href: '/team' },
+  { label: 'Home', href: '/v2/' },
+  { label: 'Team', href: '/v2/team' },
   {
     label: 'Leistungen',
-    href: '/leistungen',
+    href: '/v2/leistungen',
     children: [
-      { label: 'SEO', href: '/leistungen/seo' },
-      { label: 'GEO/AIO/LLMO', href: '/leistungen/geo-aio-llmo' },
-      { label: 'Google Stellenanzeigen', href: '/leistungen/google-stellenanzeigen' },
+      { label: 'SEO', href: '/v2/leistungen/seo' },
+      { label: 'GEO/AIO/LLMO', href: '/v2/leistungen/geo-aio-llmo' },
+      { label: 'Google Stellenanzeigen', href: '/v2/leistungen/google-stellenanzeigen' },
     ]
   },
-  { label: 'Ergebnisse', href: '/ergebnisse' },
-  { label: 'Glossar', href: '/glossar' },
+  { label: 'Ergebnisse', href: '/v2/ergebnisse' },
+  { label: 'Glossar', href: '/v2/glossar' },
 ]
 ---
 
@@ -21,8 +21,8 @@ const navItems = [
     <div class="flex items-center justify-between h-20 border-b border-transparent transition-all duration-500" id="header-inner">
 
       <!-- Logo -->
-      <a href="/" class="inline-flex items-center" aria-label="sagemedia Startseite">
-        <img src="/images/logo.png" alt="sagemedia" class="h-8 w-auto" />
+      <a href="/v2/" class="inline-flex items-center" aria-label="sagemedia Startseite">
+        <img src="/v2/images/logo.png" alt="sagemedia" class="h-8 w-auto" />
       </a>
 
       <!-- Desktop Nav -->
@@ -61,7 +61,7 @@ const navItems = [
 
       <!-- CTA -->
       <div class="hidden lg:block">
-        <a href="/kontakt" class="group inline-flex items-center gap-2 bg-gray-950 text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-emerald-600 transition-colors duration-300">
+        <a href="/v2/kontakt" class="group inline-flex items-center gap-2 bg-gray-950 text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-emerald-600 transition-colors duration-300">
           Kontakt
           <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M3 8h10m-4-4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" />
@@ -95,7 +95,7 @@ const navItems = [
       </a>
     ))}
     <div class="mt-8 pt-8 border-t border-gray-100 w-full">
-      <a href="/kontakt" class="inline-flex items-center gap-3 bg-gray-950 text-white px-8 py-4 rounded-full text-base font-medium">
+      <a href="/v2/kontakt" class="inline-flex items-center gap-3 bg-gray-950 text-white px-8 py-4 rounded-full text-base font-medium">
         Kontakt aufnehmen
         <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M3 8h10m-4-4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" />

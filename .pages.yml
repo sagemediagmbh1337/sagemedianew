@@ -85,3 +85,189 @@ content:
       - name: body
         label: Inhalt
         type: rich-text
+
+  - name: caseStudies
+    label: Case Studies
+    type: collection
+    path: src/content/caseStudies
+    format: yaml-frontmatter
+    filename: "{fields.client}"
+    view:
+      fields: [client, branche]
+      primary: client
+      sort: client
+    fields:
+      - name: title
+        label: Titel
+        type: string
+        required: true
+      - name: subtitle
+        label: Untertitel
+        type: string
+        required: true
+      - name: branche
+        label: Branche
+        type: string
+        required: true
+      - name: client
+        label: Kunde
+        type: string
+        required: true
+      - name: clientLogo
+        label: Kunden-Logo
+        type: image
+      - name: heroImage
+        label: Hero-Bild
+        type: image
+      - name: kpis
+        label: KPIs
+        type: object
+        list: true
+        required: true
+        fields:
+          - name: value
+            label: Wert
+            type: string
+          - name: label
+            label: Label
+            type: string
+      - name: company
+        label: Unternehmen
+        type: object
+        required: true
+        fields:
+          - name: description
+            label: Beschreibung
+            type: text
+          - name: facts
+            label: Fakten
+            type: object
+            list: true
+            fields:
+              - name: label
+                label: Label
+                type: string
+              - name: value
+                label: Wert
+                type: string
+          - name: logo
+            label: Logo
+            type: image
+          - name: website
+            label: Website
+            type: string
+      - name: challenges
+        label: Herausforderungen
+        type: object
+        list: true
+        required: true
+        fields:
+          - name: title
+            label: Titel
+            type: string
+          - name: description
+            label: Beschreibung
+            type: text
+      - name: goals
+        label: Ziele
+        type: object
+        list: true
+        required: true
+        fields:
+          - name: title
+            label: Titel
+            type: string
+          - name: description
+            label: Beschreibung
+            type: text
+      - name: strategy
+        label: Strategie
+        type: object
+        list: true
+        required: true
+        fields:
+          - name: title
+            label: Titel
+            type: string
+          - name: description
+            label: Beschreibung
+            type: text
+      - name: timeline
+        label: Timeline
+        type: object
+        list: true
+        required: true
+        fields:
+          - name: date
+            label: Datum
+            type: string
+          - name: title
+            label: Titel
+            type: string
+          - name: description
+            label: Beschreibung
+            type: text
+          - name: isCurrent
+            label: Aktuell
+            type: boolean
+      - name: results
+        label: Ergebnisse
+        type: object
+        required: true
+        fields:
+          - name: kpis
+            label: KPIs
+            type: object
+            list: true
+            fields:
+              - name: value
+                label: Wert
+                type: string
+              - name: label
+                label: Label
+                type: string
+          - name: highlights
+            label: Highlights
+            type: string
+            list: true
+          - name: proofImage
+            label: Beweis-Bild
+            type: image
+      - name: testimonial
+        label: Kundenstimme
+        type: object
+        fields:
+          - name: quote
+            label: Zitat
+            type: text
+          - name: author
+            label: Autor
+            type: string
+          - name: role
+            label: Rolle
+            type: string
+          - name: image
+            label: Bild
+            type: image
+      - name: services
+        label: Leistungen
+        type: string
+        list: true
+      - name: relatedCases
+        label: Verwandte Cases
+        type: string
+        list: true
+      - name: seo
+        label: SEO
+        type: object
+        required: true
+        fields:
+          - name: metaTitle
+            label: Meta-Titel
+            type: string
+          - name: metaDescription
+            label: Meta-Beschreibung
+            type: text
+      - name: body
+        label: Inhalt
+        type: rich-text
