@@ -4,12 +4,16 @@ import '../styles/global.css'
 interface Props {
   title: string
   description?: string
+  ogImage?: string
 }
 
 const {
   title,
-  description = 'Ein Unternehmen pro Branche. Keine Kompromisse. sagemedia ist deine exklusive SEO-Agentur für nachhaltige Sichtbarkeit bei Google, ChatGPT und KI-Suchsystemen.'
+  description = 'Ein Unternehmen pro Branche. Keine Kompromisse. sagemedia ist deine exklusive SEO-Agentur für nachhaltige Sichtbarkeit bei Google, ChatGPT und KI-Suchsystemen.',
+  ogImage = '/images/og-default.png'
 } = Astro.props
+
+const canonicalUrl = new URL(Astro.url.pathname, 'https://sagemedia.de').href
 ---
 
 <!DOCTYPE html>
@@ -22,13 +26,28 @@ const {
     <!-- SEO -->
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href="https://sagemedia.de/" />
+    <link rel="canonical" href={canonicalUrl} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(ogImage, 'https://sagemedia.de').href} />
     <meta property="og:locale" content="de_DE" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, 'https://sagemedia.de').href} />
+
+    <!-- Fonts (preloaded, non-blocking) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,700&family=JetBrains+Mono:wght@400;500&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,700&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,700&family=JetBrains+Mono:wght@400;500&display=swap" /></noscript>
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

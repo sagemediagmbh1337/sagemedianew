@@ -1,0 +1,58 @@
+---
+import Section from '../Section.astro'
+import SectionHeader from '../SectionHeader.astro'
+
+interface Kpi {
+  value: string
+  label: string
+}
+
+interface Props {
+  kpis: Kpi[]
+  highlights: string[]
+  proofImage?: string
+}
+
+const { kpis, highlights, proofImage } = Astro.props
+---
+
+<Section dark class="!py-20 md:!py-28">
+  <SectionHeader dark eyebrow="Ergebnisse" title="Das haben wir" titleAccent="erreicht" center />
+
+  <!-- KPI Grid -->
+  <div class="grid md:grid-cols-3 gap-8 mb-16">
+    {kpis.map((kpi) => (
+      <div class="text-center fade-up">
+        <p class="text-5xl md:text-6xl font-extrabold tracking-tight bg-gradient-to-r from-emerald-300 via-emerald-400 to-emerald-500 bg-clip-text text-transparent">{kpi.value}</p>
+        <p class="mt-3 text-sm text-gray-400 font-mono uppercase tracking-wider">{kpi.label}</p>
+      </div>
+    ))}
+  </div>
+
+  <!-- Description -->
+  {Astro.props.description && (
+    <p class="text-center text-lg text-gray-300 leading-relaxed max-w-3xl mx-auto mb-12 fade-up">{Astro.props.description}</p>
+  )}
+
+  <!-- Highlights -->
+  <div class={`${proofImage ? 'grid lg:grid-cols-2 gap-12 items-start' : 'max-w-4xl mx-auto'}`}>
+    <ul class={`space-y-4 ${!proofImage && highlights.length > 4 ? 'columns-1 md:columns-2 gap-x-8' : ''}`}>
+      {highlights.map((item) => (
+        <li class="flex items-start gap-3 fade-up break-inside-avoid">
+          <svg class="w-5 h-5 text-emerald-400 mt-0.5 shrink-0" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+          </svg>
+          <span class="text-gray-300 leading-relaxed">{item}</span>
+        </li>
+      ))}
+    </ul>
+
+    {proofImage && (
+      <div class="fade-up">
+        <div class="rounded-2xl overflow-hidden border border-white/10 shadow-[0_16px_48px_rgba(0,0,0,0.3)]">
+          <img src={proofImage} alt="Ergebnis-Nachweis" class="w-full h-auto" loading="lazy" />
+        </div>
+      </div>
+    )}
+  </div>
+</Section>

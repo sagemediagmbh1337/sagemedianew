@@ -1,0 +1,33 @@
+---
+import Section from '../Section.astro'
+import SectionHeader from '../SectionHeader.astro'
+
+interface Kpi {
+  value: string
+  label: string
+}
+
+interface Props {
+  kpis: Kpi[]
+  description?: string
+}
+
+const { kpis, description } = Astro.props
+---
+
+<Section dark class="!py-20 md:!py-28">
+  <SectionHeader dark eyebrow="Google Ads Performance" title="Messbare Ergebnisse" titleAccent="durch Google Ads" center />
+
+  {description && (
+    <p class="text-center text-gray-300 leading-relaxed max-w-2xl mx-auto -mt-12 mb-14 fade-up">{description}</p>
+  )}
+
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-4xl mx-auto">
+    {kpis.map((kpi) => (
+      <div class="relative bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] rounded-2xl p-6 md:p-8 text-center hover:bg-white/[0.07] hover:border-emerald-500/20 transition-all duration-500 fade-up">
+        <p class="text-3xl md:text-4xl font-extrabold tracking-tight text-white">{kpi.value}</p>
+        <p class="mt-2 text-xs font-mono text-gray-400 uppercase tracking-wider">{kpi.label}</p>
+      </div>
+    ))}
+  </div>
+</Section>

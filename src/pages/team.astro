@@ -8,24 +8,12 @@ import StatsStrip from '../components/StatsStrip.astro'
 import Testimonials from '../components/Testimonials.astro'
 import VideoLightbox from '../components/VideoLightbox.astro'
 import TrustLogos from '../components/TrustLogos.astro'
-
-const videoTestimonials = [
-  { title: 'Von 200 auf 3.400 Besucher/Monat', initials: 'MB', name: 'Markus B.', role: 'CEO, E-Commerce', vimeoId: '1136116624' },
-  { title: 'Wie wir 80% unserer Neupatienten über Google gewinnen', initials: 'JH', name: 'Julia H.', role: 'Praxisinhaberin, Zahnmedizin', vimeoId: '1115108100' },
-  { title: 'SEO als wichtigster Vertriebskanal im B2B', initials: 'SL', name: 'Stefan L.', role: 'Geschäftsführer, Maschinenbau', vimeoId: '1115110019', vimeoHash: 'd330a8b9b1' },
-]
-
-const textReviews = [
-  { quote: '„Die Beratungsleistung ist wirklich top. Man hat das Gefühl, dass hier der Kunde König ist. Ich bin begeistert von der Expertise der Mitarbeiter – man bekommt auf jede Frage eine Antwort."', initials: 'SB', name: 'Stefan Beck', role: 'Inhaber, Pressebeck' },
-  { quote: '„Ich bin Kunde und Geschäftspartner gleichermaßen. Die extrem hohe fachliche Kompetenz in puncto SEO und das überdurchschnittliche Engagement machen die Zusammenarbeit besonders."', initials: 'JK', name: 'Jochen Koch', role: 'Inhaber, Jochen Koch Onlinemarketing' },
-  { quote: '„Im SEO-Workshop von André wurden alle grundlegenden SEO-Themen praxisnah direkt an der Live-Website vermittelt. Leicht verständlich und sofort umsetzbar. Absolute Empfehlung!"', initials: 'SBr', name: 'Sabrina Brückner', role: 'Marketing, Vierling Production' },
-  { quote: '„Sagemedia ist ein Dienstleister mit großer Kompetenz, insbesondere zur Schaffung von Sichtbarkeit. Stets erreichbar, nachhaltige Ergebnisse."', initials: 'CM', name: 'Christian Mitter', role: 'Rechtsanwaltskanzlei Mitter' },
-]
+import { videoTestimonials, textReviews } from '../data/testimonials'
 
 const teamMembers = [
   { name: 'Janin Schäfer', role: 'Geschäftsführerin & Projektmanagement', image: '/images/janin-schaefer-sagemedia.jpg', initials: 'JS', desc: 'Koordiniert alle Kundenprojekte und sorgt dafür, dass Timelines, Budgets und Qualität stimmen. Strukturiert, lösungsorientiert, immer erreichbar.' },
-  { name: 'Saskia A.', role: 'Content-Strategie & SEO', image: '/images/janin-schaefer-sagemedia.jpg', initials: 'SA', desc: 'Keyword-Recherche, Themencluster und Content-Erstellung. Verbindet Suchintention mit überzeugenden Inhalten, die ranken und konvertieren.' },
-  { name: 'Miriam A.', role: 'Projektmanagement & Kundenbetreuung', image: '/images/janin-schaefer-sagemedia.jpg', initials: 'MA', desc: 'Begleitet Kundenprojekte von der Strategie bis zur Umsetzung. Kommunikationsstark, detailorientiert und immer einen Schritt voraus.' },
+  { name: 'Saskia A.', role: 'Content-Strategie & SEO', image: '', initials: 'SA', desc: 'Keyword-Recherche, Themencluster und Content-Erstellung. Verbindet Suchintention mit überzeugenden Inhalten, die ranken und konvertieren.' },
+  { name: 'Miriam A.', role: 'Projektmanagement & Kundenbetreuung', image: '', initials: 'MA', desc: 'Begleitet Kundenprojekte von der Strategie bis zur Umsetzung. Kommunikationsstark, detailorientiert und immer einen Schritt voraus.' },
 ]
 ---
 

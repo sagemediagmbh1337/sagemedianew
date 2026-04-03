@@ -1,0 +1,22 @@
+---
+import CtaSection from '../CtaSection.astro'
+
+interface Props {
+  heading?: string
+  subheading?: string
+  ctaText?: string
+}
+
+const {
+  heading = 'Bereit für deine',
+  subheading = 'Erfolgsgeschichte?',
+  ctaText = 'Erstgespräch vereinbaren',
+} = Astro.props
+---
+
+<CtaSection
+  title={heading}
+  titleAccent={subheading}
+  subtitle="Lass uns gemeinsam besprechen, wie wir auch für dein Unternehmen messbare Ergebnisse erzielen."
+  ctaText={ctaText}
+/>

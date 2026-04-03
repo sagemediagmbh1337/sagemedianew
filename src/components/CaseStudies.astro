@@ -25,6 +25,8 @@ const {
   showAllLink = true,
 } = Astro.props
 
+import SectionHeader from './SectionHeader.astro'
+
 const sliderId = `case-slider-${Math.random().toString(36).slice(2, 8)}`
 ---
 
@@ -34,19 +36,7 @@ const sliderId = `case-slider-${Math.random().toString(36).slice(2, 8)}`
   <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200/60 to-transparent"></div>
 
   <div class="max-w-7xl mx-auto px-6 relative">
-    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16">
-      <div>
-        <div class="flex items-center gap-3 mb-6 fade-up">
-          <span class="inline-block w-8 h-px bg-emerald-500"></span>
-          <span class="text-xs font-mono font-medium text-emerald-600 uppercase tracking-[0.2em]">{eyebrow}</span>
-        </div>
-        <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[1.05] tracking-[-0.04em] text-gray-950 fade-up">
-          {title}
-          <span class="bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">{titleAccent}</span>
-        </h2>
-      </div>
-      <p class="text-gray-500 leading-relaxed max-w-sm fade-up">{subtitle}</p>
-    </div>
+    <SectionHeader eyebrow={eyebrow} title={title} titleAccent={titleAccent} subtitle={subtitle} />
 
     <!-- Video Slider -->
     <div class="relative fade-up">

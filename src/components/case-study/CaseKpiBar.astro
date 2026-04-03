@@ -1,0 +1,21 @@
+---
+import StatsStrip from '../StatsStrip.astro'
+
+interface Kpi {
+  value: string
+  label: string
+}
+
+interface Props {
+  kpis: Kpi[]
+}
+
+const { kpis } = Astro.props
+
+const stats = kpis.map((kpi) => ({
+  val: kpi.value,
+  label: kpi.label,
+}))
+---
+
+<StatsStrip stats={stats} />

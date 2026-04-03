@@ -12,6 +12,7 @@ import ProcessTimeline from '../../components/ProcessTimeline.astro'
 import VideoLightbox from '../../components/VideoLightbox.astro'
 import ServicesGrid from '../../components/ServicesGrid.astro'
 import TrustLogos from '../../components/TrustLogos.astro'
+import { videoTestimonials, textReviews } from '../../data/testimonials'
 
 const geoFaqs = [
   { q: 'Was ist GEO / AIO / LLMO?', a: 'GEO (Generative Engine Optimization), AIO (AI Overview Optimization) und LLMO (Large Language Model Optimization) sind Strategien, um dein Unternehmen in KI-gestützten Suchsystemen wie ChatGPT, Perplexity und Google AI Overviews sichtbar zu machen. Während klassisches SEO auf Google-Rankings abzielt, sorgt GEO/AIO/LLMO dafür, dass KI-Systeme dich als vertrauenswürdige Quelle erkennen und aktiv empfehlen.' },
@@ -27,21 +28,6 @@ const caseStudies = [
   { ytId: '4nF2yb1rAzU', title: 'Beamtenberater: 88.586 Klicks/Monat', metric: '15.238', metricLabel: 'Keywords', industry: 'Versicherung' },
   { ytId: 'mTW5nOlHcpo', title: 'Cherry-Bikes: 470 Conversions/Monat', metric: '9.303', metricLabel: 'Keywords', industry: 'E-Commerce' },
   { ytId: 'S8fPqe5PWbQ', title: 'Iris Haag: +5.000% Traffic-Wachstum', metric: '+5.000%', metricLabel: 'Traffic', industry: 'Coaching' },
-]
-
-const videoTestimonials = [
-  { title: 'Von 200 auf 3.400 Besucher/Monat', initials: 'MB', name: 'Markus B.', role: 'CEO, E-Commerce', vimeoId: '1136116624' },
-  { title: 'Wie wir 80% unserer Neupatienten über Google gewinnen', initials: 'JH', name: 'Julia H.', role: 'Praxisinhaberin, Zahnmedizin', vimeoId: '1115108100' },
-  { title: 'SEO als wichtigster Vertriebskanal im B2B', initials: 'SL', name: 'Stefan L.', role: 'Geschäftsführer, Maschinenbau', vimeoId: '1115110019', vimeoHash: 'd330a8b9b1' },
-]
-
-const textReviews = [
-  { quote: '„Die Beratungsleistung ist wirklich top. Man hat das Gefühl, dass hier der Kunde König ist. Ich bin begeistert von der Expertise der Mitarbeiter – man bekommt auf jede Frage eine Antwort."', initials: 'SB', name: 'Stefan Beck', role: 'Inhaber, Pressebeck' },
-  { quote: '„Top Agentur für SEO & SEA! Durch gezielte SEO Optimierungen konnten wichtige Keywords deutlich bessere Rankings erzielen und unsere Sichtbarkeit ist spürbar gestiegen."', initials: 'DK', name: 'Dennis Koch', role: 'GF, Kaweha Absaugtechnik' },
-  { quote: '„Unsere Leads aus Deutschland werden immer mehr. Es gibt eine echte Strategie – wir besprechen gemeinsam unsere Ziele und KPIs. Die Zusammenarbeit ist hervorragend."', initials: 'BH', name: 'Björn Hoekstra', role: 'Marketingleiter, Kiekens' },
-  { quote: '„Ich bin Kunde und Geschäftspartner gleichermaßen. Die extrem hohe fachliche Kompetenz in puncto SEO und das überdurchschnittliche Engagement machen die Zusammenarbeit besonders."', initials: 'JK', name: 'Jochen Koch', role: 'Inhaber, Jochen Koch Onlinemarketing' },
-  { quote: '„Die Arbeit von sagemedia war sofort bemerk- und sichtbar. Das Ranking hat sich binnen kürzester Zeit stark verbessert – viel besser, als wir es erwartet hatten."', initials: 'StW', name: 'Stefanie Wagenblast', role: 'Rechtsanwaltskanzlei Wagenblast' },
-  { quote: '„Sagemedia ist ein Dienstleister mit großer Kompetenz, insbesondere zur Schaffung von Sichtbarkeit. Stets erreichbar, nachhaltige Ergebnisse."', initials: 'CM', name: 'Christian Mitter', role: 'Rechtsanwaltskanzlei Mitter' },
 ]
 
 const processSteps = [

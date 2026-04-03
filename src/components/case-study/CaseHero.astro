@@ -1,0 +1,71 @@
+---
+import HeroPage from '../HeroPage.astro'
+
+interface Breadcrumb {
+  label: string
+  href?: string
+}
+
+interface Props {
+  title: string
+  subtitle: string
+  branche: string
+  client: string
+  clientLogo?: string
+  heroImage?: string
+  breadcrumbs?: Breadcrumb[]
+}
+
+const {
+  title,
+  subtitle,
+  branche,
+  client,
+  clientLogo,
+  heroImage,
+  breadcrumbs = [
+    { label: 'Home', href: '/' },
+    { label: 'Ergebnisse', href: '/ergebnisse' },
+    { label: client },
+  ],
+} = Astro.props
+
+const titleParts = title.split('\n')
+const titleLine1 = titleParts[0] || title
+const titleLine2 = titleParts[1] || branche
+const showVisual = !!(heroImage || clientLogo)
+---
+
+{showVisual ? (
+  <HeroPage
+    eyebrow={`Case Study / ${branche}`}
+    titleLine1={titleLine1}
+    titleLine2={titleLine2}
+    subtitle={subtitle}
+    ctaText="Erstgespräch vereinbaren"
+    ctaHref="/kontakt"
+    breadcrumbs={breadcrumbs}
+  >
+    <div slot="visual" class="relative">
+      {heroImage ? (
+        <div class="rounded-2xl overflow-hidden border border-gray-100 shadow-[0_16px_48px_rgba(0,0,0,0.08)]">
+          <img src={heroImage} alt={`Case Study ${client}`} class="w-full h-auto" loading="eager" />
+        </div>
+      ) : (
+        <div class="rounded-2xl overflow-hidden border border-gray-100 shadow-[0_16px_48px_rgba(0,0,0,0.08)] bg-gradient-to-br from-gray-50 via-white to-emerald-50/30 flex items-center justify-center aspect-square">
+          <img src={clientLogo} alt={client} class="max-w-[60%] max-h-[60%] object-contain" loading="eager" />
+        </div>
+      )}
+    </div>
+  </HeroPage>
+) : (
+  <HeroPage
+    eyebrow={`Case Study / ${branche}`}
+    titleLine1={titleLine1}
+    titleLine2={titleLine2}
+    subtitle={subtitle}
+    ctaText="Erstgespräch vereinbaren"
+    ctaHref="/kontakt"
+    breadcrumbs={breadcrumbs}
+  />
+)}

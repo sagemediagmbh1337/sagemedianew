@@ -1,0 +1,53 @@
+---
+import Section from '../Section.astro'
+import SectionHeader from '../SectionHeader.astro'
+
+interface Fact {
+  label: string
+  value: string
+}
+
+interface Props {
+  client: string
+  description: string
+  facts: Fact[]
+  logo?: string
+  website?: string
+}
+
+const { client, description, facts, logo, website } = Astro.props
+---
+
+<Section class="!py-20 md:!py-28">
+  <div class="relative">
+    {logo && (
+      <div class="hidden md:flex items-center justify-center w-20 h-20 rounded-xl bg-white border border-gray-100 shadow-sm p-3 absolute top-0 right-0 z-10">
+        <img src={logo} alt={client} class="max-w-full max-h-full object-contain" />
+      </div>
+    )}
+    <SectionHeader eyebrow="Über das Unternehmen" title={client} />
+  </div>
+
+  <div class="grid lg:grid-cols-5 gap-12">
+    <div class="lg:col-span-3">
+      <p class="text-gray-600 leading-relaxed text-lg fade-up">{description}</p>
+      {website && (
+        <a href={website} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 mt-6 text-emerald-600 hover:text-emerald-500 font-medium transition-colors fade-up">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" /></svg>
+          Website besuchen
+        </a>
+      )}
+    </div>
+    <div class="lg:col-span-2">
+      <div class="flex flex-wrap gap-3 fade-up">
+        {facts.map((fact) => (
+          <div class="inline-flex items-center gap-2 px-4 py-2.5 bg-white rounded-full border border-gray-100 shadow-sm hover:border-emerald-200 transition-colors">
+            <span class="text-xs font-mono text-emerald-600 uppercase tracking-wider">{fact.label}</span>
+            <span class="w-px h-3 bg-gray-200"></span>
+            <span class="text-sm font-medium text-gray-900">{fact.value}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</Section>

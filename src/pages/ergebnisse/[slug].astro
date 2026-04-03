@@ -1,0 +1,110 @@
+---
+import { getCollection } from 'astro:content'
+import Layout from '../../layouts/Layout.astro'
+import Header from '../../components/Header.astro'
+import Footer from '../../components/Footer.astro'
+import VideoLightbox from '../../components/VideoLightbox.astro'
+import CaseHero from '../../components/case-study/CaseHero.astro'
+import CaseKpiBar from '../../components/case-study/CaseKpiBar.astro'
+import CaseCompany from '../../components/case-study/CaseCompany.astro'
+import CaseNumberedCards from '../../components/case-study/CaseNumberedCards.astro'
+import CaseStrategy from '../../components/case-study/CaseStrategy.astro'
+import CaseTimeline from '../../components/case-study/CaseTimeline.astro'
+import CaseResults from '../../components/case-study/CaseResults.astro'
+import CaseTestimonial from '../../components/case-study/CaseTestimonial.astro'
+import CaseRelated from '../../components/case-study/CaseRelated.astro'
+import CaseCta from '../../components/case-study/CaseCta.astro'
+import CaseSerpPreview from '../../components/case-study/CaseSerpPreview.astro'
+import CaseKeywordRankings from '../../components/case-study/CaseKeywordRankings.astro'
+import CaseCustomerJourney from '../../components/case-study/CaseCustomerJourney.astro'
+import CaseGrowthEngine from '../../components/case-study/CaseGrowthEngine.astro'
+import CaseAiVisibility from '../../components/case-study/CaseAiVisibility.astro'
+import CaseGoogleAds from '../../components/case-study/CaseGoogleAds.astro'
+import CaseRoiCalculation from '../../components/case-study/CaseRoiCalculation.astro'
+
+export async function getStaticPaths() {
+  const entries = await getCollection('caseStudies')
+  return entries.map(entry => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }))
+}
+
+const { slug } = Astro.params
+const entries = await getCollection('caseStudies')
+const entry = Astro.props.entry || entries.find(e => e.id === slug)
+if (!entry) return Astro.redirect('/ergebnisse')
+const data = entry.data
+---
+
+<Layout title={data.seo.metaTitle} description={data.seo.metaDescription}>
+  <Header />
+  <main class="pt-18">
+    <CaseHero title={data.title} subtitle={data.subtitle} branche={data.branche} client={data.client} clientLogo={data.clientLogo} heroImage={data.heroImage} />
+    <CaseKpiBar kpis={data.kpis} />
+    <CaseCompany client={data.client} description={data.company.description} facts={data.company.facts} logo={data.company.logo} website={data.company.website} />
+    {data.challenges.length > 0 && (
+      <CaseNumberedCards eyebrow="Die Ausgangslage" heading={data.challengesHeading || "Was war die Ausgangssituation?"} items={data.challenges} />
+    )}
+    {data.goals.length > 0 && (
+      <CaseNumberedCards eyebrow="Das Ziel" heading={data.goalsHeading || "Was sollte erreicht werden?"} items={data.goals} variant="gray" />
+    )}
+    <CaseStrategy heading={data.strategyHeading || "Unser Ansatz"} items={data.strategy} />
+    <CaseTimeline steps={data.timeline} />
+    <CaseResults kpis={data.results.kpis} highlights={data.results.highlights} proofImage={data.results.proofImage} />
+    {data.serpPreview && (
+      <CaseSerpPreview
+        keyword={data.serpPreview.keyword}
+        resultCount={data.serpPreview.resultCount}
+        featured={data.serpPreview.featured}
+        competitors={data.serpPreview.competitors}
+        sponsored={data.serpPreview.sponsored}
+        sectionTitle={data.serpPreview.sectionTitle}
+        sectionSubtitle={data.serpPreview.sectionSubtitle}
+      />
+    )}
+    {data.googleAds && (
+      <CaseGoogleAds kpis={data.googleAds.kpis} description={data.googleAds.description} />
+    )}
+    {data.roiCalculation && (
+      <CaseRoiCalculation
+        invested={data.roiCalculation.invested}
+        conversions={data.roiCalculation.conversions}
+        avgOrderValue={data.roiCalculation.avgOrderValue}
+        avgOrderLabel={data.roiCalculation.avgOrderLabel}
+        potentialRevenue={data.roiCalculation.potentialRevenue}
+        revenueFormula={data.roiCalculation.revenueFormula}
+        roas={data.roiCalculation.roas}
+        costPerConversion={data.roiCalculation.costPerConversion}
+        conversionsPerMonth={data.roiCalculation.conversionsPerMonth}
+      />
+    )}
+    {data.keywordRankings && (
+      <CaseKeywordRankings
+        description={data.keywordRankings.description}
+        keywords={data.keywordRankings.keywords}
+      />
+    )}
+    {data.customerJourney && (
+      <CaseCustomerJourney
+        phases={data.customerJourney.phases}
+        stats={data.customerJourney.stats}
+      />
+    )}
+    {data.aiVisibility && (
+      <CaseAiVisibility items={data.aiVisibility.items} />
+    )}
+    {data.growthEngine && (
+      <CaseGrowthEngine
+        title={data.growthEngine.title}
+        description={data.growthEngine.description}
+        steps={data.growthEngine.steps}
+      />
+    )}
+    {data.testimonial && <CaseTestimonial quote={data.testimonial.quote} author={data.testimonial.author} role={data.testimonial.role} image={data.testimonial.image} />}
+    {data.relatedCases && data.relatedCases.length > 0 && <CaseRelated slugs={data.relatedCases} />}
+    <CaseCta />
+  </main>
+  <Footer />
+  <VideoLightbox />
+</Layout>

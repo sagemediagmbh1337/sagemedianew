@@ -1,0 +1,60 @@
+---
+import Section from '../Section.astro'
+import SectionHeader from '../SectionHeader.astro'
+
+interface Props {
+  title?: string
+  description?: string
+  steps: {
+    text: string
+  }[]
+}
+
+const { title = 'Der Wachstumsmotor', description, steps } = Astro.props
+---
+
+<Section gray class="!py-20 md:!py-28">
+  <SectionHeader eyebrow="Der Mechanismus" title={title} titleAccent="dahinter" subtitle={description} />
+
+  <div class="relative max-w-3xl mx-auto">
+    {/* Vertical connecting line */}
+    <div class="absolute left-6 md:left-8 top-0 bottom-0 w-px bg-gradient-to-b from-emerald-200 via-emerald-300/50 to-emerald-200"></div>
+
+    <div class="flex flex-col gap-5">
+      {steps.map((step, i) => (
+        <div class="relative flex items-start gap-5 md:gap-6 fade-up">
+          {/* Number badge */}
+          <div class="relative z-10 w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-white border border-gray-100 shadow-[0_4px_24px_rgba(0,0,0,0.03)] flex items-center justify-center shrink-0">
+            <span class="text-sm md:text-base font-mono font-bold text-emerald-600">{String(i + 1).padStart(2, '0')}</span>
+          </div>
+
+          {/* Step content */}
+          <div class="flex-1 bg-white border border-gray-100 rounded-2xl px-6 py-5 md:px-8 md:py-6 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:border-emerald-200 hover:shadow-[0_16px_48px_rgba(16,185,129,0.08)] transition-all duration-500">
+            <p class="text-gray-600 leading-relaxed text-sm md:text-base">{step.text}</p>
+          </div>
+
+          {/* Arrow to next step */}
+          {i < steps.length - 1 && (
+            <div class="absolute left-6 md:left-8 -bottom-5 w-px h-5 flex items-end justify-center">
+              <svg class="w-3 h-3 text-emerald-400 translate-x-[-0.5px]" fill="currentColor" viewBox="0 0 12 12">
+                <path d="M6 9l-3-3h6z" />
+              </svg>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+
+    {/* Cycle-back indicator */}
+    <div class="mt-8 flex items-center justify-center gap-3 fade-up">
+      <div class="h-px flex-1 bg-gradient-to-r from-transparent to-emerald-300/50"></div>
+      <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white border border-gray-100 shadow-[0_4px_24px_rgba(0,0,0,0.03)] flex items-center justify-center">
+        <svg class="w-5 h-5 md:w-6 md:h-6 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </div>
+      <div class="h-px flex-1 bg-gradient-to-l from-transparent to-emerald-300/50"></div>
+    </div>
+    <p class="text-center text-xs font-mono font-medium uppercase tracking-[0.2em] text-emerald-500/60 mt-4 fade-up">Zyklus wiederholt sich</p>
+  </div>
+</Section>

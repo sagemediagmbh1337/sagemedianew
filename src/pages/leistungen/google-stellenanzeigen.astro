@@ -11,6 +11,7 @@ import ProcessTimeline from '../../components/ProcessTimeline.astro'
 import VideoLightbox from '../../components/VideoLightbox.astro'
 import ServicesGrid from '../../components/ServicesGrid.astro'
 import TrustLogos from '../../components/TrustLogos.astro'
+import { videoTestimonials, textReviews } from '../../data/testimonials'
 
 const jobFaqs = [
   { q: 'Was sind Google Stellenanzeigen?', a: 'Google for Jobs ist ein Feature, das Stellenanzeigen direkt in der Google-Suche anzeigt, prominent über den organischen Ergebnissen. Kandidaten finden deine Jobs genau dort, wo sie aktiv suchen, ohne den Umweg über Jobbörsen. Wir sorgen dafür, dass deine Stellen dort erscheinen.' },
@@ -19,19 +20,6 @@ const jobFaqs = [
   { q: 'Wie schnell erscheinen meine Stellen bei Google?', a: 'Nach Einrichtung des JobPosting Schema-Markups erscheinen neue Stellen typischerweise innerhalb von 24-48 Stunden in Google for Jobs. Die Indexierung läuft automatisch über die Google Search Console.' },
   { q: 'Funktioniert das auch für kleine Unternehmen?', a: 'Gerade für kleine und mittelständische Unternehmen ist Google for Jobs ein Game Changer. Du konkurierst auf Augenhöhe mit großen Arbeitgebern, ohne deren Budget für Jobbörsen. Eine optimierte Karriereseite mit Schema-Markup ist alles, was du brauchst.' },
   { q: 'Können wir das mit SEO kombinieren?', a: 'Absolut, und genau das empfehlen wir. Eine SEO-optimierte Karriereseite rankt nicht nur in Google for Jobs, sondern auch organisch für Suchbegriffe wie "Jobs [Branche] [Stadt]". In Kombination mit unserem SEO-Angebot entsteht ein vollständiger Recruiting-Kanal.' },
-]
-
-const videoTestimonials = [
-  { title: 'Von 200 auf 3.400 Besucher/Monat', initials: 'MB', name: 'Markus B.', role: 'CEO, E-Commerce', vimeoId: '1136116624' },
-  { title: 'Wie wir 80% unserer Neupatienten über Google gewinnen', initials: 'JH', name: 'Julia H.', role: 'Praxisinhaberin, Zahnmedizin', vimeoId: '1115108100' },
-  { title: 'SEO als wichtigster Vertriebskanal im B2B', initials: 'SL', name: 'Stefan L.', role: 'Geschäftsführer, Maschinenbau', vimeoId: '1115110019', vimeoHash: 'd330a8b9b1' },
-]
-
-const textReviews = [
-  { quote: '„Die Beratungsleistung ist wirklich top. Man hat das Gefühl, dass hier der Kunde König ist. Ich bin begeistert von der Expertise der Mitarbeiter – man bekommt auf jede Frage eine Antwort."', initials: 'SB', name: 'Stefan Beck', role: 'Inhaber, Pressebeck' },
-  { quote: '„Top Agentur für SEO & SEA! Durch gezielte SEO Optimierungen konnten wichtige Keywords deutlich bessere Rankings erzielen und unsere Sichtbarkeit ist spürbar gestiegen."', initials: 'DK', name: 'Dennis Koch', role: 'GF, Kaweha Absaugtechnik' },
-  { quote: '„Unsere Leads aus Deutschland werden immer mehr. Es gibt eine echte Strategie – wir besprechen gemeinsam unsere Ziele und KPIs. Die Zusammenarbeit ist hervorragend."', initials: 'BH', name: 'Björn Hoekstra', role: 'Marketingleiter, Kiekens' },
-  { quote: '„Sagemedia ist ein Dienstleister mit großer Kompetenz, insbesondere zur Schaffung von Sichtbarkeit. Stets erreichbar, nachhaltige Ergebnisse."', initials: 'CM', name: 'Christian Mitter', role: 'Rechtsanwaltskanzlei Mitter' },
 ]
 
 const processSteps = [

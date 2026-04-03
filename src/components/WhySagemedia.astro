@@ -1,0 +1,105 @@
+<!-- ════════════════════════════════════════════
+     WARUM SAGEMEDIA
+════════════════════════════════════════════ -->
+<section class="relative py-32 md:py-44 bg-gray-50/80" id="warum-sagemedia">
+  <div class="absolute top-[20%] -left-[10%] w-[500px] h-[500px] rounded-full" style="background: radial-gradient(circle, rgba(16,185,129,0.07) 0%, transparent 60%);"></div>
+  <div class="absolute bottom-[10%] right-[5%] w-[400px] h-[400px] rounded-full" style="background: radial-gradient(circle, rgba(52,211,153,0.05) 0%, transparent 60%);"></div>
+  <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200/60 to-transparent"></div>
+  <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200/60 to-transparent"></div>
+
+  <div class="max-w-7xl mx-auto px-6 relative">
+    <div class="grid lg:grid-cols-12 gap-16 lg:gap-8 items-start">
+      <!-- Content -->
+      <div class="lg:col-span-6 lg:pr-8">
+        <div class="flex items-center gap-3 mb-6 fade-up">
+          <span class="inline-block w-8 h-px bg-emerald-500"></span>
+          <span class="text-xs font-mono font-medium text-emerald-600 uppercase tracking-[0.2em]">Dein Vorteil</span>
+        </div>
+
+        <h2 class="text-4xl md:text-5xl lg:text-[3.5rem] font-extrabold leading-[1.05] tracking-[-0.04em] text-gray-950 fade-up">
+          Warum sagemedia
+          <span class="bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent"> als Partner?</span>
+        </h2>
+
+        <div class="mt-14 space-y-10">
+          {[
+            {
+              num: '01',
+              title: 'Branchenexklusivität statt Interessenkonflikte.',
+              text: 'Die meisten SEO-Agenturen betreuen mehrere Unternehmen derselben Branche, oft in derselben Stadt. Das bedeutet: Deine Agentur optimiert gleichzeitig für deinen direkten Wettbewerber. Bei sagemedia ist das ausgeschlossen. Wir arbeiten pro Branche und Region mit genau einem Unternehmen. So bleibt deine SEO-Strategie exklusiv und dein Wettbewerbsvorteil geschützt.'
+            },
+            {
+              num: '02',
+              title: 'Vorbereitet auf die nächste Generation der Suche.',
+              text: 'Google ist nicht mehr der einzige Kanal, über den Kunden dich finden. ChatGPT, Perplexity, Google AI Overviews und andere KI-Systeme verändern grundlegend, wie Menschen nach Produkten und Dienstleistungen suchen. Wir optimieren deine Sichtbarkeit bereits heute für diese Kanäle, mit Generative Engine Optimization (GEO), AI Overview Optimization (AIO) und Large Language Model Optimization (LLMO).'
+            },
+            {
+              num: '03',
+              title: 'Messbare Ergebnisse statt Marketing-Versprechen.',
+              text: 'Jede SEO-Maßnahme, die wir umsetzen, ist an konkrete KPIs gebunden: organischer Traffic, Keyword-Rankings, Conversion-Raten, Umsatz. Du bekommst kein Pitchdeck mit Prognosen, sondern ein Dashboard mit Echtzeitdaten. Unsere durchschnittliche Kundenbindung liegt bei über 24 Monaten, weil die Ergebnisse für sich sprechen.'
+            },
+          ].map((item) => (
+            <div class="group fade-up">
+              <div class="flex items-start gap-5">
+                <span class="shrink-0 text-xs font-mono font-medium text-emerald-400 mt-1.5 tracking-wider">{item.num}</span>
+                <div>
+                  <h3 class="text-xl font-bold text-gray-900 tracking-tight">{item.title}</h3>
+                  <p class="mt-2.5 text-gray-500 leading-relaxed">{item.text}</p>
+                </div>
+              </div>
+              <div class="mt-5 ml-10 h-px bg-gradient-to-r from-gray-200 via-emerald-200/30 to-transparent"></div>
+            </div>
+          ))}
+        </div>
+
+        <div class="mt-12 fade-up">
+          <a href="/kontakt" class="group inline-flex items-center gap-3 text-gray-900 font-semibold hover:text-emerald-600 transition-colors">
+            <span class="w-12 h-12 rounded-full border-2 border-gray-900 group-hover:border-emerald-500 group-hover:bg-emerald-500 group-hover:shadow-[0_0_24px_rgba(16,185,129,0.4)] flex items-center justify-center transition-all duration-300">
+              <svg class="w-4 h-4 group-hover:text-white transition-colors" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 8h10m-4-4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+            Ist deine Branche noch frei?
+          </a>
+        </div>
+      </div>
+
+      <!-- Visual -->
+      <div class="lg:col-span-6 fade-up">
+        <div class="relative lg:pl-8">
+          <div class="absolute -inset-8 rounded-[2rem]" style="background: radial-gradient(ellipse at 60% 40%, rgba(16,185,129,0.12) 0%, rgba(16,185,129,0.04) 50%, transparent 70%);"></div>
+          <div class="relative aspect-[4/3] bg-gray-100 rounded-[1.5rem] overflow-hidden shadow-[0_32px_64px_-16px_rgba(0,0,0,0.15)]">
+            <img src="/images/sagemedia-buero.jpg" alt="sagemedia Agentur, Bad Staffelstein" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-gray-950/30 to-transparent"></div>
+            <div class="absolute bottom-4 left-5">
+              <p class="text-xs font-medium text-white/70">sagemedia HQ, Bad Staffelstein</p>
+            </div>
+          </div>
+
+          <!-- Floating badges -->
+          <div class="absolute -bottom-5 -left-4 lg:left-2 bg-white/90 backdrop-blur-xl rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.08)] border border-gray-100 px-4 py-3 flex items-center gap-3 fade-up z-10">
+            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-[0_4px_16px_rgba(16,185,129,0.35)]">
+              <span class="text-white text-sm font-extrabold">15</span>
+            </div>
+            <div>
+              <p class="text-xs font-bold text-gray-900">Jahre SEO-Erfahrung</p>
+              <p class="text-[10px] text-gray-400">USA, Kanada, Deutschland</p>
+            </div>
+          </div>
+
+          <div class="absolute -top-3 -right-3 bg-white/90 backdrop-blur-xl rounded-xl shadow-[0_8px_32px_rgba(245,158,11,0.1)] border border-amber-100/50 px-4 py-3 fade-up z-10">
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-amber-400" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+              <div>
+                <p class="text-xs font-bold text-gray-900">Platz 1</p>
+                <p class="text-[10px] text-gray-400">SEO-Contest '21</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
