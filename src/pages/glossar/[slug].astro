@@ -3,10 +3,8 @@ import { getCollection, render } from 'astro:content'
 import Layout from '../../layouts/Layout.astro'
 import Header from '../../components/Header.astro'
 import Footer from '../../components/Footer.astro'
-import HeroPage from '../../components/HeroPage.astro'
 import CtaSection from '../../components/CtaSection.astro'
 import VideoLightbox from '../../components/VideoLightbox.astro'
-import TrustLogos from '../../components/TrustLogos.astro'
 
 export async function getStaticPaths() {
   const entries = await getCollection('lexikon')
@@ -17,7 +15,7 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props
-const { title, category, description, related, author, ctas } = entry.data
+const { title, category, description, related, author } = entry.data
 const { Content } = await render(entry)
 
 const breadcrumbs = [
@@ -35,91 +33,64 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200))
 
   <main class="pt-18">
 
-    <HeroPage
-      eyebrow={category}
-      titleLine1={title}
-      titleLine2=""
-      subtitle={description}
-      ctaText="Erstgespräch vereinbaren"
-      secondaryText="Zurück zum Glossar"
-      secondaryHref="/glossar"
-      breadcrumbs={breadcrumbs}
-    >
-      <div class="relative" slot="visual">
-        <div class="absolute -inset-12 rounded-[3rem]" style="background: radial-gradient(ellipse at center, rgba(16,185,129,0.15) 0%, rgba(16,185,129,0.05) 50%, transparent 70%);"></div>
-
-        <div class="relative bg-white/70 backdrop-blur-2xl rounded-[1.25rem] border border-white/80 shadow-[0_32px_80px_-16px_rgba(16,185,129,0.15),0_0_0_1px_rgba(0,0,0,0.04)] p-7">
-          <div class="flex items-center justify-between mb-6">
-            <div class="flex items-center gap-3">
-              <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)] animate-pulse"></div>
-              <span class="text-xs font-mono font-medium text-gray-400 uppercase tracking-wider">Definition</span>
-            </div>
-            <span class="text-[10px] font-mono text-emerald-600 font-semibold bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-100">{category}</span>
-          </div>
-
-          <div class="flex items-center gap-4 mb-6">
-            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-[0_0_24px_rgba(16,185,129,0.3)]">
-              <span class="text-2xl font-extrabold text-white">{title[0]}</span>
-            </div>
-            <div>
-              <p class="text-lg font-extrabold text-gray-900 tracking-tight">{title}</p>
-              <p class="text-xs text-gray-400 mt-0.5">{category}</p>
-            </div>
-          </div>
-
-          <div class="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-6"></div>
-
-          <div class="grid grid-cols-3 gap-4">
-            <div>
-              <p class="text-[10px] font-mono uppercase tracking-wider text-gray-400 mb-1">Kategorie</p>
-              <p class="text-sm font-bold text-gray-900">{category}</p>
-            </div>
-            <div>
-              <p class="text-[10px] font-mono uppercase tracking-wider text-gray-400 mb-1">Verwandte</p>
-              <p class="text-sm font-bold text-emerald-600">{related.length} Begriffe</p>
-            </div>
-            <div>
-              <p class="text-[10px] font-mono uppercase tracking-wider text-gray-400 mb-1">Lesezeit</p>
-              <p class="text-sm font-bold text-gray-900">~{readingTime} Min.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <TrustLogos class="mt-16 hero-trust" slot="trust" />
-    </HeroPage>
-
-    <!-- Article Content -->
-    <section class="relative py-24 md:py-36 overflow-hidden lexikon-article-bg">
-      <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200/60 to-transparent"></div>
-      <div class="absolute top-[10%] right-[5%] w-[500px] h-[500px] rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(16,185,129,0.05) 0%, transparent 60%);"></div>
-      <div class="absolute bottom-[10%] left-[5%] w-[400px] h-[400px] rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(16,185,129,0.04) 0%, transparent 60%);"></div>
+    <!-- Glossar Article -->
+    <section class="relative pt-32 pb-24 md:pt-44 md:pb-36">
+      <div class="absolute inset-0 bg-[linear-gradient(rgba(16,185,129,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,0.06)_1px,transparent_1px)] bg-[size:64px_64px]" style="mask-image: linear-gradient(to bottom, black 0%, transparent 600px); -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 600px);"></div>
+      <!-- Recurring emerald glows -->
+      <div class="absolute top-[5%] right-[5%] w-[700px] h-[700px] rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(16,185,129,0.15) 0%, rgba(16,185,129,0.05) 40%, transparent 70%);"></div>
+      <div class="absolute top-[5%] left-[15%] w-[300px] h-[300px] rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(6,78,59,0.06) 0%, transparent 60%);"></div>
+      <div class="absolute top-[25%] right-[8%] w-[500px] h-[500px] rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(16,185,129,0.08) 0%, rgba(16,185,129,0.02) 50%, transparent 70%);"></div>
+      <div class="absolute top-[45%] left-[-5%] w-[400px] h-[400px] rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(52,211,153,0.06) 0%, transparent 60%);"></div>
+      <div class="absolute top-[60%] right-[3%] w-[600px] h-[600px] rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(16,185,129,0.07) 0%, rgba(16,185,129,0.02) 45%, transparent 70%);"></div>
+      <div class="absolute top-[80%] left-[10%] w-[350px] h-[350px] rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(6,78,59,0.05) 0%, transparent 60%);"></div>
+      <div class="absolute top-[90%] right-[10%] w-[500px] h-[500px] rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(52,211,153,0.06) 0%, transparent 65%);"></div>
 
       <div class="max-w-7xl mx-auto px-6 relative">
         <div class="grid lg:grid-cols-[1fr_280px] gap-12 lg:gap-14">
 
-          <!-- Main Content -->
+          <!-- Left Column: Hero + Content -->
           <div class="min-w-0">
-            <div class="fade-up">
-              <!-- Section Title -->
-              <div class="flex items-center gap-3 mb-8">
-                <div class="w-10 h-10 rounded-xl bg-gray-950 flex items-center justify-center">
-                  <span class="text-xl font-extrabold text-emerald-400 leading-none">/</span>
-                </div>
-                <div>
-                  <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">Was ist {title}?</h2>
-                </div>
-              </div>
+            <!-- Breadcrumbs -->
+            <nav class="flex items-center gap-2 text-xs text-gray-400 mb-10" aria-label="Breadcrumb">
+              {breadcrumbs.map((crumb, i) => (
+                <>
+                  {i > 0 && <span class="text-emerald-500 font-bold text-sm">/</span>}
+                  {crumb.href ? (
+                    <a href={crumb.href} class="hover:text-emerald-600 transition-colors">{crumb.label}</a>
+                  ) : (
+                    <span class="text-gray-600">{crumb.label}</span>
+                  )}
+                </>
+              ))}
+            </nav>
 
-              <!-- Markdown Content -->
-              <div class="lexikon-content" data-ctas={JSON.stringify(ctas)}>
-                <Content />
-              </div>
+            <!-- Category + Meta -->
+            <div class="flex flex-wrap items-center gap-3 mb-6">
+              <span class="inline-flex items-center gap-2 text-xs font-medium text-emerald-600 bg-emerald-50 border border-emerald-100 px-3 py-1.5 rounded-full">
+                {category}
+              </span>
+              <span class="text-xs text-gray-400">~{readingTime} Min. Lesezeit</span>
+            </div>
+
+            <!-- Title -->
+            <h1 class="text-[clamp(3rem,7vw,6rem)] font-extrabold leading-[1.1] tracking-[-0.04em] text-gray-950 mb-6">
+              {title}
+            </h1>
+
+            <!-- Description -->
+            <p class="text-lg md:text-xl text-gray-500 leading-relaxed mb-10">
+              {description}
+            </p>
+
+            <!-- Markdown Content -->
+
+            <div class="lexikon-content">
+              <Content />
             </div>
 
             <!-- Author Box -->
             {author && (
-              <div class="mt-12 fade-up">
+              <div class="mt-12">
                 <div class="lexikon-author">
                   <div class="flex flex-col sm:flex-row gap-5 items-start">
                     <div class="shrink-0">
@@ -146,7 +117,7 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200))
           </div>
 
           <!-- Sidebar -->
-          <div class="fade-up hidden lg:block">
+          <div class="hidden lg:block" id="glossar-sidebar">
             <div class="sticky top-24 space-y-4 max-h-[calc(100vh-7rem)] overflow-y-auto lexikon-sidebar">
 
               <!-- TOC -->
@@ -179,6 +150,22 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200))
                   </div>
                 </div>
               )}
+
+              <!-- CTA Card -->
+              <div class="bg-white rounded-2xl border border-gray-100 shadow-[0_8px_32px_rgba(0,0,0,0.04)] overflow-hidden">
+                <div class="p-5">
+                  <h4 class="text-base font-bold text-gray-900 tracking-tight">Noch Fragen?</h4>
+                  <p class="mt-2 text-sm text-gray-500 leading-relaxed">
+                    Sprich direkt mit unserem Team
+                  </p>
+                  <a href="/kontakt" class="group relative mt-4 w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-sm font-semibold overflow-hidden transition-all duration-500 hover:shadow-[0_0_32px_rgba(16,185,129,0.3)]">
+                    <div class="absolute inset-0 bg-gradient-to-r from-emerald-600 to-emerald-500 transition-all duration-500 group-hover:from-emerald-500 group-hover:to-emerald-400"></div>
+                    <div class="absolute inset-0 rounded-full shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]"></div>
+                    <span class="relative z-10 text-white">Erstgespräch vereinbaren</span>
+                    <svg class="relative z-10 w-3.5 h-3.5 text-white group-hover:translate-x-1 transition-transform" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10m-4-4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                  </a>
+                </div>
+              </div>
 
               <!-- Back -->
               <a href="/glossar" class="flex items-center gap-2 text-xs font-medium text-gray-400 hover:text-emerald-600 transition-colors group px-1 pt-1">
@@ -213,6 +200,8 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200))
       const sections: HTMLElement[] = []
       let currentSection: HTMLElement | null = null
 
+      const orphans: ChildNode[] = []
+
       children.forEach(node => {
         if (node instanceof HTMLElement && node.tagName === 'H2') {
           if (currentSection) {
@@ -224,48 +213,17 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200))
         } else if (currentSection) {
           currentSection.appendChild(node)
         } else {
-          if (node instanceof HTMLElement || (node instanceof Text && node.textContent?.trim())) {
-            if (!container.querySelector('.lexikon-intro')) {
-              const intro = document.createElement('div')
-              intro.className = 'lexikon-intro'
-              container.insertBefore(intro, container.firstChild)
-            }
-            container.querySelector('.lexikon-intro')!.appendChild(node)
-          }
+          orphans.push(node)
         }
       })
+
+      orphans.forEach(node => node.remove())
 
       if (currentSection) {
         sections.push(currentSection)
       }
 
       sections.forEach(section => container.appendChild(section))
-
-      // Inject inline CTAs
-      const ctaData = container.getAttribute('data-ctas')
-      if (ctaData) {
-        const ctas = JSON.parse(ctaData) as { after_section: number; title: string; text: string; link_text: string; link_url: string }[]
-        const allSections = container.querySelectorAll('.lexikon-section')
-        ;[...ctas].sort((a, b) => b.after_section - a.after_section).forEach(cta => {
-          const targetSection = allSections[cta.after_section - 1]
-          if (!targetSection) return
-          const ctaEl = document.createElement('div')
-          ctaEl.className = 'lexikon-inline-cta'
-          ctaEl.innerHTML = `
-            <div class="lexikon-inline-cta-inner">
-              <div class="lexikon-inline-cta-content">
-                <p class="lexikon-inline-cta-title">${cta.title}</p>
-                <p class="lexikon-inline-cta-text">${cta.text}</p>
-              </div>
-              <a href="${cta.link_url}" class="lexikon-inline-cta-btn">
-                ${cta.link_text}
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10m-4-4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" /></svg>
-              </a>
-            </div>
-          `
-          targetSection.after(ctaEl)
-        })
-      }
     }
 
     function makeTablesResponsive() {
@@ -339,9 +297,19 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200))
       headings.forEach(h2 => observer.observe(h2))
     }
 
+    function alignSidebar() {
+      const content = document.querySelector('.lexikon-content') as HTMLElement
+      const sidebar = document.getElementById('glossar-sidebar')
+      if (!content || !sidebar) return
+      const contentTop = content.offsetTop
+      const sidebarParentTop = sidebar.parentElement?.offsetTop || 0
+      sidebar.style.paddingTop = (contentTop - sidebarParentTop) + 'px'
+    }
+
     wrapLexikonSections()
     makeTablesResponsive()
     styleNumberedH3s()
     buildTOC()
+    alignSidebar()
   </script>
 </Layout>
