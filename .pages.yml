@@ -1,0 +1,87 @@
+media:
+  input: public/images
+  output: /images
+
+content:
+  - name: lexikon
+    label: Lexikon
+    type: collection
+    path: src/content/lexikon
+    format: yaml-frontmatter
+    filename: "{fields.title}"
+    view:
+      fields: [title, category]
+      primary: title
+      sort: title
+    fields:
+      - name: title
+        label: Begriff
+        type: string
+        required: true
+      - name: category
+        label: Kategorie
+        type: select
+        options:
+          - OnPage SEO
+          - OffPage SEO
+          - Technisches SEO
+          - Content
+          - Analyse
+          - KI-Suche
+          - SERP
+          - Webdesign
+        required: true
+      - name: description
+        label: Kurzbeschreibung
+        type: text
+        required: true
+      - name: author
+        label: Autor
+        type: object
+        fields:
+          - name: name
+            label: Name
+            type: string
+          - name: role
+            label: Rolle
+            type: string
+          - name: bio
+            label: Kurzbeschreibung
+            type: text
+          - name: image
+            label: Bild
+            type: image
+      - name: related
+        label: Verwandte Begriffe
+        type: object
+        list: true
+        fields:
+          - name: term
+            label: Begriff
+            type: string
+          - name: slug
+            label: Slug
+            type: string
+      - name: ctas
+        label: Inline-CTAs
+        type: object
+        list: true
+        fields:
+          - name: after_section
+            label: Nach Sektion Nr.
+            type: number
+          - name: title
+            label: Titel
+            type: string
+          - name: text
+            label: Text
+            type: text
+          - name: link_text
+            label: Button-Text
+            type: string
+          - name: link_url
+            label: Button-Link
+            type: string
+      - name: body
+        label: Inhalt
+        type: rich-text

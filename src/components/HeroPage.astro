@@ -39,7 +39,7 @@ const hasVisual = Astro.slots.has('visual')
       <nav class="flex items-center gap-2 text-xs text-gray-400 mb-10 fade-up" aria-label="Breadcrumb">
         {breadcrumbs.map((crumb, i) => (
           <>
-            {i > 0 && <span>/</span>}
+            {i > 0 && <span class="text-emerald-500 font-bold text-sm">/</span>}
             {crumb.href ? (
               <a href={crumb.href} class="hover:text-emerald-600 transition-colors">{crumb.label}</a>
             ) : (

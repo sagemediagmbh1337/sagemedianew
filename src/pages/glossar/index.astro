@@ -1,4 +1,5 @@
 ---
+import { getCollection } from 'astro:content'
 import Layout from '../../layouts/Layout.astro'
 import Header from '../../components/Header.astro'
 import Footer from '../../components/Footer.astro'
@@ -7,57 +8,21 @@ import CtaSection from '../../components/CtaSection.astro'
 import TrustLogos from '../../components/TrustLogos.astro'
 import VideoLightbox from '../../components/VideoLightbox.astro'
 
-const glossar = [
-  { term: 'Above the Fold', category: 'Webdesign', desc: 'Der sichtbare Bereich einer Webseite, den der Nutzer ohne Scrollen sieht. Wichtig f\u00fcr SEO, weil Google bewertet, welcher Content sofort sichtbar ist.' },
-  { term: 'Alt-Text', category: 'OnPage SEO', desc: 'Alternativer Text, der Bilder f\u00fcr Suchmaschinen und Screenreader beschreibt. Ein wichtiger Rankingfaktor f\u00fcr die Bildersuche und ein Beitrag zur Barrierefreiheit.' },
-  { term: 'Backlink', category: 'OffPage SEO', desc: 'Ein eingehender Link von einer externen Website auf deine Seite. Backlinks sind einer der wichtigsten Rankingfaktoren. Qualit\u00e4t schl\u00e4gt dabei immer Quantit\u00e4t.' },
-  { term: 'Bounce Rate', category: 'Analyse', desc: 'Der Prozentsatz der Besucher, die eine Website nach dem Aufruf einer einzigen Seite wieder verlassen. Kann auf irrelevante Inhalte oder schlechte UX hinweisen.' },
-  { term: 'Canonical Tag', category: 'Technisches SEO', desc: 'Ein HTML-Element, das Suchmaschinen mitteilt, welche URL die Original-Version einer Seite ist. Verhindert Duplicate-Content-Probleme.' },
-  { term: 'Content Gap', category: 'Content', desc: 'Themen oder Keywords, f\u00fcr die deine Wettbewerber ranken, du aber nicht. Eine Content-Gap-Analyse identifiziert Chancen f\u00fcr neue Inhalte.' },
-  { term: 'Core Web Vitals', category: 'Technisches SEO', desc: 'Googles Metriken f\u00fcr die Nutzererfahrung: LCP (Largest Contentful Paint), INP (Interaction to Next Paint) und CLS (Cumulative Layout Shift). Seit 2021 Rankingfaktor.' },
-  { term: 'Crawling', category: 'Technisches SEO', desc: 'Der Prozess, bei dem Suchmaschinen-Bots Webseiten systematisch durchsuchen und deren Inhalte erfassen. Voraussetzung f\u00fcr Indexierung.' },
-  { term: 'Domain Authority', category: 'OffPage SEO', desc: 'Ein von Moz entwickelter Score (0-100), der die Wahrscheinlichkeit vorhersagt, mit der eine Domain in Suchergebnissen rankt.' },
-  { term: 'Duplicate Content', category: 'Technisches SEO', desc: 'Identische oder sehr \u00e4hnliche Inhalte unter verschiedenen URLs. Kann zu Ranking-Problemen f\u00fchren, da Suchmaschinen die bevorzugte Version nicht kennen.' },
-  { term: 'E-E-A-T', category: 'Content', desc: 'Experience, Expertise, Authoritativeness, Trustworthiness. Googles Qualit\u00e4tskriterien f\u00fcr Inhalte. Besonders wichtig f\u00fcr YMYL-Themen wie Gesundheit und Finanzen.' },
-  { term: 'Featured Snippet', category: 'SERP', desc: 'Ein hervorgehobener Textausschnitt direkt \u00fcber den organischen Google-Ergebnissen (Position 0). Beantwortet die Suchanfrage direkt auf der Ergebnisseite.' },
-  { term: 'Google AI Overviews', category: 'KI-Suche', desc: 'KI-generierte Zusammenfassungen, die Google direkt in den Suchergebnissen anzeigt. Sie zitieren verschiedene Quellen und ver\u00e4ndern die Interaktion mit Suchergebnissen.' },
-  { term: 'Google Search Console', category: 'Analyse', desc: 'Kostenloses Google-Tool mit Daten zu Suchanfragen, Klicks, Impressionen und technischen Problemen deiner Website. Essentiell f\u00fcr jede SEO-Strategie.' },
-  { term: 'GEO', category: 'KI-Suche', desc: 'Generative Engine Optimization. Die Optimierung von Inhalten f\u00fcr KI-gest\u00fctzte Suchsysteme wie ChatGPT, Perplexity und Google AI Overviews.' },
-  { term: 'Heading-Struktur', category: 'OnPage SEO', desc: 'Die hierarchische Gliederung einer Seite durch HTML-\u00dcberschriften (H1-H6). Hilft Suchmaschinen den Inhalt zu verstehen und verbessert die Barrierefreiheit.' },
-  { term: 'Indexierung', category: 'Technisches SEO', desc: 'Der Prozess, bei dem eine gecrawlte Seite in den Google-Index aufgenommen wird. Nur indexierte Seiten k\u00f6nnen in den Suchergebnissen erscheinen.' },
-  { term: 'Interne Verlinkung', category: 'OnPage SEO', desc: 'Links innerhalb deiner eigenen Website, die Seiten miteinander verbinden. Strategische interne Verlinkung verteilt Link-Equity und verbessert die Crawlbarkeit.' },
-  { term: 'Keyword', category: 'Content', desc: 'Ein Suchbegriff, den Nutzer in Suchmaschinen eingeben. Die Keyword-Recherche ist die Grundlage jeder SEO-Strategie und bestimmt deine Sichtbarkeitsziele.' },
-  { term: 'Keyword Difficulty', category: 'Content', desc: 'Ein Score, der angibt, wie schwer es ist, f\u00fcr ein bestimmtes Keyword auf Seite 1 zu ranken. Abh\u00e4ngig von Wettbewerb und Content-Qualit\u00e4t.' },
-  { term: 'LLMO', category: 'KI-Suche', desc: 'Large Language Model Optimization. Die Optimierung von Inhalten, damit KI-Modelle dein Unternehmen als vertrauensw\u00fcrdige Quelle erkennen und empfehlen.' },
-  { term: 'Local SEO', category: 'OnPage SEO', desc: 'SEO-Ma\u00dfnahmen f\u00fcr lokale Sichtbarkeit: Google Business Profile, lokale Keywords, NAP-Konsistenz (Name, Address, Phone) und Bewertungsmanagement.' },
-  { term: 'Meta Description', category: 'OnPage SEO', desc: 'Der Beschreibungstext unter dem Seitentitel in Suchergebnissen. Kein direkter Rankingfaktor, beeinflusst aber die Click-Through-Rate massiv.' },
-  { term: 'Meta Title', category: 'OnPage SEO', desc: 'Der Seitentitel in Suchergebnissen und im Browser-Tab. Einer der wichtigsten OnPage-Rankingfaktoren \u2014 sollte das Hauptkeyword enthalten.' },
-  { term: 'Nofollow', category: 'OffPage SEO', desc: 'Ein Link-Attribut (rel=nofollow), das Suchmaschinen signalisiert, dem Link nicht zu folgen und keinen PageRank weiterzugeben. Typisch f\u00fcr bezahlte Links.' },
-  { term: 'Organischer Traffic', category: 'Analyse', desc: 'Besucher, die \u00fcber unbezahlte Suchergebnisse auf deine Website kommen \u2014 im Gegensatz zu bezahltem Traffic (Google Ads). Das Hauptziel von SEO.' },
-  { term: 'PageSpeed', category: 'Technisches SEO', desc: 'Die Ladegeschwindigkeit einer Webseite. Ein Rankingfaktor und entscheidend f\u00fcr die Nutzererfahrung. Wird \u00fcber Core Web Vitals gemessen.' },
-  { term: 'Robots.txt', category: 'Technisches SEO', desc: 'Eine Textdatei im Stammverzeichnis einer Website, die Suchmaschinen-Crawlern mitteilt, welche Bereiche gecrawlt werden d\u00fcrfen und welche nicht.' },
-  { term: 'Schema Markup', category: 'Technisches SEO', desc: 'Strukturierte Daten im JSON-LD-Format, die Suchmaschinen helfen den Inhalt zu verstehen. Erm\u00f6glicht Rich Snippets in den Suchergebnissen.' },
-  { term: 'Search Intent', category: 'Content', desc: 'Die Absicht hinter einer Suchanfrage: informational (lernen), navigational (finden), transactional (kaufen) oder commercial (vergleichen).' },
-  { term: 'SERP', category: 'SERP', desc: 'Search Engine Results Page \u2014 die Suchergebnisseite von Google mit organischen Ergebnissen, Anzeigen, Featured Snippets und AI Overviews.' },
-  { term: 'Sitemap', category: 'Technisches SEO', desc: 'Eine XML-Datei mit allen wichtigen URLs deiner Website. Hilft Suchmaschinen beim Crawling und wird \u00fcber die Google Search Console eingereicht.' },
-  { term: 'Suchvolumen', category: 'Content', desc: 'Die durchschnittliche Anzahl monatlicher Suchanfragen f\u00fcr ein Keyword. Hoher Wert = mehr Traffic-Potenzial, aber auch mehr Wettbewerb.' },
-  { term: 'Themencluster', category: 'Content', desc: 'Content-Strategie mit Pillar-Artikel und verlinkten Unterartikeln. Signalisiert Google thematische Autorit\u00e4t und verbessert Rankings f\u00fcr verwandte Keywords.' },
-  { term: 'URL-Struktur', category: 'Technisches SEO', desc: 'Die Gestaltung deiner Website-URLs. SEO-freundliche URLs sind kurz, beschreibend, enthalten das Keyword und nutzen Bindestriche als Trennzeichen.' },
-]
-
-function toSlug(term: string): string {
-  return term
-    .toLowerCase()
-    .replace(/[\u00e4\u00f6\u00fc\u00df]/g, (c: string) => ({ '\u00e4': 'ae', '\u00f6': 'oe', '\u00fc': 'ue', '\u00df': 'ss' }[c] || c))
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)/g, '')
-}
+const entries = await getCollection('lexikon')
+const glossar = entries
+  .map(entry => ({
+    term: entry.data.title,
+    category: entry.data.category,
+    desc: entry.data.description,
+    slug: entry.id,
+  }))
+  .sort((a, b) => a.term.localeCompare(b.term, 'de'))
 
 const categories = [...new Set(glossar.map(g => g.category))].sort()
 const letters = [...new Set(glossar.map(g => g.term[0].toUpperCase()))].sort()
 ---
 
-<Layout title="SEO-Glossar | Alle Begriffe einfach erkl\u00e4rt | sagemedia" description="SEO-Glossar von A bis Z: Alle wichtigen Begriffe aus SEO, Content, Technik und KI-Suche verst\u00e4ndlich erkl\u00e4rt. Von sagemedia.">
+<Layout title="SEO-Glossar | Alle Begriffe einfach erklärt | sagemedia" description="SEO-Glossar von A bis Z: Alle wichtigen Begriffe aus SEO, Content, Technik und KI-Suche verständlich erklärt. Von sagemedia.">
   <Header />
 
   <main class="pt-18">
@@ -66,8 +31,8 @@ const letters = [...new Set(glossar.map(g => g.term[0].toUpperCase()))].sort()
       eyebrow="SEO-Glossar"
       titleLine1="SEO verstehen."
       titleLine2="Nicht raten."
-      subtitle="Alle wichtigen Begriffe aus SEO, Content-Strategie, technischem SEO und KI-Suche \u2014 verst\u00e4ndlich erkl\u00e4rt. Dein Nachschlagewerk f\u00fcr digitale Sichtbarkeit."
-      ctaText="Erstgespr\u00e4ch vereinbaren"
+      subtitle="Alle wichtigen Begriffe aus SEO, Content-Strategie, technischem SEO und KI-Suche — verständlich erklärt. Dein Nachschlagewerk für digitale Sichtbarkeit."
+      ctaText="Erstgespräch vereinbaren"
       secondaryText="Direkt zum Glossar"
       secondaryHref="#glossar"
       breadcrumbs={[
@@ -123,7 +88,7 @@ const letters = [...new Set(glossar.map(g => g.term[0].toUpperCase()))].sort()
           </div>
           <div>
             <p class="text-xs font-bold text-gray-900">Kostenlos</p>
-            <p class="text-[10px] text-gray-400">F\u00fcr alle verf\u00fcgbar</p>
+            <p class="text-[10px] text-gray-400">Für alle verfügbar</p>
           </div>
         </div>
       </div>
@@ -190,7 +155,7 @@ const letters = [...new Set(glossar.map(g => g.term[0].toUpperCase()))].sort()
               data-letter={g.term[0].toUpperCase()}
               data-cat={g.category}
             >
-              <a href={"/glossar/" + toSlug(g.term)} class="block p-7">
+              <a href={"/glossar/" + g.slug} class="block p-7">
                 <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background: radial-gradient(circle at 50% 0%, rgba(16,185,129,0.04) 0%, transparent 60%);"></div>
                 <div class="relative">
                   <div class="flex items-start justify-between gap-3 mb-4">
@@ -217,8 +182,8 @@ const letters = [...new Set(glossar.map(g => g.term[0].toUpperCase()))].sort()
     <CtaSection
       title="SEO nicht nur verstehen,"
       titleAccent="sondern umsetzen?"
-      subtitle="Wir machen die Theorie zur Praxis. In einem kostenlosen Erstgespr\u00e4ch zeigen wir dir, wie diese Konzepte konkret f\u00fcr dein Unternehmen funktionieren."
-      ctaText="Erstgespr\u00e4ch vereinbaren"
+      subtitle="Wir machen die Theorie zur Praxis. In einem kostenlosen Erstgespräch zeigen wir dir, wie diese Konzepte konkret für dein Unternehmen funktionieren."
+      ctaText="Erstgespräch vereinbaren"
     />
 
   </main>
@@ -230,7 +195,7 @@ const letters = [...new Set(glossar.map(g => g.term[0].toUpperCase()))].sort()
     "@context": "https://schema.org",
     "@type": "DefinedTermSet",
     "name": "SEO-Glossar",
-    "description": "Alle wichtigen SEO-Begriffe verst\u00e4ndlich erkl\u00e4rt.",
+    "description": "Alle wichtigen SEO-Begriffe verständlich erklärt.",
     "url": "https://sagemedia.de/glossar",
     "hasDefinedTerm": glossar.map(g => ({
       "@type": "DefinedTerm",
