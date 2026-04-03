@@ -6,6 +6,7 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://sagemedia.de',
+  base: '/v2',
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()]
