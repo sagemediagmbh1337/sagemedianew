@@ -22,7 +22,7 @@ const { cases } = Astro.props
 
   <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
     {cases.map((c) => (
-      <a href={`/ergebnisse/${c.slug}`} class="group relative bg-white rounded-2xl p-6 border border-gray-100 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:border-emerald-200 hover:shadow-[0_16px_48px_rgba(16,185,129,0.08)] transition-all duration-500 card-lift fade-up">
+      <a href={`/v2/ergebnisse/${c.slug}`} class="group relative bg-white rounded-2xl p-6 border border-gray-100 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:border-emerald-200 hover:shadow-[0_16px_48px_rgba(16,185,129,0.08)] transition-all duration-500 card-lift fade-up">
         <div class="flex items-center justify-between mb-4">
           <span class="text-[10px] font-mono text-emerald-600 uppercase tracking-wider bg-emerald-50 border border-emerald-100 px-2.5 py-1 rounded-full">{c.branche}</span>
           <svg class="w-4 h-4 text-gray-300 group-hover:text-emerald-500 group-hover:translate-x-0.5 transition-all" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10m-4-4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" /></svg>

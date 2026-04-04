@@ -1,0 +1,174 @@
+---
+import { getCollection } from 'astro:content'
+import Layout from '../../layouts/Layout.astro'
+import Header from '../../components/Header.astro'
+import Footer from '../../components/Footer.astro'
+import HeroPage from '../../components/HeroPage.astro'
+import CtaSection from '../../components/CtaSection.astro'
+import FaqSection from '../../components/FaqSection.astro'
+import StatsStrip from '../../components/StatsStrip.astro'
+import CaseStudies from '../../components/CaseStudies.astro'
+import Testimonials from '../../components/Testimonials.astro'
+import ProcessTimeline from '../../components/ProcessTimeline.astro'
+import VideoLightbox from '../../components/VideoLightbox.astro'
+import ServicesGrid from '../../components/ServicesGrid.astro'
+import TrustLogos from '../../components/TrustLogos.astro'
+import Section from '../../components/Section.astro'
+import SectionHeader from '../../components/SectionHeader.astro'
+
+import CityHeroVisual from '../../components/seo-agentur/CityHeroVisual.astro'
+import CityImageSection from '../../components/seo-agentur/CityImageSection.astro'
+import BranchHeroVisual from '../../components/seo-agentur/BranchHeroVisual.astro'
+import BranchWhyBlock from '../../components/seo-agentur/BranchWhyBlock.astro'
+import LocalKeywords from '../../components/seo-agentur/LocalKeywords.astro'
+import LocalContent from '../../components/seo-agentur/LocalContent.astro'
+import LocalInfo from '../../components/seo-agentur/LocalInfo.astro'
+import EconomyBlock from '../../components/seo-agentur/EconomyBlock.astro'
+import CustomerJourney from '../../components/seo-agentur/CustomerJourney.astro'
+import SeoProblems from '../../components/seo-agentur/SeoProblems.astro'
+import LinkAccordion from '../../components/seo-agentur/LinkAccordion.astro'
+
+import { videoTestimonials, textReviews } from '../../data/testimonials'
+import { seoCaseStudies, seoProcessSteps, seoServices, seoStats, seoFaqs, cities, branches, buildSeoSchema } from '../../data/seo-agentur'
+
+export async function getStaticPaths() {
+  const cityEntries = await getCollection('seoCity')
+  const branchEntries = await getCollection('seoBranch')
+
+  const cityPaths = cityEntries.map(entry => ({
+    params: { slug: entry.id },
+    props: { entry, type: 'city' as const },
+  }))
+
+  const branchPaths = branchEntries.map(entry => ({
+    params: { slug: entry.data.slug },
+    props: { entry, type: 'branch' as const },
+  }))
+
+  return [...cityPaths, ...branchPaths]
+}
+
+const { entry, type } = Astro.props
+
+/* ─── Shared data ─── */
+const allCityPages = await getCollection('seoCity')
+const citySlugs = new Set(allCityPages.map(e => e.data.city))
+function slugify(s: string) { return s.toLowerCase().replace(/\s+/g,'-').replace(/ü/g,'ue').replace(/ö/g,'oe').replace(/ä/g,'ae').replace(/ß/g,'ss') }
+const branchItems = branches.map(b => ({ label: b }))
+
+/* ─── City-specific ─── */
+const isCity = type === 'city'
+const cd = isCity ? (entry.data as any) : null
+const cityFaqs = isCity ? [...cd.localFaqs, ...seoFaqs.slice(2, 6)] : []
+const otherCities = isCity ? cities.filter(c => c !== cd.city) : cities
+const cityItems = otherCities.map(c => ({ label: c, href: citySlugs.has(c) ? `/v2/seo-agentur/${slugify(c)}` : undefined }))
+
+/* ─── Branch-specific ─── */
+const isBranch = type === 'branch'
+const bd = isBranch ? (entry.data as any) : null
+const branchFaqs = isBranch ? [...bd.branchFaqs, ...seoFaqs.slice(2, 6)] : []
+
+/* ─── Page meta ─── */
+const pageTitle = isCity ? cd.title : bd.title
+const pageDesc = isCity ? cd.description : bd.description
+const schema = isCity
+  ? buildSeoSchema(`/seo-agentur/${entry.id}`, cd.city)
+  : buildSeoSchema(`/seo-agentur/${bd.slug}`)
+const allFaqs = isCity ? cityFaqs : branchFaqs
+const breadcrumbLabel = isCity ? cd.city : bd.branch
+---
+
+<Layout title={pageTitle} description={pageDesc}>
+  <Header />
+  <main class="pt-18">
+
+    {isCity ? (
+      <!-- ═══════════════════════════ CITY PAGE ═══════════════════════════ -->
+      <>
+        <HeroPage eyebrow={`SEO-Agentur ${cd.city}`} titleLine1={cd.heroTitle1} titleLine2={cd.heroTitle2} subtitle={cd.heroSubtitle} ctaText="Verfügbarkeit prüfen" secondaryText="Ergebnisse ansehen" secondaryHref="#ergebnisse" breadcrumbs={[{ label: 'Home', href: '/v2/' }, { label: 'SEO-Agentur', href: '/v2/seo-agentur' }, { label: cd.city }]}>
+          <CityHeroVisual slot="visual" city={cd.city} region={cd.region} bundesland={cd.bundesland} distanceHQ={cd.distanceHQ} cityFacts={cd.cityFacts} />
+          <TrustLogos class="mt-16 hero-trust" slot="trust" />
+        </HeroPage>
+
+        <LocalKeywords city={cd.city} keywords={cd.localKeywords} />
+        <LocalContent city={cd.city} intro={cd.localIntro} blocks={cd.localContent} />
+        <CityImageSection city={cd.city} region={cd.region} distanceHQ={cd.distanceHQ} intro={cd.localIntro} />
+
+        {cd.economyBlock && <EconomyBlock city={cd.city} heading={cd.economyBlock.heading} text={cd.economyBlock.text} highlights={cd.economyBlock.highlights} />}
+
+        <LocalInfo city={cd.city} region={cd.region} industries={cd.localIndustries} nearbyAreas={cd.nearbyAreas} />
+        <SeoProblems />
+        <CaseStudies eyebrow="Ergebnisse" title="Echte Kunden." titleAccent=" Echte Zahlen." subtitle={`Ergebnisse unserer SEO-Betreuung — auch relevant für Unternehmen in ${cd.city} und ${cd.region}.`} cases={seoCaseStudies} showAllLink />
+        <StatsStrip stats={seoStats} />
+        <Testimonials eyebrow="Kundenstimmen" title="Was unsere Kunden" titleAccent=" über uns sagen" videos={videoTestimonials} reviews={textReviews} showGoogleBadge />
+
+        {cd.customerJourneyBlock && <CustomerJourney city={cd.city} heading={cd.customerJourneyBlock.heading} text={cd.customerJourneyBlock.text} steps={cd.customerJourneyBlock.steps} />}
+
+        <ServicesGrid eyebrow={`SEO ${cd.city}`} title="SEO-Leistungen für" titleAccent={` ${cd.city}`} subtitle={`Professionelle Suchmaschinenoptimierung für Unternehmen in ${cd.city} und ${cd.region}.`} services={seoServices} />
+        <ProcessTimeline title="So arbeiten wir als SEO-Agentur" titleAccent={` für ${cd.city}`} subtitle="Vom ersten Gespräch bis zum messbaren Wachstum — transparent, strukturiert und ohne versteckte Kosten." steps={seoProcessSteps} ctaText="Erstgespräch vereinbaren" />
+
+        <LinkAccordion eyebrow="Städte & Branchen" title="SEO-Agentur für" titleAccent=" ganz Deutschland" subtitle={`Von Bad Staffelstein aus betreuen wir neben ${cd.city} Kunden in jeder Stadt und Branche.`} groups={[
+          { id: 'cities', icon: 'map', title: 'SEO-Agentur in deiner Stadt', count: `${otherCities.length} weitere Städte`, prefix: 'SEO-Agentur', items: cityItems, text: `Unser Sitz ist Bad Staffelstein — nur ${cd.distanceHQ} von ${cd.city} entfernt. Wir arbeiten vollständig remote und betreuen Unternehmen in ganz Deutschland.` },
+          { id: 'branches', icon: 'briefcase', title: 'SEO-Agentur für deine Branche', count: `${branches.length} Branchen`, prefix: 'SEO für', items: branchItems, text: `Pro Branche und Region nur ein Kunde. Prüfe, ob deine Branche in ${cd.city} noch verfügbar ist.` },
+        ]} />
+
+        <FaqSection title="Häufige Fragen" titleAccent={` zur SEO-Agentur ${cd.city}`} subtitle={`Antworten für Unternehmen in ${cd.city} und ${cd.region}.`} faqs={allFaqs} gray />
+        <CtaSection title={`Ist deine Branche in ${cd.city}`} titleAccent=" noch verfügbar?" subtitle={`Wir betreuen nur einen Kunden pro Branche in ${cd.city}. Prüfe jetzt deinen Exklusivplatz.`} ctaText="Verfügbarkeit prüfen" />
+      </>
+    ) : (
+      <!-- ═══════════════════════════ BRANCH PAGE ═══════════════════════════ -->
+      <>
+        <HeroPage eyebrow={`SEO ${bd.branch}`} titleLine1={bd.heroTitle1} titleLine2={bd.heroTitle2} subtitle={bd.heroSubtitle} ctaText="Verfügbarkeit prüfen" secondaryText="Ergebnisse ansehen" secondaryHref="#ergebnisse" breadcrumbs={[{ label: 'Home', href: '/v2/' }, { label: 'SEO-Agentur', href: '/v2/seo-agentur' }, { label: bd.branch }]}>
+          <BranchHeroVisual slot="visual" branch={bd.branch} branchFacts={bd.branchFacts} />
+          <TrustLogos class="mt-16 hero-trust" slot="trust" />
+        </HeroPage>
+
+        <!-- 2. Keywords (Dark) -->
+        <LocalKeywords city={bd.branch} keywords={bd.branchKeywords} eyebrow={`Keywords ${bd.branch}`} heading="So suchen Patienten" headingAccent={` nach ${bd.branch}`} subtitle={`Echte Suchvolumen für ${bd.branch}. Diese Keywords zeigen, wie viele potenzielle Patienten jeden Monat nach ${bd.branch} suchen.`} />
+
+        <!-- 3. Content (Gray) -->
+        <LocalContent city={bd.branch} intro={bd.branchIntro} blocks={bd.branchContent} eyebrow={`SEO ${bd.branch}`} title="Suchmaschinenoptimierung" titleAccent={` für ${bd.branch}`} />
+
+        <!-- 4. Why Block (Dark) -->
+        {bd.whyBlock && <BranchWhyBlock branch={bd.branch} heading={bd.whyBlock.heading} text={bd.whyBlock.text} points={bd.whyBlock.points} />}
+
+        <!-- 5. Ergebnisse (Hell) -->
+        <CaseStudies eyebrow="Ergebnisse" title="Echte Kunden." titleAccent=" Echte Zahlen." subtitle={`Ergebnisse unserer SEO-Betreuung — auch relevant für ${bd.branch}.`} cases={seoCaseStudies} showAllLink />
+
+        <!-- 6. Stats (Dark) -->
+        <StatsStrip stats={seoStats} />
+
+        <!-- 7. Kundenstimmen (Hell) -->
+        <Testimonials eyebrow="Kundenstimmen" title="Was unsere Kunden" titleAccent=" über uns sagen" videos={videoTestimonials} reviews={textReviews} showGoogleBadge />
+
+        <!-- 8. Problem (Dark) -->
+        <SeoProblems />
+
+        <!-- 9. Kundenreise (Gray) -->
+        {bd.journeyBlock && <CustomerJourney city={bd.branch} heading={bd.journeyBlock.heading} text={bd.journeyBlock.text} steps={bd.journeyBlock.steps} eyebrow={`Patientenreise ${bd.branch}`} title="So finden Patienten" titleAccent={` deinen ${bd.branch.slice(0, -1)}`} />}
+
+        <!-- 10. Leistungen (Hell) -->
+        <ServicesGrid eyebrow={`SEO ${bd.branch}`} title="SEO-Leistungen für" titleAccent={` ${bd.branch}`} subtitle={`Professionelle Suchmaschinenoptimierung speziell für ${bd.branch}.`} services={seoServices} />
+
+        <!-- 11. Prozess (Hell) -->
+        <ProcessTimeline title="So arbeiten wir als SEO-Agentur" titleAccent={` für ${bd.branch}`} subtitle="Vom ersten Gespräch bis zum messbaren Wachstum — transparent, strukturiert und ohne versteckte Kosten." steps={seoProcessSteps} ctaText="Erstgespräch vereinbaren" />
+
+        <LinkAccordion eyebrow="Städte & Branchen" title="SEO-Agentur für" titleAccent=" ganz Deutschland" subtitle={`Neben ${bd.branch} betreuen wir Kunden in jeder Stadt und Branche.`} groups={[
+          { id: 'cities', icon: 'map', title: 'SEO-Agentur in deiner Stadt', count: `${cities.length} Städte`, prefix: 'SEO-Agentur', items: cityItems, text: 'Wir arbeiten vollständig remote und betreuen Unternehmen in ganz Deutschland.' },
+          { id: 'branches', icon: 'briefcase', title: 'SEO-Agentur für deine Branche', count: `${branches.length} Branchen`, prefix: 'SEO für', items: branchItems, text: 'Pro Branche und Region nur ein Kunde. Prüfe, ob deine Branche noch verfügbar ist.' },
+        ]} />
+
+        <FaqSection title="Häufige Fragen" titleAccent={` zu SEO für ${bd.branch}`} subtitle={`Antworten speziell für ${bd.branch}.`} faqs={allFaqs} gray />
+        <CtaSection title="Ist deine Region" titleAccent=" noch verfügbar?" subtitle={`Wir betreuen nur einen ${bd.branch.slice(0, -1)} pro Region. Prüfe jetzt, ob dein Exklusivplatz für ${bd.branch} noch frei ist.`} ctaText="Verfügbarkeit prüfen" />
+      </>
+    )}
+
+  </main>
+  <Footer />
+  <VideoLightbox />
+
+  <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: allFaqs.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) })} />
+  <script type="application/ld+json" set:html={JSON.stringify(schema.professionalService)} />
+  <script type="application/ld+json" set:html={JSON.stringify(schema.service)} />
+  <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://sagemedia.de/' }, { '@type': 'ListItem', position: 2, name: 'SEO-Agentur', item: 'https://sagemedia.de/seo-agentur' }, { '@type': 'ListItem', position: 3, name: breadcrumbLabel, item: `https://sagemedia.de/seo-agentur/${isCity ? entry.id : bd.slug}` }] })} />
+</Layout>

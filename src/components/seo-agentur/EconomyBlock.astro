@@ -1,0 +1,48 @@
+---
+interface Highlight {
+  label: string
+  text: string
+}
+
+interface Props {
+  city: string
+  heading: string
+  text: string
+  highlights: Highlight[]
+}
+
+const { city, heading, text, highlights } = Astro.props
+---
+
+<section class="relative py-32 md:py-44 bg-gray-950 text-white overflow-hidden noise-bg">
+  <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/40 to-transparent divider-glow"></div>
+  <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent"></div>
+  <div class="absolute top-[10%] left-[5%] w-[600px] h-[600px] rounded-full" style="background: radial-gradient(circle, rgba(16,185,129,0.08) 0%, transparent 60%);"></div>
+  <div class="absolute bottom-[15%] right-[10%] w-[400px] h-[400px] rounded-full" style="background: radial-gradient(circle, rgba(52,211,153,0.06) 0%, transparent 60%);"></div>
+
+  <div class="max-w-7xl mx-auto px-6 relative z-10">
+    <div class="max-w-3xl mb-16 fade-up">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="inline-block w-8 h-px bg-emerald-400"></span>
+        <span class="text-xs font-mono font-medium text-emerald-400 uppercase tracking-[0.2em]">Wirtschaft {city}</span>
+      </div>
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-[1.1] tracking-[-0.04em]">
+        {heading.split(city)[0]}<span class="bg-gradient-to-r from-emerald-300 to-emerald-500 bg-clip-text text-transparent">{city}</span>{heading.split(city)[1] || ''}
+      </h2>
+      <p class="mt-6 text-gray-400 leading-relaxed max-w-2xl">{text}</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6 fade-up-stagger">
+      {highlights.map((item, i) => (
+        <div class="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-8 hover:bg-white/[0.06] transition-all duration-500 fade-up">
+          <div class="flex items-center gap-3 mb-5">
+            <span class="text-xs font-mono font-medium text-emerald-400 tracking-[0.2em]">0{i + 1}</span>
+            <div class="flex-1 h-px bg-gradient-to-r from-emerald-500/30 to-transparent"></div>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-3">{item.label}</h3>
+          <p class="text-sm text-gray-400 leading-relaxed">{item.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

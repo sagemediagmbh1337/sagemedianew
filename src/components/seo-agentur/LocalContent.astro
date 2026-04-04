@@ -1,0 +1,45 @@
+---
+import Section from '../Section.astro'
+import SectionHeader from '../SectionHeader.astro'
+
+interface ContentBlock {
+  heading: string
+  text: string
+}
+
+interface Props {
+  city: string
+  intro: string
+  blocks: ContentBlock[]
+  eyebrow?: string
+  title?: string
+  titleAccent?: string
+}
+
+const { city, intro, blocks, eyebrow, title, titleAccent } = Astro.props
+---
+
+<Section gray>
+  <SectionHeader
+    eyebrow={eyebrow || `SEO ${city}`}
+    title={title || 'Suchmaschinenoptimierung'}
+    titleAccent={titleAccent || ` in ${city}`}
+    subtitle={intro}
+  />
+
+  <div class="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-6 fade-up-stagger">
+    {blocks.map((block, i) => (
+      <div class="group relative bg-white rounded-2xl border border-gray-100 p-8 hover:border-emerald-200 transition-all duration-500 hover:shadow-[0_16px_48px_-8px_rgba(16,185,129,0.08)] card-lift fade-up">
+        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" style="background: radial-gradient(circle at 50% 0%, rgba(16,185,129,0.04) 0%, transparent 60%);"></div>
+        <div class="relative">
+          <div class="flex items-center gap-3 mb-5">
+            <span class="text-xs font-mono font-medium text-emerald-600 tracking-[0.2em]">0{i + 1}</span>
+            <div class="flex-1 h-px bg-gradient-to-r from-emerald-200/60 to-transparent"></div>
+          </div>
+          <h3 class="text-lg font-bold text-gray-900 tracking-tight mb-3">{block.heading}</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">{block.text}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</Section>

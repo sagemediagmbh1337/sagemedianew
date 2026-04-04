@@ -1,0 +1,52 @@
+---
+import Section from '../Section.astro'
+
+interface Props {
+  city: string
+  region: string
+  distanceHQ: string
+  intro: string
+  image?: string
+}
+
+const { city, region, distanceHQ, intro, image } = Astro.props
+---
+
+<Section>
+  <div class="grid lg:grid-cols-2 gap-8 items-center">
+    <div class="fade-up">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="inline-block w-8 h-px bg-emerald-500"></span>
+        <span class="text-xs font-mono font-medium text-emerald-600 uppercase tracking-[0.2em]">Vor Ort</span>
+      </div>
+      <h2 class="text-3xl md:text-4xl font-extrabold leading-[1.1] tracking-[-0.04em] text-gray-950 mb-6">
+        SEO-Agentur für<span class="bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent"> {city}</span>
+      </h2>
+      <p class="text-gray-500 leading-relaxed mb-6">{intro}</p>
+      <p class="text-gray-500 leading-relaxed">Unser Sitz ist Bad Staffelstein — nur {distanceHQ} von {city} entfernt. Wir kennen {region}, die lokalen Suchbedürfnisse und betreuen unsere Kunden per Video-Call, Echtzeit-Dashboard und bei Bedarf auch vor Ort.</p>
+      <div class="mt-8">
+        <a href="/v2/kontakt" class="group inline-flex items-center gap-3 text-gray-900 font-semibold hover:text-emerald-600 transition-colors">
+          <span class="w-12 h-12 rounded-full border-2 border-gray-900 group-hover:border-emerald-500 group-hover:bg-emerald-500 group-hover:shadow-[0_0_24px_rgba(16,185,129,0.4)] flex items-center justify-center transition-all duration-300">
+            <svg class="w-4 h-4 group-hover:text-white transition-colors" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10m-4-4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </span>
+          Erstgespräch vereinbaren
+        </a>
+      </div>
+    </div>
+    <div class="fade-up">
+      {image ? (
+        <img src={image} alt={`SEO-Agentur ${city}`} class="rounded-2xl shadow-[0_32px_80px_-16px_rgba(0,0,0,0.1)] w-full aspect-[4/3] object-cover" loading="lazy" />
+      ) : (
+        <div class="relative rounded-2xl overflow-hidden aspect-[4/3] bg-gray-100 border border-gray-200 shadow-[0_32px_80px_-16px_rgba(0,0,0,0.1)]">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-center">
+              <svg class="w-12 h-12 text-gray-300 mx-auto mb-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" /></svg>
+              <p class="text-sm font-medium text-gray-400">{city} — Stadtbild</p>
+              <p class="text-xs text-gray-300 mt-1">Bild wird ergänzt</p>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  </div>
+</Section>

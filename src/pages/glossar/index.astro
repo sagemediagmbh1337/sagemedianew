@@ -155,7 +155,7 @@ const letters = [...new Set(glossar.map(g => g.term[0].toUpperCase()))].sort()
               data-letter={g.term[0].toUpperCase()}
               data-cat={g.category}
             >
-              <a href={"/glossar/" + g.slug} class="block p-7">
+              <a href={"/v2/glossar/" + g.slug} class="block p-7">
                 <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background: radial-gradient(circle at 50% 0%, rgba(16,185,129,0.04) 0%, transparent 60%);"></div>
                 <div class="relative">
                   <div class="flex items-start justify-between gap-3 mb-4">

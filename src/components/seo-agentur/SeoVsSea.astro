@@ -1,0 +1,116 @@
+---
+import Section from '../Section.astro'
+import SectionHeader from '../SectionHeader.astro'
+
+interface Props {
+  items?: { label: string; seo: string; sea: string }[]
+}
+
+const {
+  items = [
+    { label: 'Kosten', seo: 'Fixer monatlicher Invest, Traffic kostet nach Aufbau nichts extra', sea: 'Jeder Klick kostet Geld, Budget leer = Sichtbarkeit weg' },
+    { label: 'Nachhaltigkeit', seo: 'Rankings bleiben auch nach Ende der Betreuung bestehen', sea: 'Sofort unsichtbar, sobald die Kampagne pausiert wird' },
+    { label: 'Geschwindigkeit', seo: 'Erste Ergebnisse nach 3–6 Monaten, volle Wirkung 6–12', sea: 'Sofortige Sichtbarkeit ab Tag 1 der Kampagne' },
+    { label: 'Vertrauen', seo: 'Organische Ergebnisse genießen mehr Vertrauen bei Nutzern', sea: 'Anzeigen-Label kann Klickrate negativ beeinflussen' },
+    { label: 'Skalierung', seo: 'Wachstum ohne proportionale Kostensteigerung', sea: 'Mehr Traffic = proportional höhere Kosten' },
+  ],
+} = Astro.props
+---
+
+<Section gray>
+  <SectionHeader
+    eyebrow="Vergleich"
+    title="SEO-Agentur vs. Google Ads:"
+    titleAccent=" Was lohnt sich mehr?"
+    subtitle="Beide Kanäle haben ihre Berechtigung. Die Frage ist nicht ob, sondern wann und wie du sie einsetzt."
+  />
+
+  <div class="mt-16 grid md:grid-cols-2 gap-6 fade-up-stagger">
+    <!-- SEO Card -->
+    <div class="relative bg-white rounded-2xl border-2 border-emerald-200 p-8 shadow-[0_8px_32px_rgba(16,185,129,0.08)] fade-up">
+      <div class="absolute top-0 left-0 right-0 h-1 rounded-t-2xl bg-gradient-to-r from-emerald-500 to-emerald-400"></div>
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center">
+          <svg class="w-5 h-5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" /></svg>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold text-gray-900">SEO (organisch)</h3>
+          <span class="text-[10px] font-mono text-emerald-600 uppercase tracking-[0.2em]">Empfohlen</span>
+        </div>
+      </div>
+      <div class="space-y-0">
+        {items.map((row, i) => (
+          <div class={`py-4 ${i < items.length - 1 ? 'border-b border-gray-100' : ''}`}>
+            <p class="text-[10px] font-mono font-medium text-emerald-600 uppercase tracking-[0.2em] mb-1.5">{row.label}</p>
+            <p class="text-sm text-gray-700 leading-relaxed">{row.seo}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- SEA Card -->
+    <div class="relative bg-white rounded-2xl border border-gray-100 p-8 fade-up">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-gray-50 border border-gray-200 flex items-center justify-center">
+          <svg class="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" /><path d="M16 3v4M8 3v4M2 11h20" /></svg>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold text-gray-900">SEA (Google Ads)</h3>
+          <span class="text-[10px] font-mono text-gray-400 uppercase tracking-[0.2em]">Ergänzend</span>
+        </div>
+      </div>
+      <div class="space-y-0">
+        {items.map((row, i) => (
+          <div class={`py-4 ${i < items.length - 1 ? 'border-b border-gray-100' : ''}`}>
+            <p class="text-[10px] font-mono font-medium text-gray-400 uppercase tracking-[0.2em] mb-1.5">{row.label}</p>
+            <p class="text-sm text-gray-500 leading-relaxed">{row.sea}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Growth Chart -->
+  <div class="mt-12 bg-white rounded-2xl border border-gray-100 p-8 fade-up">
+    <div class="flex items-center gap-6 mb-6">
+      <div class="flex items-center gap-2">
+        <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
+        <span class="text-xs font-mono text-gray-500 uppercase tracking-[0.2em]">SEO (organisch)</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <div class="w-3 h-3 rounded-full bg-gray-300"></div>
+        <span class="text-xs font-mono text-gray-500 uppercase tracking-[0.2em]">SEA (Google Ads)</span>
+      </div>
+    </div>
+    <div class="relative h-40">
+      <div class="absolute inset-0 flex flex-col justify-between">
+        <div class="h-px bg-gray-100"></div>
+        <div class="h-px bg-gray-100"></div>
+        <div class="h-px bg-gray-100"></div>
+        <div class="h-px bg-gray-100"></div>
+        <div class="h-px bg-gray-200"></div>
+      </div>
+      <svg class="absolute inset-0 w-full h-full" viewBox="0 0 400 160" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="seo-fill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="rgb(16,185,129)" stop-opacity="0.15" />
+            <stop offset="100%" stop-color="rgb(16,185,129)" stop-opacity="0" />
+          </linearGradient>
+        </defs>
+        <path d="M0,150 C40,148 80,140 120,125 C160,110 200,85 240,55 C280,30 320,15 360,8 L400,5" fill="none" stroke="#10b981" stroke-width="2.5" />
+        <path d="M0,150 C40,148 80,140 120,125 C160,110 200,85 240,55 C280,30 320,15 360,8 L400,5 L400,160 L0,160Z" fill="url(#seo-fill)" />
+        <path d="M0,150 C20,145 40,60 60,55 C80,50 100,50 140,50 C180,50 200,50 240,50 C260,50 270,50 280,55 C300,65 320,100 360,130 L400,150" fill="none" stroke="#d1d5db" stroke-width="2" stroke-dasharray="6 4" />
+      </svg>
+      <div class="absolute bottom-0 left-0 right-0 flex justify-between pt-2 border-t border-gray-200">
+        <span class="text-[10px] font-mono text-gray-400">Monat 1</span>
+        <span class="text-[10px] font-mono text-gray-400">Monat 6</span>
+        <span class="text-[10px] font-mono text-gray-400">Monat 12</span>
+        <span class="text-[10px] font-mono text-gray-400">Monat 18</span>
+        <span class="text-[10px] font-mono text-gray-400">Monat 24</span>
+      </div>
+    </div>
+    <p class="mt-6 text-center text-sm text-gray-500">
+      <span class="text-emerald-600 font-semibold">SEO wächst exponentiell</span> — SEA bleibt konstant und stoppt, wenn das Budget aufhört.
+    </p>
+  </div>
+</Section>

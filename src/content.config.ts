@@ -178,4 +178,129 @@ const caseStudies = defineCollection({
   }),
 })
 
-export const collections = { lexikon, caseStudies }
+const seoCity = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/seoCity' }),
+  schema: z.object({
+    city: z.string(),
+    region: z.string(),
+    bundesland: z.string(),
+    title: z.string(),
+    description: z.string(),
+    heroTitle1: z.string(),
+    heroTitle2: z.string(),
+    heroSubtitle: z.string(),
+
+    /* City-Profil */
+    population: z.string(),
+    distanceHQ: z.string(),
+    cityFacts: z.array(z.object({
+      label: z.string(),
+      value: z.string(),
+    })).optional().default([]),
+
+    /* Lokale Keywords mit Suchvolumen */
+    localKeywords: z.array(z.object({
+      keyword: z.string(),
+      volume: z.string(),
+      difficulty: z.enum(['niedrig', 'mittel', 'hoch']).optional().default('mittel'),
+    })).optional().default([]),
+
+    /* Umland */
+    nearbyAreas: z.array(z.string()).optional().default([]),
+
+    /* Lokale Branchen-Schwerpunkte */
+    localIndustries: z.array(z.string()).optional().default([]),
+
+    /* Relevante Case Studies (slugs aus cases.ts) */
+    relevantCases: z.array(z.string()).optional().default([]),
+
+    /* Wirtschaftsprofil — unique deep-dive */
+    economyBlock: z.object({
+      heading: z.string(),
+      text: z.string(),
+      highlights: z.array(z.object({
+        label: z.string(),
+        text: z.string(),
+      })),
+    }).optional(),
+
+    /* Kundenreise — wie lokale Kunden suchen */
+    customerJourneyBlock: z.object({
+      heading: z.string(),
+      text: z.string(),
+      steps: z.array(z.object({
+        step: z.string(),
+        text: z.string(),
+      })),
+    }).optional(),
+
+    /* Content */
+    localIntro: z.string(),
+    localContent: z.array(z.object({
+      heading: z.string(),
+      text: z.string(),
+    })),
+    localFaqs: z.array(z.object({
+      q: z.string(),
+      a: z.string(),
+    })).optional().default([]),
+  }),
+})
+
+const seoBranch = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/seoBranch' }),
+  schema: z.object({
+    branch: z.string(),
+    slug: z.string(),
+    title: z.string(),
+    description: z.string(),
+    heroTitle1: z.string(),
+    heroTitle2: z.string(),
+    heroSubtitle: z.string(),
+
+    branchFacts: z.array(z.object({
+      label: z.string(),
+      value: z.string(),
+    })).optional().default([]),
+
+    /* Branchenspezifische Keywords */
+    branchKeywords: z.array(z.object({
+      keyword: z.string(),
+      volume: z.string(),
+      difficulty: z.enum(['niedrig', 'mittel', 'hoch']).optional().default('mittel'),
+    })).optional().default([]),
+
+    /* Warum SEO für diese Branche */
+    whyBlock: z.object({
+      heading: z.string(),
+      text: z.string(),
+      points: z.array(z.object({
+        label: z.string(),
+        text: z.string(),
+      })),
+    }).optional(),
+
+    /* Typische Kundenreise in der Branche */
+    journeyBlock: z.object({
+      heading: z.string(),
+      text: z.string(),
+      steps: z.array(z.object({
+        step: z.string(),
+        text: z.string(),
+      })),
+    }).optional(),
+
+    /* Content-Blöcke */
+    branchIntro: z.string(),
+    branchContent: z.array(z.object({
+      heading: z.string(),
+      text: z.string(),
+    })),
+    branchFaqs: z.array(z.object({
+      q: z.string(),
+      a: z.string(),
+    })).optional().default([]),
+  }),
+})
+
+export const collections = { lexikon, caseStudies, seoCity, seoBranch }

@@ -187,13 +187,30 @@ img {
   gap: 0;
 }
 
-/* Section spacing */
+/* Section spacing + dividers */
 .lexikon-content > .lexikon-section {
-  margin-bottom: 2.5rem;
+  margin-bottom: 3rem;
+  padding-bottom: 3rem;
+  position: relative;
+}
+
+.lexikon-content > .lexikon-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.25), rgba(209, 213, 219, 0.4), rgba(16, 185, 129, 0.25), transparent);
 }
 
 .lexikon-content > .lexikon-section:last-child {
   margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.lexikon-content > .lexikon-section:last-child::after {
+  display: none;
 }
 
 /* Typography */
@@ -204,14 +221,26 @@ img {
   margin-bottom: 1rem;
 }
 
-/* H2 inside sections */
+/* H2 inside sections — with eyebrow line like SectionHeader */
 .lexikon-content h2 {
   font-size: 1.875rem;
   font-weight: 800;
   color: #111827;
   letter-spacing: -0.025em;
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.lexikon-content h2::before {
+  content: '';
+  display: inline-block;
+  width: 2rem;
+  height: 1px;
+  background: #10b981;
+  flex-shrink: 0;
 }
 
 /* H3 */
